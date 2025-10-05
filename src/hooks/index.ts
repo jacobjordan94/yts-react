@@ -5,6 +5,7 @@ export { default as useMovieDetails } from './use-movie-details';
 export { default as useMovieSuggestions } from './use-movie-suggestions';
 export { default as useMovieComments } from './use-movie-comments';
 export { default as useMovieParentalGuides } from './use-movie-parental-guides';
+export { default as useFeaturedMovie } from './use-featured-movie';
 
 export type {
   Movie,

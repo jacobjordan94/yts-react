@@ -1,7 +1,9 @@
+import Primitives from './home.primitives';
+
 const HomePage = () => {
     return (
         <main className="home-page">
-            Home
+            <Primitives.FeaturedMovie />
         </main>
     );
 };
