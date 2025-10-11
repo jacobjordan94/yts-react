@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { cn } from "@/lib/utils";
 import { SearchSlideOut } from "@/components/search/search-slide-out";
 import { Button } from "@/components/ui/button";
-import { Film, Github } from "lucide-react";
+import { DicesIcon, Film, Github } from "lucide-react";
 import ListDropdown from "./list-dropdown";
+import { useListMovies } from "@/hooks";
 
 interface SiteHeaderProps extends React.ComponentPropsWithoutRef<"header"> {
   onSearch?: (value: string) => void;
@@ -13,9 +14,18 @@ interface SiteHeaderProps extends React.ComponentPropsWithoutRef<"header"> {
 const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
   ({ onSearch, className, ...props }, ref) => {
     const [searchValue, setSearchValue] = React.useState("");
+    const { data } = useListMovies({});
+    const navigate = useNavigate();
 
     const handleSearchSubmit = (value: string) => {
       onSearch?.(value);
+    };
+
+    const randomMovie = () => {
+      const movieCount = data?.data.movie_count;
+      if(!movieCount) return;
+      const rand = Math.floor(Math.random() * (movieCount - 1 + 1)) + 1;
+      navigate('/movie/' + rand);
     };
 
     return (
@@ -48,6 +58,9 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
               onChange={setSearchValue}
               onSubmit={handleSearchSubmit}
             />
+            <Button disabled={!data?.data.movie_count} variant="ghost" size="icon" className="h-8 w-8" onClick={randomMovie}>
+              <DicesIcon />
+            </Button>
             <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
               <a
                 href="https://github.com"
