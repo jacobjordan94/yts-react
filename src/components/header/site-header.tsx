@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { cn } from "@/lib/utils";
 import { SearchSlideOut } from "@/components/search/search-slide-out";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Film, Github } from "lucide-react";
 import ListDropdown from "./list-dropdown";
 
 interface SiteHeaderProps extends React.ComponentPropsWithoutRef<"header"> {
@@ -33,10 +33,10 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
               to="/"
               className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
             >
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground font-semibold text-sm shadow-sm">
-                Y
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-sm">
+                <Film />
               </div>
-              <span className="font-semibold text-base tracking-tight">YTS Movies</span>
+              <span className="font-semibold text-base tracking-tight">MovieDB</span>
             </Link>
             <nav className="hidden md:flex items-center gap-1">
               <ListDropdown />
