@@ -1,30 +1,31 @@
 import useListMovies from './use-list-movies';
 import type { Movie } from './use-list-movies';
 
-interface UseFeaturedMovieOptions {
+interface UseFeaturedMoviesOptions {
   skip?: boolean;
 }
 
-function useFeaturedMovie(options: UseFeaturedMovieOptions = {}) {
+function useFeaturedMovies(options: UseFeaturedMoviesOptions = {}) {
   const { data, error, loading, refetch } = useListMovies(
     {
-      limit: 1,
+      limit: 6,
       quality: '1080p',
-      minimum_rating: 7,
-      sort_by: 'date_added',
+      minimum_rating: 7.5,
+      sort_by: 'year',
       order_by: 'desc',
+      with_rt_ratings: true,
     },
     options
   );
 
-  const movie: Movie | null = data?.data?.movies?.[0] ?? null;
+  const movies: Movie[] | null = data?.data?.movies ?? null;
 
   return {
-    data: movie,
+    data: movies,
     error,
     loading,
     refetch,
   };
 }
 
-export default useFeaturedMovie;
+export default useFeaturedMovies;

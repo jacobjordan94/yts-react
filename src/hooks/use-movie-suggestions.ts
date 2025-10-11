@@ -19,10 +19,10 @@ interface UseMovieSuggestionsOptions {
 }
 
 function useMovieSuggestions(
-  params: MovieSuggestionsParams,
+  movieId: number | undefined,
   options: UseMovieSuggestionsOptions = {}
 ) {
-  return useApi<MovieSuggestionsResponse>('movie_suggestions.json', params, options);
+  return useApi<MovieSuggestionsResponse>('movie_suggestions.json', { movie_id: movieId }, options);
 }
 
 export default useMovieSuggestions;

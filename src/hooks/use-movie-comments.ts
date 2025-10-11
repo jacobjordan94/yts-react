@@ -29,10 +29,10 @@ interface UseMovieCommentsOptions {
 }
 
 function useMovieComments(
-  params: MovieCommentsParams,
+  movieId: number | undefined,
   options: UseMovieCommentsOptions = {}
 ) {
-  return useApi<MovieCommentsResponse>('movie_comments.json', params, options);
+  return useApi<MovieCommentsResponse>('movie_comments.json', { movie_id: movieId }, options);
 }
 
 export default useMovieComments;
