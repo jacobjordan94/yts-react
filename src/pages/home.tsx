@@ -3,7 +3,7 @@ import useFeaturedMovies from '@/hooks/use-featured-movie';
 import { useOutletContext } from 'react-router';
 import type { BackgroundImageLayoutContext } from '@/layouts/background-image';
 import { useEffect } from 'react';
-import { MovieCard, MovieCardSkeleton, MovieGrid } from '@/components';
+import { MovieGrid } from '@/components';
 
 const HomePage = () => {
     const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();

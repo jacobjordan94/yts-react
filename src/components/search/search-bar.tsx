@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -26,7 +25,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     ...props
   }, ref) => {
     const [localValue, setLocalValue] = React.useState(value);
-    const timerRef = React.useRef<NodeJS.Timeout>();
+    const timerRef = React.useRef<number>(undefined);
 
     React.useEffect(() => {
       setLocalValue(value);

@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import Icons, { SortIcon } from "../icons";
+import Icons from "../icons";
 
 interface SortSelectProps extends React.ComponentPropsWithoutRef<"div"> {
   sortBy?: string;

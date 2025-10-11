@@ -7,7 +7,6 @@ import { MovieGrid, type MovieGridProps } from "@/components/layout/movie-grid";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
-import { type ListMoviesParams } from "@/hooks/use-list-movies";
 
 // Root container for the list page
 interface ListPageRootProps extends React.ComponentPropsWithoutRef<"div"> {}

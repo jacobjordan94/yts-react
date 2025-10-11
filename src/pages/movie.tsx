@@ -8,7 +8,7 @@ import TorrentTabs from "@/components/torrent/torrent-tabs";
 const MoviePage = () => {
     const { id } = useParams();
     const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();
-    const { data: movie, error, loading } = useMovieDetails({ movie_id: Number(id) });
+    const { data: movie } = useMovieDetails({ movie_id: Number(id) });
     useEffect(() => {
         if(!movie) return;
         setBackgroundConfig({ image: movie.data.movie.background_image });

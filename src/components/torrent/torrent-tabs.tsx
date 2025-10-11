@@ -1,9 +1,7 @@
 import type { Torrent } from "@/hooks";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { TorrentList } from "./torrent-list";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { QualityBadge } from "./quality-badge";
 
 const gradientMap: Record<string, string> = {
     'all': 'transparent',

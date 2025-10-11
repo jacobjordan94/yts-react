@@ -34,7 +34,7 @@ const Hero = ({ movie }: { movie: Movie | undefined }) =>
     </div>
 
 const RecommendedMovies = ({ id }: { id: number }) => {
-    const { data: recommended, error: recommendedError, loading: recommendedLoading } = useMovieSuggestions(id);
+    const { data: recommended, error: _recommendedError, loading: recommendedLoading } = useMovieSuggestions(id);
     return (
         <Section.Base className="bg-transparent text-white shadow-none">
             <Section.Header className="p-0">

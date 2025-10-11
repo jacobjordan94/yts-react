@@ -8,7 +8,6 @@ import { MovieDescription } from "./movie-description";
 import { MovieSynopsis } from "./movie-synopsis";
 import { MovieHeroSkeleton } from "../skeleton/movie-hero-skeleton";
 import { TrailerButton } from "./trailer-button";
-import { DownloadButton } from "../torrent/download-button";
 import { cn } from "@/lib/utils";
 import type { Movie } from "@/hooks";
 import DownloadDropdown from "../torrent/download-dropdown";
