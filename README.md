@@ -1,75 +1,150 @@
-# React + TypeScript + Vite
+# YTS Movie Browser
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive movie browsing application built with React 19 and TypeScript. Browse, search, and discover movies with a beautiful, performant interface.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Browse featured and popular movies
+- Search functionality with real-time results
+- Filter by genre, quality, and rating
+- Fully responsive design
+- Dark mode interface
+- Optimized performance with React Compiler
+- Modern UI with Radix UI components and Tailwind CSS
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Framework:** React 19.1.1
+- **Language:** TypeScript 5.9
+- **Build Tool:** Vite 7
+- **Styling:** Tailwind CSS 4
+- **UI Components:** shadcn and Radix UI primitives
+- **Routing:** React Router 7
+- **Icons:** Lucide React
+- **Compiler:** React Compiler (experimental)
 
-Note: This will impact Vite dev & build performances.
+## Key Technical Highlights
 
-## Expanding the ESLint configuration
+- **React 19 Compiler** - Automatic optimizations for better performance
+- **Modern Tooling** - Vite for lightning-fast builds and HMR
+- **Type Safety** - Full TypeScript coverage
+- **Component Architecture** - Modular, reusable components with consistent patterns
+- **Code Splitting** - Optimized bundle chunks for faster loading
+- **Custom Hooks** - Reusable logic for API calls and state management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js 20 or higher
+- npm or yarn
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/jacobjordan94/yts-react.git
+cd yts-react
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Start development server
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# The app will be available at http://localhost:5173
 ```
+
+### Production Build
+
+```bash
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Linting
+
+```bash
+# Run ESLint
+npm run lint
+```
+
+## Docker Deployment
+
+### Using Docker Compose (Recommended)
+
+```bash
+# Build and run
+docker-compose up -d
+
+# The app will be available at http://localhost:8080
+
+# Stop the container
+docker-compose down
+```
+
+### Using Docker Directly
+
+```bash
+# Build the image
+docker build -t yts-react .
+
+# Run the container
+docker run -p 8080:80 yts-react
+```
+
+## Project Structure
+
+```
+yts-react/
+├── src/
+│   ├── components/     # Reusable UI components
+│   │   ├── movie/      # Movie-specific components
+│   │   ├── ui/         # Base UI components
+│   │   ├── filter/     # Filter components
+│   │   ├── search/     # Search components
+│   │   └── ...
+│   ├── hooks/          # Custom React hooks
+│   ├── layouts/        # Page layouts
+│   ├── pages/          # Route pages
+│   ├── lib/            # Utility functions
+│   └── main.tsx        # Application entry point
+├── public/             # Static assets
+└── dist/               # Production build output
+```
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint checks
+
+## Performance Optimizations
+
+- Manual chunk splitting for vendor libraries
+- React Compiler for automatic memoization
+- Lazy loading for routes and components
+- Optimized asset loading with Vite
+- Compressed production builds (gzip)
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+This is a portfolio project.
+
+---
+
