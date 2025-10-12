@@ -46,3 +46,5 @@ export const RecommendedMovies = ({ id }: { id: number }) => {
         </Section.Base>
     );
 };
+
+export default { Hero, RecommendedMovies };

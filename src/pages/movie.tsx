@@ -12,7 +12,8 @@ const MoviePage = () => {
     useEffect(() => {
         if(!movie) return;
         setBackgroundConfig({ image: movie.data.movie.background_image });
-    }, [ movie, setBackgroundConfig ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ movie ]);
 
     return (
         <main className="movie-page sm:flex-row py-6 space-y-6 h-full">

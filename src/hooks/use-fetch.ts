@@ -71,7 +71,8 @@ function useFetch<T = unknown>(
         loading: false,
       });
     }
-  }, [url, fetchOptionsKey, fetchOptions]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, fetchOptionsKey]);
 
   const refetch = () => {
     if (url && !skip) {

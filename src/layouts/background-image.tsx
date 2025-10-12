@@ -1,5 +1,5 @@
 import { PageBackground } from "@/components/layout/page-background";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Outlet } from "react-router";
 
 interface BackgroundConfig {
@@ -10,10 +10,19 @@ interface BackgroundConfig {
 
 export default function BackgroundImageLayout() {
     const [ backgroundConfig, setBackgroundConfig ] = useState<BackgroundConfig>({});
-    return ( 
+
+    const handleSetBackgroundConfig = useCallback((config: Partial<BackgroundConfig>) => {
+        setBackgroundConfig(config);
+    }, []);
+
+    const contextValue = useMemo(() => ({
+        setBackgroundConfig: handleSetBackgroundConfig
+    }), [handleSetBackgroundConfig]);
+
+    return (
         <PageBackground { ...backgroundConfig }>
             <div className="max-w-6xl px-6 m-auto">
-                <Outlet context={{ setBackgroundConfig }} />
+                <Outlet context={contextValue} />
             </div>
         </PageBackground>
     );

@@ -12,7 +12,8 @@ const HomePage = () => {
     useEffect(() => {
         if(!featuredMovies || featuredMovies.length === 0) return;
         setBackgroundConfig({ image: featuredMovies?.at(0)?.background_image_original });
-    }, [setBackgroundConfig, featuredMovies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [featuredMovies]);
 
     return (
         <main className="home-page space-y-4 pb-12">
