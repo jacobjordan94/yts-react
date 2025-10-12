@@ -8,7 +8,7 @@ interface BackgroundConfig {
     blur?: number | undefined;
 };
 
-export default function BackgroundImageLayout({}) {
+export default function BackgroundImageLayout() {
     const [ backgroundConfig, setBackgroundConfig ] = useState<BackgroundConfig>({});
     return ( 
         <PageBackground { ...backgroundConfig }>

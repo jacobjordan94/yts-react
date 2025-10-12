@@ -10,7 +10,6 @@ interface SearchBarProps extends Omit<React.ComponentPropsWithoutRef<typeof Inpu
   loading?: boolean;
   placeholder?: string;
   debounceMs?: number;
-  asChild?: boolean;
 }
 
 const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
@@ -20,7 +19,6 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     loading = false,
     placeholder = "Search movies...",
     debounceMs = 300,
-    asChild = false,
     className,
     ...props
   }, ref) => {

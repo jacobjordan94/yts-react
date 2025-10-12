@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface FetchState<T> {
   data: T | null;
@@ -25,11 +25,12 @@ function useFetch<T = unknown>(
   });
 
   const abortControllerRef = useRef<AbortController | null>(null);
+  const fetchOptionsKey = JSON.stringify(fetchOptions);
 
-  const fetchData = async (signal: AbortSignal) => {
+  const fetchData = useCallback(async (signal: AbortSignal) => {
     if (!url) return;
 
-    const cacheKey = `${url}-${JSON.stringify(fetchOptions)}`;
+    const cacheKey = `${url}-${fetchOptionsKey}`;
     const cachedEntry = cache.get(cacheKey);
 
     if (cachedEntry && Date.now() - cachedEntry.timestamp < CACHE_DURATION) {
@@ -70,7 +71,7 @@ function useFetch<T = unknown>(
         loading: false,
       });
     }
-  };
+  }, [url, fetchOptionsKey, fetchOptions]);
 
   const refetch = () => {
     if (url && !skip) {
@@ -92,7 +93,7 @@ function useFetch<T = unknown>(
     return () => {
       abortControllerRef.current?.abort();
     };
-  }, [url, skip, JSON.stringify(fetchOptions)]);
+  }, [url, skip, fetchData]);
 
   return { ...state, refetch };
 }

@@ -2,7 +2,7 @@ import { useMovieDetails } from "@/hooks";
 import type { BackgroundImageLayoutContext } from "@/layouts/background-image";
 import { useEffect } from "react";
 import { useOutletContext, useParams } from "react-router";
-import Primitives from './movie.primitives';
+import { Hero, RecommendedMovies } from './movie.primitives';
 import TorrentTabs from "@/components/torrent/torrent-tabs";
 
 const MoviePage = () => {
@@ -12,13 +12,13 @@ const MoviePage = () => {
     useEffect(() => {
         if(!movie) return;
         setBackgroundConfig({ image: movie.data.movie.background_image });
-    }, [ movie ]);
+    }, [ movie, setBackgroundConfig ]);
 
     return (
         <main className="movie-page sm:flex-row py-6 space-y-6 h-full">
-            <Primitives.Hero movie={movie?.data.movie}></Primitives.Hero>
+            <Hero movie={movie?.data.movie}></Hero>
             <TorrentTabs torrents={ movie?.data.movie.torrents } movieName={movie?.data.movie.title} />
-            <Primitives.RecommendedMovies id={Number(id)} />
+            <RecommendedMovies id={Number(id)} />
         </main>
     );
 }

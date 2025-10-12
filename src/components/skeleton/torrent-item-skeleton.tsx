@@ -2,7 +2,7 @@ import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-interface TorrentItemSkeletonProps extends React.ComponentPropsWithoutRef<"div"> {}
+type TorrentItemSkeletonProps = React.ComponentPropsWithoutRef<"div">;
 
 const TorrentItemSkeleton = React.forwardRef<HTMLDivElement, TorrentItemSkeletonProps>(
   ({ className, ...props }, ref) => {

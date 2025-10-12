@@ -22,6 +22,7 @@ interface MovieDetailedCardProps extends Omit<MovieCardBaseProps, "children"> {
   movie?: Movie;
   loading?: boolean;
   skeleton?: boolean;
+  onGenreClick?: (genre: string) => void;
 }
 
 const MovieDetailedCard = React.forwardRef<HTMLDivElement, MovieDetailedCardProps>(

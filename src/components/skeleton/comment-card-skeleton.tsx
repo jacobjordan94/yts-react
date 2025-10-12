@@ -2,7 +2,7 @@ import * as React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-interface CommentCardSkeletonProps extends React.ComponentPropsWithoutRef<"div"> {}
+type CommentCardSkeletonProps = React.ComponentPropsWithoutRef<"div">;
 
 const CommentCardSkeleton = React.forwardRef<HTMLDivElement, CommentCardSkeletonProps>(
   ({ className, ...props }, ref) => {

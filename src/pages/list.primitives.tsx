@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
 
 // Root container for the list page
-interface ListPageRootProps extends React.ComponentPropsWithoutRef<"div"> {}
+type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
 
 const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
   ({ className, ...props }, ref) => {
@@ -220,7 +220,7 @@ const ListPageToolbar = React.forwardRef<HTMLDivElement, ListPageToolbarProps>(
 ListPageToolbar.displayName = "ListPageToolbar";
 
 // Content section with movies grid
-interface ListPageContentProps extends MovieGridProps {}
+type ListPageContentProps = MovieGridProps;
 
 const ListPageContent = React.forwardRef<HTMLDivElement, ListPageContentProps>(
   ({ className, ...props }, ref) => {

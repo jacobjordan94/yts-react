@@ -8,7 +8,7 @@ import { useMovieSuggestions, type Movie } from "@/hooks";
 import DownloadDropdown from "@/components/torrent/download-dropdown";
 import { Separator } from "@/components/ui/separator";
 
-const Hero = ({ movie }: { movie: Movie | undefined }) =>
+export const Hero = ({ movie }: { movie: Movie | undefined }) =>
     <div className="flex gap-6 ">
         <MoviePoster className="flex-1/3 pt-2" size="full" src={movie?.large_cover_image} />
         <div className="movie-info flex-2/3 flex flex-col space-y-4">
@@ -33,8 +33,8 @@ const Hero = ({ movie }: { movie: Movie | undefined }) =>
         </div>
     </div>
 
-const RecommendedMovies = ({ id }: { id: number }) => {
-    const { data: recommended, error: _recommendedError, loading: recommendedLoading } = useMovieSuggestions(id);
+export const RecommendedMovies = ({ id }: { id: number }) => {
+    const { data: recommended, loading: recommendedLoading } = useMovieSuggestions(id);
     return (
         <Section.Base className="bg-transparent text-white shadow-none">
             <Section.Header className="p-0">
@@ -46,5 +46,3 @@ const RecommendedMovies = ({ id }: { id: number }) => {
         </Section.Base>
     );
 };
-
-export default { Hero, RecommendedMovies };

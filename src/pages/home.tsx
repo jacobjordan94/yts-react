@@ -1,4 +1,4 @@
-import Primitives from './home.primitives';
+import { FeaturedMovie } from './home.primitives';
 import useFeaturedMovies from '@/hooks/use-featured-movie';
 import { useOutletContext } from 'react-router';
 import type { BackgroundImageLayoutContext } from '@/layouts/background-image';
@@ -16,7 +16,7 @@ const HomePage = () => {
 
     return (
         <main className="home-page space-y-4 pb-12">
-            <Primitives.FeaturedMovie movie={ featuredMovies?.at(0) } loading={featuredLoading} error={featuredError} />
+            <FeaturedMovie movie={ featuredMovies?.at(0) } loading={featuredLoading} error={featuredError} />
             <MovieGrid variant="compact" columns={5} movies={featuredMovies?.slice(1)} loading={featuredLoading} />
         </main>
     );

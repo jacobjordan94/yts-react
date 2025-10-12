@@ -8,7 +8,7 @@ import { QualityBadge } from "./quality-badge";
 import { DownloadLink } from "../ui/download-link";
 import { MagnetLink } from "../ui/magnet-link";
 
-const DownloadDropdown = ({ movieTitle, torrents, children }: { movieTitle: string | undefined, torrents: Torrent[] | undefined, children?: any }) => 
+const DownloadDropdown = ({ movieTitle, torrents, children }: { movieTitle: string | undefined, torrents: Torrent[] | undefined, children?: React.ReactNode }) => 
     torrents &&
     <DropdownMenu>
         <DropdownMenuTrigger asChild>

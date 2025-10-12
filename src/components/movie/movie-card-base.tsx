@@ -4,13 +4,13 @@ import { Card } from "../ui/card";
 import { cn } from "@/lib/utils";
 
 interface MovieCardBaseProps extends React.ComponentPropsWithoutRef<"div"> {
-  onGenreClick?: (genre: string) => void;
   asChild?: boolean;
   background?: boolean;
+  onGenreClick?: (genre: string) => void;
 }
 
 const MovieCardBase = React.forwardRef<HTMLDivElement, MovieCardBaseProps>(
-  ({ onGenreClick, asChild = false, background = false, className, onClick, children, ...props }, ref) => {
+  ({ asChild = false, background = false, className, onClick, children, ...props }, ref) => {
     const Comp = asChild ? Slot : Card;
 
     return (
