@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router'
 import { lazy, Suspense } from 'react'
 import BackgroundImageLayout from './layouts/background-image';
 import { SiteHeader } from '@/components/header/site-header';
+import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from 'lucide-react';
 
 // Lazy load route components
@@ -17,15 +18,17 @@ function App() {
         <div className="flex flex-col h-screen items-stretch">
           <ApplicationHeader />
           <div className="flex-1 overflow-auto">
-            <Suspense fallback={<LoadingComponent/>}>
-              <Routes>
-                <Route element={ <BackgroundImageLayout /> }>
-                  <Route index path="/" element={ <HomePage /> } />
-                  <Route path="/list" element={ <ListPage /> } />
-                  <Route path="/movie/:id"  element={ <MoviePage /> } />
-                </Route>
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<LoadingComponent/>}>
+                <Routes>
+                  <Route element={ <BackgroundImageLayout /> }>
+                    <Route index path="/" element={ <HomePage /> } />
+                    <Route path="/list" element={ <ListPage /> } />
+                    <Route path="/movie/:id"  element={ <MoviePage /> } />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </BrowserRouter>
