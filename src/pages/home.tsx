@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router';
 import type { BackgroundImageLayoutContext } from '@/layouts/background-image';
 import { useEffect } from 'react';
 import { MovieGrid } from '@/components';
+import Seo from '@/components/seo';
 
 const HomePage = () => {
     const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();
@@ -16,10 +17,17 @@ const HomePage = () => {
     }, [featuredMovies]);
 
     return (
-        <main className="home-page space-y-4 pb-12">
-            <FeaturedMovie movie={ featuredMovies?.at(0) } loading={featuredLoading} error={featuredError} />
-            <MovieGrid variant="compact" columns={5} movies={featuredMovies?.slice(1)} loading={featuredLoading} />
-        </main>
+        <>
+            <Seo
+                title="YTS Movie Browser - Browse & Discover Movies"
+                description="Discover and browse featured movies. Find high-quality torrents with detailed information about thousands of films."
+                pathname="/"
+            />
+            <main className="home-page space-y-4 pb-12">
+                <FeaturedMovie movie={ featuredMovies?.at(0) } loading={featuredLoading} error={featuredError} />
+                <MovieGrid variant="compact" columns={5} movies={featuredMovies?.slice(1)} loading={featuredLoading} />
+            </main>
+        </>
     );
 };
 

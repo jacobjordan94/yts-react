@@ -11,6 +11,7 @@ import {
   ListPageContent,
   ListPagePagination,
 } from "./list.primitives";
+import Seo from "@/components/seo";
 
 export default function ListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -117,13 +118,31 @@ export default function ListPage() {
     return 6;
   };
 
+  const seoTitle = params.query_term
+    ? `Search: ${params.query_term} - YTS Movie Browser`
+    : params.genre && params.genre !== "all"
+    ? `${params.genre} Movies - YTS Movie Browser`
+    : "Browse Movies - YTS Movie Browser";
+
+  const seoDescription = params.query_term
+    ? `Search results for "${params.query_term}". Browse and discover movies with high-quality torrents.`
+    : params.genre && params.genre !== "all"
+    ? `Browse ${params.genre} movies. Find high-quality torrents and detailed information.`
+    : "Discover and search through thousands of movies. Find high-quality torrents with detailed information.";
+
   return (
-    <ListPageRoot>
-      <div className="flex-1">
-        <ListPageHeader
-          title="Browse Movies"
-          description="Discover and search through thousands of movies"
-        />
+    <>
+      <Seo
+        title={seoTitle}
+        description={seoDescription}
+        pathname="/list"
+      />
+      <ListPageRoot>
+        <div className="flex-1">
+          <ListPageHeader
+            title="Browse Movies"
+            description="Discover and search through thousands of movies"
+          />
 
         <div className="mb-6">
           <ListPageSearch
@@ -176,6 +195,7 @@ export default function ListPage() {
         onPageChange={handlePageChange}
         hasMore={movies.length === params.limit}
       />
-    </ListPageRoot>
+      </ListPageRoot>
+    </>
   );
 }
