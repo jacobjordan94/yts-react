@@ -7,11 +7,11 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from 'lucide-react';
 
 // Lazy load route components
-const HomePage = lazy(() => import('./pages/home'))
-const MoviePage = lazy(() => import('./pages/movie'))
-const ListPage = lazy(() => import('./pages/list'))
-const AboutPage = lazy(() => import('./pages/about'))
-const NotFoundPage = lazy(() => import('./pages/not-found'))
+const HomePage = lazy(() => import('./pages/home/home'))
+const MoviePage = lazy(() => import('./pages/movie/movie'))
+const ListPage = lazy(() => import('./pages/list/list'))
+const AboutPage = lazy(() => import('./pages/about/about'))
+const NotFoundPage = lazy(() => import('./pages/not-found/not-found'))
 
 function App() {
 
