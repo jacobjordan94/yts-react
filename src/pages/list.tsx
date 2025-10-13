@@ -107,6 +107,20 @@ export default function ListPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleResetFilters = (_e: any) => {
+    setParams({ 
+      limit: 24, 
+      page: 1, 
+      quality: 'all', 
+      genre: 'all', 
+      sort_by: 'date_added', 
+      order_by: 'desc', 
+      query_term: undefined,
+      with_rt_ratings: true, 
+      minimum_rating: 0  
+    });
+  };
+
   const movies = data?.data?.movies || [];
   const movieCount = data?.data?.movie_count || 0;
   const totalPages = params.limit ? Math.ceil(movieCount / params.limit) : 1;
@@ -162,6 +176,7 @@ export default function ListPage() {
             onQualityChange={handleQualityChange}
             onSortChange={handleSortChange}
             onOrderChange={handleOrderChange}
+            onFiltersReset={handleResetFilters}
           />
           <ListPageLayoutSwitcher layout={layout} onLayoutChange={setLayout} />
         </ListPageToolbar>

@@ -7,6 +7,7 @@ import { MovieGrid, type MovieGridProps } from "@/components/layout/movie-grid";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
+import { ResetFiltersButton } from "@/components/filter/reset-filters";
 
 // Root container for the list page
 type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
@@ -101,6 +102,7 @@ interface ListPageFiltersProps extends React.ComponentPropsWithoutRef<"div"> {
   onQualityChange: (value: string) => void;
   onSortChange: (value: string) => void;
   onOrderChange: (value: "asc" | "desc") => void;
+  onFiltersReset: (e: React.MouseEvent) => any;
 }
 
 const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
@@ -113,6 +115,7 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
     onQualityChange,
     onSortChange,
     onOrderChange,
+    onFiltersReset,
     className,
     ...props
   }, ref) => {
@@ -135,6 +138,9 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
             onSortChange={onSortChange}
             onOrderChange={onOrderChange}
           />
+        </div>
+        <div className="w-auto sm:flex-1">
+          <ResetFiltersButton onFilterReset={onFiltersReset} />
         </div>
       </div>
     );
