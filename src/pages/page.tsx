@@ -8,7 +8,7 @@ const pageVariants = cva(
     {
         variants: {
             layout: {
-                default: "mx-auto",
+                default: "max-w-4xl mx-auto",
                 wide: "max-w-6xl mx-auto",
                 full: "w-full sm:px-4",
                 centered: "mx-auto flex items-center justify-center h-full",

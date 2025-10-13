@@ -139,7 +139,7 @@ export default function ListPage() {
   const seoTitle = params.query_term
     ? `Search: ${params.query_term} - YTS Movie Browser`
     : params.genre && params.genre !== "all"
-    ? `${params.genre} Movies - YTS Movie Browser`
+    ? `${params.genre.at(0)?.toUpperCase() + params.genre.slice(1)} Movies - YTS Movie Browser`
     : "Browse Movies - YTS Movie Browser";
 
   const seoDescription = params.query_term

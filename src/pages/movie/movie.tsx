@@ -1,15 +1,15 @@
 import { useMovieDetails } from "@/hooks";
-import type { BackgroundImageLayoutContext } from "@/layouts/background-image";
 import { useEffect } from "react";
-import { useOutletContext, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Hero, RecommendedMovies } from './movie.primitives';
 import TorrentTabs from "@/components/torrent/torrent-tabs";
 import Seo from "@/components/seo";
 import { Page } from "../page";
+import { useBackgroundConfig } from "@/contexts/background-config-context";
 
 const MoviePage = () => {
     const { id } = useParams();
-    const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();
+    const { setBackgroundConfig } = useBackgroundConfig();
     const { data: movie } = useMovieDetails({ movie_id: Number(id) });
     useEffect(() => {
         if(!movie) return;

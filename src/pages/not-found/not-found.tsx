@@ -3,8 +3,15 @@ import { Film, Home } from "lucide-react";
 import { Link } from "react-router";
 import Seo from "@/components/seo";
 import { Page } from "../page";
+import { useBackgroundConfig } from "@/contexts/background-config-context";
+import { useEffect } from "react";
 
 const NotFoundPage = () => {
+    const { setBackgroundConfig } = useBackgroundConfig();
+    useEffect(() => {
+        setBackgroundConfig({ image: './kenobi.png', blur: 20 });
+    }, []);
+
     return (
         <>
             <Seo

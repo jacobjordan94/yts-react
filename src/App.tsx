@@ -1,10 +1,11 @@
 import './App.css'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router'
 import { lazy, Suspense } from 'react'
-import BackgroundImageLayout from './layouts/background-image';
 import { SiteHeader } from '@/components/header/site-header';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from 'lucide-react';
+import { BackgroundConfigProvider, useBackgroundConfig } from '@/contexts/background-config-context';
+import { PageBackground } from '@/components/layout/page-background';
 
 // Lazy load route components
 const HomePage = lazy(() => import('./pages/home/home'))
@@ -16,6 +17,17 @@ const NotFoundPage = lazy(() => import('./pages/not-found/not-found'))
 function App() {
 
   return (
+    <BackgroundConfigProvider>
+      <AppContent />
+    </BackgroundConfigProvider>
+  )
+}
+
+function AppContent() {
+  const { backgroundConfig } = useBackgroundConfig();
+
+  return (
+    <PageBackground {...backgroundConfig}>
       <BrowserRouter>
         <div className="flex flex-col h-screen items-stretch">
           <ApplicationHeader />
@@ -23,11 +35,9 @@ function App() {
             <ErrorBoundary>
               <Suspense fallback={<LoadingComponent/>}>
                 <Routes>
-                  <Route element={ <BackgroundImageLayout /> }>
-                    <Route index path="/" element={ <HomePage /> } />
-                    <Route path="/list" element={ <ListPage /> } />
-                    <Route path="/movie/:id"  element={ <MoviePage /> } />
-                  </Route>
+                  <Route index path="/" element={ <HomePage /> } />
+                  <Route path="/list" element={ <ListPage /> } />
+                  <Route path="/movie/:id"  element={ <MoviePage /> } />
                   <Route path="/about" element={ <AboutPage /> } />
                   <Route path="*" element={ <NotFoundPage /> } />
                 </Routes>
@@ -36,6 +46,7 @@ function App() {
           </div>
         </div>
       </BrowserRouter>
+    </PageBackground>
   )
 }
 

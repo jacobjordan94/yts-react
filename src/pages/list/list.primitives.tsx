@@ -20,7 +20,7 @@ const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
       <Page
         pageName="movies-list"
         ref={ref}
-        className={cn("container max-w-screen-2xl mx-auto px-4 py-6 min-h-full flex flex-col", className)}
+        className={cn("container min-h-full flex flex-col", className)}
         {...props}
       />
     );

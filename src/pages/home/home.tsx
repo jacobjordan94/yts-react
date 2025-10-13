@@ -1,14 +1,13 @@
 import { FeaturedMovie } from './home.primitives';
 import useFeaturedMovies from '@/hooks/use-featured-movie';
-import { useOutletContext } from 'react-router';
-import type { BackgroundImageLayoutContext } from '@/layouts/background-image';
 import { useEffect } from 'react';
 import { MovieGrid } from '@/components';
 import Seo from '@/components/seo';
 import { Page } from '../page';
+import { useBackgroundConfig } from '@/contexts/background-config-context';
 
 const HomePage = () => {
-    const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();
+    const { setBackgroundConfig } = useBackgroundConfig();
     const { data: featuredMovies, loading: featuredLoading, error: featuredError } = useFeaturedMovies();
 
     useEffect(() => {
