@@ -17,12 +17,12 @@ const ResetFiltersButton = React.forwardRef<HTMLButtonElement, ResetFiltersButto
         const Comp = asChild ? Slot : Button;
         return (
             <Comp
+                {...props}
                 ref={ref}
                 variant={variant}
                 size={size}
                 className={cn("", className)}
                 onMouseDown={e => onFilterReset(e)}
-                {...props}
             >
                 <Trash2 />
                 Reset Filters
