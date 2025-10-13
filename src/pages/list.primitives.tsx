@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
 import { ResetFiltersButton } from "@/components/filter/reset-filters";
+import { MinimumRatingSelect } from "@/components/filter/minimum-rating-select";
 
 // Root container for the list page
 type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
@@ -98,11 +99,13 @@ interface ListPageFiltersProps extends React.ComponentPropsWithoutRef<"div"> {
   quality?: string;
   sortBy?: string;
   orderBy?: "asc" | "desc";
+  minimumRating: number;
   onGenreChange: (value: string) => void;
   onQualityChange: (value: string) => void;
   onSortChange: (value: string) => void;
   onOrderChange: (value: "asc" | "desc") => void;
   onFiltersReset: (e: React.MouseEvent) => any;
+  onMinimumRatingChange: (value: number) => any;
 }
 
 const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
@@ -111,11 +114,13 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
     quality,
     sortBy,
     orderBy,
+    minimumRating,
     onGenreChange,
     onQualityChange,
     onSortChange,
     onOrderChange,
     onFiltersReset,
+    onMinimumRatingChange,
     className,
     ...props
   }, ref) => {
@@ -139,8 +144,11 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
             onOrderChange={onOrderChange}
           />
         </div>
-        <div className="w-auto sm:flex-1">
+        <div className="w-full sm:w-auto sm:flex-1">
           <ResetFiltersButton onFilterReset={onFiltersReset} />
+        </div>
+        <div className="w-full sm:w-auto sm:flex-1">
+          <MinimumRatingSelect value={minimumRating} onChange={onMinimumRatingChange} />
         </div>
       </div>
     );

@@ -107,6 +107,10 @@ export default function ListPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleMinimumRatingsChange = (rating: number) => {
+    setParams((prev) => ({ ...prev, minimum_rating: rating || 0, page: 1 }));
+  };
+
   const handleResetFilters = (_e: any) => {
     setParams({ 
       limit: 24, 
@@ -172,11 +176,13 @@ export default function ListPage() {
             quality={params.quality}
             sortBy={params.sort_by}
             orderBy={params.order_by}
+            minimumRating={params.minimum_rating || 0 }
             onGenreChange={handleGenreChange}
             onQualityChange={handleQualityChange}
             onSortChange={handleSortChange}
             onOrderChange={handleOrderChange}
             onFiltersReset={handleResetFilters}
+            onMinimumRatingChange={handleMinimumRatingsChange}
           />
           <ListPageLayoutSwitcher layout={layout} onLayoutChange={setLayout} />
         </ListPageToolbar>
