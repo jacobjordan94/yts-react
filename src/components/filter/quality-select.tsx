@@ -13,7 +13,7 @@ interface QualitySelectProps {
   onChange: (value: string) => void;
 }
 
-const QUALITIES = ["all", "480p", "720p", "1080p", "2160p", "3D"];
+const QUALITIES = ["all", "480p", "720p", "1080p", "1080p.x265", "2160p", "3D"];
 
 const QualitySelect = React.forwardRef<HTMLButtonElement, QualitySelectProps>(
   ({ value, onChange }, ref) => {
@@ -26,9 +26,7 @@ const QualitySelect = React.forwardRef<HTMLButtonElement, QualitySelectProps>(
           {QUALITIES.map((quality) => (
             <SelectItem key={quality} value={quality}>
               <QualityIcon quality={quality} />
-              <span className="capitalize">
-                {quality}
-              </span>
+              { quality.at(0)?.toUpperCase() + quality.slice(1)}
             </SelectItem>
           ))}
         </SelectContent>

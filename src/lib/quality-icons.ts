@@ -6,6 +6,7 @@ import {
   type LucideIcon,
   Star,
   Tv2,
+  Video,
 } from "lucide-react";
 
 export const QUALITY_ICONS: Record<string, LucideIcon> = {
@@ -13,7 +14,8 @@ export const QUALITY_ICONS: Record<string, LucideIcon> = {
   "480p": Tv,
   "720p": Monitor,
   "1080p": Tv2,
-  "2160p": Star,
+  "1080p.x265": Star,
+  "2160p": Video,
   "3d": Glasses,
 };
 
