@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Link, useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { cn } from "@/lib/utils";
 import { SearchSlideOut } from "@/components/search/search-slide-out";
 import { Button } from "@/components/ui/button";
-import { DicesIcon, Film, Github } from "lucide-react";
+import { DicesIcon, Film, Github, InfoIcon } from "lucide-react";
 import ListDropdown from "./list-dropdown";
 import { useListMovies } from "@/hooks";
 
@@ -39,7 +39,7 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
       >
         <div className="container flex h-14 max-w-6xl items-center justify-between px-4 m-auto">
           <div className="flex items-center gap-8">
-            <Link
+            <NavLink
               to="/"
               className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
             >
@@ -47,9 +47,15 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
                 <Film />
               </div>
               <span className="font-semibold text-base tracking-tight">MovieDB</span>
-            </Link>
+            </NavLink>
             <nav className="hidden md:flex items-center gap-1">
               <ListDropdown />
+              <Button asChild variant="nav">
+                <NavLink to="/about">
+                  <InfoIcon />
+                  About
+                </NavLink>
+              </Button>
             </nav>
           </div>
           <div className="flex items-center gap-1">

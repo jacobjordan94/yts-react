@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +8,7 @@ import {
   DropdownMenuLabel
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import { Library } from "lucide-react";
 
 type ListOption = {
   label: string;
@@ -81,8 +82,11 @@ const ListDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="font-semibold" variant="ghost">
-          List
+        <Button asChild variant="nav">
+          <NavLink to="/list" className="" onClick={e => e.preventDefault()}>
+            <Library />
+            Movies
+          </NavLink>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="sm:grid sm:grid-cols-3 sm:p-2 sm-pb-4 ">

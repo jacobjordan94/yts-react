@@ -10,6 +10,7 @@ import { Popcorn } from 'lucide-react';
 const HomePage = lazy(() => import('./pages/home'))
 const MoviePage = lazy(() => import('./pages/movie'))
 const ListPage = lazy(() => import('./pages/list'))
+const AboutPage = lazy(() => import('./pages/about'))
 const NotFoundPage = lazy(() => import('./pages/not-found'))
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                     <Route path="/list" element={ <ListPage /> } />
                     <Route path="/movie/:id"  element={ <MoviePage /> } />
                   </Route>
+                  <Route path="/about" element={ <AboutPage /> } />
                   <Route path="*" element={ <NotFoundPage /> } />
                 </Routes>
               </Suspense>
