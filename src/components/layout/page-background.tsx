@@ -1,17 +1,33 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { cn } from "@/lib/utils";
+import { cn, loadImage } from "@/lib/utils";
 
 interface PageBackgroundProps extends React.ComponentPropsWithoutRef<"div"> {
   image?: string;
   blur?: number;
   darkness?: number;
   asChild?: boolean;
+  duration?: number,
 }
 
 const PageBackground = React.forwardRef<HTMLDivElement, PageBackgroundProps>(
-  ({ image, blur = 8, darkness = 0.7, asChild = false, className, children, ...props }, ref) => {
+  ({ image, blur = 8, darkness = 0.7, duration = 250, asChild = false, className, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "div";
+    const [ pageBackground, setPageBackground ] = React.useState<string | undefined>();
+    const [ loading, setLoading ] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+      if(!image) return;
+      loadImage(image).then(imageElement => {
+        setLoading(true);
+        setTimeout(() => {
+          setPageBackground(imageElement.src);
+        }, duration);
+        setTimeout(() => {
+          setLoading(false);
+        }, duration * 2);
+      });
+    }, [ image ]);
 
     return (
       <Comp
@@ -24,10 +40,12 @@ const PageBackground = React.forwardRef<HTMLDivElement, PageBackgroundProps>(
           <>
             {/* Background Image Layer */}
             <div
-              className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+              data-loading={loading}
+              className="transition-opacity opacity-100 data-[loading=true]:opacity-5 absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: `url(${image})`,
+                backgroundImage: `url(${pageBackground})`,
                 filter: `blur(${blur}px)`,
+                transitionDuration: `${duration}ms`
               }}
             />
             {/* Darkness Overlay */}
