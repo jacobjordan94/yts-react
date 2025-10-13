@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
 import { ResetFiltersButton } from "@/components/filter/reset-filters";
 import { MinimumRatingSelect } from "@/components/filter/minimum-rating-select";
+import { Page } from "../page";
 
 // Root container for the list page
 type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
@@ -16,7 +17,8 @@ type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
 const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
   ({ className, ...props }, ref) => {
     return (
-      <div
+      <Page
+        pageName="movies-list"
         ref={ref}
         className={cn("container max-w-screen-2xl mx-auto px-4 py-6 min-h-full flex flex-col", className)}
         {...props}

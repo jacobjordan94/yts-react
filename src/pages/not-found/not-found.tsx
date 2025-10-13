@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Film, Home } from "lucide-react";
 import { Link } from "react-router";
 import Seo from "@/components/seo";
+import { Page } from "../page";
 
 const NotFoundPage = () => {
     return (
@@ -10,7 +11,7 @@ const NotFoundPage = () => {
                 title="404 - Page Not Found | YTS Movie Browser"
                 description="The page you're looking for doesn't exist or has been moved."
             />
-            <main className="flex flex-col items-center justify-center h-full text-center px-6 space-y-6">
+            <Page layout="centered" spacing="none" pageName="not-found" className="flex-col text-center space-y-6">
                 <div className="space-y-2">
                     <Film className="size-24 mx-auto text-muted-foreground/50" />
                     <h1 className="text-6xl font-bold">404</h1>
@@ -25,7 +26,7 @@ const NotFoundPage = () => {
                         Back to Home
                     </Button>
                 </Link>
-            </main>
+            </Page>
         </>
     );
 };

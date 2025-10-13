@@ -5,6 +5,7 @@ import type { BackgroundImageLayoutContext } from '@/layouts/background-image';
 import { useEffect } from 'react';
 import { MovieGrid } from '@/components';
 import Seo from '@/components/seo';
+import { Page } from '../page';
 
 const HomePage = () => {
     const { setBackgroundConfig } = useOutletContext<BackgroundImageLayoutContext>();
@@ -23,10 +24,10 @@ const HomePage = () => {
                 description="Discover and browse featured movies. Find high-quality torrents with detailed information about thousands of films."
                 pathname="/"
             />
-            <main className="home-page space-y-4 pb-12">
+            <Page pageName="home" spacing="relaxed" className="space-y-4">
                 <FeaturedMovie movie={ featuredMovies?.at(0) } loading={featuredLoading} error={featuredError} />
                 <MovieGrid variant="compact" columns={5} movies={featuredMovies?.slice(1)} loading={featuredLoading} />
-            </main>
+            </Page>
         </>
     );
 };

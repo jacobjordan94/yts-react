@@ -69,7 +69,7 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
         {...props}
       >
         {header && (
-          <div className={cn("px-6 pt-6", hasBackground && "text-white")}>
+          <div className={cn("px-6", hasBackground && "text-white")}>
             {header}
           </div>
         )}

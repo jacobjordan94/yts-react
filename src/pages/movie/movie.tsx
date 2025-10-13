@@ -5,6 +5,7 @@ import { useOutletContext, useParams } from "react-router";
 import { Hero, RecommendedMovies } from './movie.primitives';
 import TorrentTabs from "@/components/torrent/torrent-tabs";
 import Seo from "@/components/seo";
+import { Page } from "../page";
 
 const MoviePage = () => {
     const { id } = useParams();
@@ -31,11 +32,11 @@ const MoviePage = () => {
                 image={movieData?.large_cover_image}
                 type="article"
             />
-            <main className="movie-page sm:flex-row py-6 space-y-6 h-full">
+            <Page spacing="relaxed" layout="wide" pageName="movie" className="space-y-6">
                 <Hero movie={movie?.data.movie}></Hero>
                 <TorrentTabs torrents={ movie?.data.movie.torrents } movieName={movie?.data.movie.title} />
                 <RecommendedMovies id={Number(id)} />
-            </main>
+            </Page>
         </>
     );
 }

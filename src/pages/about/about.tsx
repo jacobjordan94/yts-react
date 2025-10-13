@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { AlertCircleIcon, ExternalLink, Github, Home } from "lucide-react";
 import { Link } from "react-router";
 import Seo from "@/components/seo";
+import { Page } from "../page";
 
 const AboutPage = () => {
     return (
@@ -11,7 +12,7 @@ const AboutPage = () => {
                 description="Learn about YTS Movie Browser - a portfolio project showcasing modern web development with React, TypeScript, and Tailwind CSS."
                 pathname="/about"
             />
-            <main className="container max-w-4xl mx-auto px-6 py-12 space-y-8">
+            <Page layout="narrow" spacing="relaxed" pageName="about space-y-12">
                 <div className="space-y-4">
                     <h1 className="text-4xl font-bold">About This Project</h1>
                     <p className="text-xl text-muted-foreground">
@@ -112,7 +113,7 @@ const AboutPage = () => {
                         </a>
                     </section>
                 </div>
-            </main>
+            </Page>
         </>
     );
 };
