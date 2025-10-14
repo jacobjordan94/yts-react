@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from 'lucide-react';
 import { BackgroundConfigProvider, useBackgroundConfig } from '@/contexts/background-config-context';
 import { PageBackground } from '@/components/layout/page-background';
+import SiteDisclaimerDialog from './components/dialogs/site-disclaimer';
 
 // Lazy load route components
 const HomePage = lazy(() => import('./pages/home/home'))
@@ -19,6 +20,7 @@ function App() {
   return (
     <BackgroundConfigProvider>
       <AppContent />
+      <SiteDisclaimerDialog />
     </BackgroundConfigProvider>
   )
 }
