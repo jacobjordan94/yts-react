@@ -85,7 +85,9 @@ const ListDropdown = () => {
         <Button asChild variant="nav">
           <NavLink to="/list" className="" onClick={e => e.preventDefault()}>
             <Library />
-            Movies
+            <span className="hidden md:inline">
+              Movies
+            </span>
           </NavLink>
         </Button>
       </DropdownMenuTrigger>

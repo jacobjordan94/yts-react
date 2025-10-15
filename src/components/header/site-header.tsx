@@ -48,18 +48,19 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
               </div>
               <span className="font-semibold text-base tracking-tight">MovieDB</span>
             </NavLink>
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="flex items-center gap-1">
               <ListDropdown />
               <Button asChild variant="nav">
                 <NavLink to="/about">
                   <InfoIcon />
-                  About
+                  <span className="hidden md:inline">About</span>
                 </NavLink>
               </Button>
             </nav>
           </div>
           <div className="flex items-center gap-1">
             <SearchSlideOut
+              className="hidden md:flex"
               value={searchValue}
               onChange={setSearchValue}
               onSubmit={handleSearchSubmit}
