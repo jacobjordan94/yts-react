@@ -7,19 +7,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { QualityIcon } from "../icons";
+import { cn } from "@/lib/utils";
 
 interface QualitySelectProps {
   value?: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
 const QUALITIES = ["all", "480p", "720p", "1080p", "1080p.x265", "2160p", "3D"];
 
 const QualitySelect = React.forwardRef<HTMLButtonElement, QualitySelectProps>(
-  ({ value, onChange }, ref) => {
+  ({ value, onChange, className }, ref) => {
     return (
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger ref={ref} className="font-semibold">
+        <SelectTrigger ref={ref} className={cn("font-semibold", className)}>
           <SelectValue placeholder="All Qualities" />
         </SelectTrigger>
         <SelectContent className="font-semibold">

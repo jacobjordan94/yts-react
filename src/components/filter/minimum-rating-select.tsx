@@ -7,10 +7,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface MinimumRatingSelectProps {
   value?: number;
   onChange: (value: number) => void;
+  className?: string;
 }
 
 const RATING_OPTIONS = [
@@ -23,13 +25,13 @@ const RATING_OPTIONS = [
 ];
 
 const MinimumRatingSelect = React.forwardRef<HTMLButtonElement, MinimumRatingSelectProps>(
-  ({ value = 0, onChange }, ref) => {
+  ({ value = 0, onChange, className }, ref) => {
     return (
       <Select
         value={String(value)}
         onValueChange={(val) => onChange(Number(val))}
       >
-        <SelectTrigger ref={ref} className="font-semibold">
+        <SelectTrigger ref={ref} className={cn("font-semibold", className)}>
           <SelectValue placeholder="All Ratings" />
         </SelectTrigger>
         <SelectContent className="font-semibold">

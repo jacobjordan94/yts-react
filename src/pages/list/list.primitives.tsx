@@ -10,6 +10,7 @@ import { Search, Grid3x3, LayoutGrid, LayoutList } from "lucide-react";
 import { ResetFiltersButton } from "@/components/filter/reset-filters";
 import { MinimumRatingSelect } from "@/components/filter/minimum-rating-select";
 import { Page } from "../page";
+import { OrderSelect } from "@/components/filter/order-select";
 
 // Root container for the list page
 type ListPageRootProps = React.ComponentPropsWithoutRef<"div">;
@@ -102,12 +103,14 @@ interface ListPageFiltersProps extends React.ComponentPropsWithoutRef<"div"> {
   sortBy?: string;
   orderBy?: "asc" | "desc";
   minimumRating: number;
+  layout: "compact" | "default" | "detailed";
   onGenreChange: (value: string) => void;
   onQualityChange: (value: string) => void;
   onSortChange: (value: string) => void;
   onOrderChange: (value: "asc" | "desc") => void;
   onFiltersReset: (e: React.MouseEvent) => any;
   onMinimumRatingChange: (value: number) => any;
+  onLayoutChange: (value: "compact" | "default" | "detailed") => any;
 }
 
 const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
@@ -117,41 +120,30 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
     sortBy,
     orderBy,
     minimumRating,
+    layout,
     onGenreChange,
     onQualityChange,
     onSortChange,
     onOrderChange,
     onFiltersReset,
     onMinimumRatingChange,
+    onLayoutChange,
     className,
     ...props
   }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("flex flex-wrap items-center gap-3", className)}
-        {...props}
-      >
-        <div className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px]">
-          <GenreSelect value={genre} onChange={onGenreChange} />
-        </div>
-        <div className="w-full sm:w-auto sm:flex-1 sm:max-w-[200px]">
-          <QualitySelect value={quality} onChange={onQualityChange} />
-        </div>
-        <div className="w-full sm:w-auto sm:flex-1">
-          <SortSelect
-            sortBy={sortBy}
-            orderBy={orderBy}
-            onSortChange={onSortChange}
-            onOrderChange={onOrderChange}
-          />
-        </div>
-        <div className="w-full sm:w-auto sm:flex-1">
-          <ResetFiltersButton onFilterReset={onFiltersReset} />
-        </div>
-        <div className="w-full sm:w-auto sm:flex-1">
-          <MinimumRatingSelect value={minimumRating} onChange={onMinimumRatingChange} />
-        </div>
+      <div ref={ref} {...props} className={cn("grid grid-cols-2 grid-rows-4 gap-2 md:grid-cols-12 md:grid-rows-2 w-full", className)}>
+        <GenreSelect   className="w-full md:col-span-4" value={genre} onChange={onGenreChange} />
+        <QualitySelect className="w-full md:col-span-4 md:col-start-5" value={quality} onChange={onQualityChange} />
+        <SortSelect
+          sortBy={sortBy}
+          onSortChange={onSortChange}
+          className="w-full row-start-2 md:row-start-1 md:col-span-4 md:col-start-9"
+        />
+        <MinimumRatingSelect className="w-full row-start-3 md:row-start-2 md:col-span-3 md:col-start-1" value={minimumRating} onChange={onMinimumRatingChange} />
+        <OrderSelect className="w-full md:col-span-2 md:col-start-4 md:row-start-2" orderBy={orderBy} onOrderChange={onOrderChange} />
+        <ResetFiltersButton className="w-full row-start-3 md:row-start-2 md:col-span-2 md:col-start-6" onFilterReset={onFiltersReset} />
+        <ListPageLayoutSwitcher className="w-full px-0.5 col-span-full row-start-4 md:col-span-5 md:col-start-8 md:row-start-2" layout={layout} onLayoutChange={onLayoutChange} />
       </div>
     );
   }
@@ -171,7 +163,7 @@ const ListPageLayoutSwitcher = React.forwardRef<HTMLDivElement, ListPageLayoutSw
       <div
         ref={ref}
         className={cn(
-          "flex items-center gap-1 rounded-lg border p-1 border-white/20", 
+          "flex items-center justify-stretch *:flex-1 gap-1 rounded-lg border h-9 border-white/20", 
           className,
           "*:data-[active=true]:bg-white/20"
         )}
@@ -181,31 +173,31 @@ const ListPageLayoutSwitcher = React.forwardRef<HTMLDivElement, ListPageLayoutSw
           data-active={layout === 'compact'}
           variant={layout === "compact" ? "secondary" : "ghost"}
           size="sm"
-          className="h-8 px-3"
+          className="h-7 px-3"
           onClick={() => onLayoutChange("compact")}
         >
           <Grid3x3 className="h-4 w-4" />
-          <span className="ml-2 hidden sm:inline">Compact</span>
+          <span className="ml-2">Compact</span>
         </Button>
         <Button
           data-active={layout === 'default'}
           variant={layout === "default" ? "secondary" : "ghost"}
           size="sm"
-          className="h-8 px-3"
+          className="h-7 px-3"
           onClick={() => onLayoutChange("default")}
         >
           <LayoutGrid className="h-4 w-4" />
-          <span className="ml-2 hidden sm:inline">Grid</span>
+          <span className="ml-2">Grid</span>
         </Button>
         <Button
           data-active={layout === 'detailed'}
           variant={layout === "detailed" ? "secondary" : "ghost"}
           size="sm"
-          className="h-8 px-3"
+          className="h-7 px-3"
           onClick={() => onLayoutChange("detailed")}
         >
           <LayoutList className="h-4 w-4" />
-          <span className="ml-2 hidden sm:inline">Detailed</span>
+          <span className="ml-2">Detailed</span>
         </Button>
       </div>
     );
@@ -224,7 +216,7 @@ const ListPageToolbar = React.forwardRef<HTMLDivElement, ListPageToolbarProps>(
     return (
       <div
         ref={ref}
-        className={cn("flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6", className)}
+        className={cn("mb-6 flex", className)}
         {...props}
       >
         {children}

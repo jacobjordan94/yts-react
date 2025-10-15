@@ -55,6 +55,8 @@ export const genreIcons: Record<string, LucideIcon> = {
   "History": Globe,
   "Music": Music,
   "Film-Noir": Film,
+
+  "All Genres": Film,  
 };
 
 export const getGenreIcon = (genre: string): LucideIcon => {

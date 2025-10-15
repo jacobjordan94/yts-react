@@ -7,11 +7,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { GenreIcon } from "@/components/icons/genre-icon";
+import { Film } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface GenreSelectProps {
   value?: string;
   onChange: (value: string) => void;
   genres?: string[];
+  className?: string;
 }
 
 const DEFAULT_GENRES = [
@@ -39,15 +42,18 @@ const DEFAULT_GENRES = [
   "Western",
 ];
 
-const GenreSelect = React.forwardRef<HTMLButtonElement, GenreSelectProps>(
-  ({ value, onChange, genres = DEFAULT_GENRES }, ref) => {
+const GenreSelect = React.forwardRef<HTMLDivElement, GenreSelectProps>(
+  ({ value, onChange, genres = DEFAULT_GENRES, className }, ref) => {
     return (
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger ref={ref} className="font-semibold">
+        <SelectTrigger className={cn("font-semibold", className)}>
           <SelectValue placeholder="All Genres" />
         </SelectTrigger>
-        <SelectContent className="font-semibold">
-          <SelectItem value="all">All Genres</SelectItem>
+        <SelectContent ref={ref} className="font-semibold">
+          <SelectItem value="all">
+            <Film />
+            All Genres
+          </SelectItem>
           {genres.map((genre) => (
             <SelectItem key={genre} value={genre.toLowerCase()}>
               <GenreIcon genre={genre} />

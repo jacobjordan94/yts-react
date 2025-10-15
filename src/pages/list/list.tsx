@@ -162,60 +162,61 @@ export default function ListPage() {
             description="Discover and search through thousands of movies"
           />
 
-        <div className="mb-6">
-          <ListPageSearch
-            value={params.query_term}
-            onSearch={handleSearch}
-            placeholder="Search movies by title..."
+          <div className="mb-6">
+            <ListPageSearch
+              value={params.query_term}
+              onSearch={handleSearch}
+              placeholder="Search movies by title..."
+            />
+          </div>
+
+          <ListPageToolbar>
+            <ListPageFilters
+              genre={params.genre}
+              quality={params.quality}
+              sortBy={params.sort_by}
+              orderBy={params.order_by}
+              minimumRating={params.minimum_rating || 0 }
+              layout={layout}
+              onLayoutChange={setLayout}
+              onGenreChange={handleGenreChange}
+              onQualityChange={handleQualityChange}
+              onSortChange={handleSortChange}
+              onOrderChange={handleOrderChange}
+              onFiltersReset={handleResetFilters}
+              onMinimumRatingChange={handleMinimumRatingsChange}
+            />
+          </ListPageToolbar>
+
+          {error && (
+            <div className="mb-6 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-center">
+              <p className="text-sm text-destructive">
+                Failed to load movies. Please try again later.
+              </p>
+            </div>
+          )}
+
+          <ListPageContent
+            movies={movies}
+            loading={loading}
+            empty={!loading && movies.length === 0}
+            variant={layout}
+            columns={getColumns()}
+            rows={5}
+            emptyMessage={
+              params.query_term
+                ? `No movies found matching "${params.query_term}"`
+                : "No movies found"
+            }
           />
         </div>
 
-        <ListPageToolbar>
-          <ListPageFilters
-            genre={params.genre}
-            quality={params.quality}
-            sortBy={params.sort_by}
-            orderBy={params.order_by}
-            minimumRating={params.minimum_rating || 0 }
-            onGenreChange={handleGenreChange}
-            onQualityChange={handleQualityChange}
-            onSortChange={handleSortChange}
-            onOrderChange={handleOrderChange}
-            onFiltersReset={handleResetFilters}
-            onMinimumRatingChange={handleMinimumRatingsChange}
-          />
-          <ListPageLayoutSwitcher layout={layout} onLayoutChange={setLayout} />
-        </ListPageToolbar>
-
-        {error && (
-          <div className="mb-6 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-center">
-            <p className="text-sm text-destructive">
-              Failed to load movies. Please try again later.
-            </p>
-          </div>
-        )}
-
-        <ListPageContent
-          movies={movies}
-          loading={loading}
-          empty={!loading && movies.length === 0}
-          variant={layout}
-          columns={getColumns()}
-          rows={5}
-          emptyMessage={
-            params.query_term
-              ? `No movies found matching "${params.query_term}"`
-              : "No movies found"
-          }
+        <ListPagePagination
+          currentPage={params.page || 1}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          hasMore={movies.length === params.limit}
         />
-      </div>
-
-      <ListPagePagination
-        currentPage={params.page || 1}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        hasMore={movies.length === params.limit}
-      />
       </ListPageRoot>
     </>
   );

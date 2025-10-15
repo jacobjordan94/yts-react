@@ -21,10 +21,10 @@ const ResetFiltersButton = React.forwardRef<HTMLButtonElement, ResetFiltersButto
                 ref={ref}
                 variant={variant}
                 size={size}
-                className={cn("", className)}
+                className={cn("font-semibold hover:bg-destructive/20!", className)}
                 onMouseDown={e => onFilterReset(e)}
             >
-                <Trash2 />
+                <Trash2 className="opacity-50" />
                 Reset Filters
             </Comp>
         );

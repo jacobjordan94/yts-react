@@ -6,16 +6,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
 import Icons from "../icons";
+import { cn } from "@/lib/utils";
 
 interface SortSelectProps extends React.ComponentPropsWithoutRef<"div"> {
   sortBy?: string;
-  orderBy?: "asc" | "desc";
   onSortChange: (value: string) => void;
-  onOrderChange: (value: "asc" | "desc") => void;
+  className?: string;
 }
 
 const SORT_OPTIONS = [
@@ -30,41 +27,21 @@ const SORT_OPTIONS = [
 ];
 
 const SortSelect = React.forwardRef<HTMLDivElement, SortSelectProps>(
-  ({ sortBy = "date_added", orderBy = "desc", onSortChange, onOrderChange, className, ...props }, ref) => {
+  ({ sortBy = "date_added", onSortChange, className, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("flex items-center gap-2 font-semibold", className)}
-        {...props}
-      >
-        <Select value={sortBy} onValueChange={onSortChange}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent className="font-semibold">
-            {SORT_OPTIONS.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                <Icons.Sort sortBy={option.value}  />
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Button
-          variant="outline"
-          onClick={() => onOrderChange(orderBy === "asc" ? "desc" : "asc")}
-          data-order={orderBy}
-          className="capitalize font-semibold w-[84px]"
-        >
-          { orderBy }
-          <ChevronDown
-            className={cn(
-              "h-4 w-4 transition-transform",
-              orderBy === "asc" && "rotate-180"
-            )}
-          />
-        </Button>
-      </div>
+      <Select value={sortBy} onValueChange={onSortChange}>
+        <SelectTrigger className={cn("w-[180px] font-semibold", className)}>
+          <SelectValue placeholder="Sort by" />
+        </SelectTrigger>
+        <SelectContent {...props} ref={ref} className="font-semibold">
+          {SORT_OPTIONS.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              <Icons.Sort sortBy={option.value}  />
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     );
   }
 );
