@@ -24,8 +24,10 @@ const sizeClasses = {
 const MoviePoster = React.forwardRef<HTMLDivElement, MoviePosterProps>(
   ({ src, alt = "Movie poster", size = "md", loading = false, error = false, asChild = false, className, ...props }, ref) => {
     const Comp = asChild ? Slot : "div";
+    const [ loadingImage, setLoadingImage ] = React.useState(false);
+    const [ loadingError, setLoadingError ] = React.useState(false);
 
-    if (loading) {
+    if (loading || loadingImage) {
       return (
         <Comp
           ref={ref}
@@ -55,7 +57,7 @@ const MoviePoster = React.forwardRef<HTMLDivElement, MoviePosterProps>(
         {...props}
       >
         <AspectRatio ratio={2 / 3}>
-          {error || !src ? (
+          {error || !src || loadingError ? (
             <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
               <ImageOff className="h-12 w-12" />
             </div>
@@ -63,6 +65,9 @@ const MoviePoster = React.forwardRef<HTMLDivElement, MoviePosterProps>(
             <img
               src={src}
               alt={alt}
+              onLoadStart={() => setLoadingImage(true)}
+              onLoad={() => setLoadingImage(false)}
+              onError={() => setLoadingError(true)}
               className="h-full w-full object-cover"
               loading="lazy"
             />
