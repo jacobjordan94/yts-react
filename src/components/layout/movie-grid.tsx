@@ -90,11 +90,11 @@ const MovieGrid = React.forwardRef<HTMLDivElement, MovieGridProps>(
         className={cn("grid gap-4", columnClasses[columns], className)}
         {...props}
       >
-        {movies.map((movie) =>
+        {movies.map((movie, i) =>
           renderCard ? (
-            <React.Fragment key={movie.id}>{renderCard(movie)}</React.Fragment>
+            <React.Fragment key={`${movie.id}-${i}`}>{renderCard(movie)}</React.Fragment>
           ) : (
-            <Link key={movie.id} to={`/movie/${movie.id}`}>
+            <Link key={`${movie.id}-${i}`} to={`/movie/${movie.id}`}>
               <MovieCard
                 className="shadow-sm"
                 movie={movie}
