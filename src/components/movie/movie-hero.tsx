@@ -78,6 +78,7 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
             src={movie.large_cover_image}
             alt={movie.title}
             size="lg"
+            className="w-full md:w-64"
           />
           <div className="flex flex-1 flex-col gap-4">
             <MovieTitle
@@ -88,23 +89,28 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
             <MovieSynopsis
               synopsis={movie.synopsis}
               lines={3}
+              className="hidden md:block"
             />
             <MovieMeta
               movie={movie}
               showItems={["year", "runtime", "rating", "language", "mpa_rating"]}
+              className="space-x-2"
             />
             <GenreBadges
               genres={movie.genres}
               limit={5}
               onGenreClick={onGenreClick}
             />
-            <MovieDescription
-              description={movie.description_full || movie.summary}
-              lines={4}
-            />
+            {
+              !(movie.synopsis === movie.description_full || movie.synopsis === movie.summary)  &&
+              <MovieDescription
+                description={movie.description_full || movie.summary}
+                lines={4}
+              />
+            }
             {children}
             {(showTrailerButton || showDownloadButton || children) && (
-              <div className="mt-auto flex gap-2 justify-end">
+              <div className="flex *:max-md:flex-1 gap-2 md:gap-2 md:justify-end mt-auto">
                 {showTrailerButton && (
                   <TrailerButton
                     trailerCode={movie.yt_trailer_code}

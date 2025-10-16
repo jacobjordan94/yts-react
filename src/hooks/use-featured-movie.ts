@@ -10,8 +10,8 @@ function useFeaturedMovies(options: UseFeaturedMoviesOptions = {}) {
     {
       limit: 6,
       quality: '1080p',
-      minimum_rating: 7.5,
-      sort_by: 'year',
+      minimum_rating: 7,
+      sort_by: 'date_added',
       order_by: 'desc',
       with_rt_ratings: true,
     },

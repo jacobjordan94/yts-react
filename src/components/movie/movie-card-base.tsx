@@ -20,7 +20,7 @@ const MovieCardBase = React.forwardRef<HTMLDivElement, MovieCardBaseProps>(
         data-clickable={!!onClick}
         className={cn(
           "group/movieCard flex flex-col transition-transform border-0 data-[background=true]:bg-radial from-white/20 to-transparent",
-          "data-[clickable=true]:cursor-pointer data-[clickable=true]:hover:scale-105",
+          "data-[clickable=true]:cursor-pointer",
           className
         )}
         onClick={onClick}

@@ -32,7 +32,7 @@ const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
       <header
         ref={ref}
         className={cn(
-          "w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+          "w-full border-b border-border/40 bg-background/60",
           className
         )}
         {...props}
