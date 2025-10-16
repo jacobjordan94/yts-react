@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from 'react';
 
 interface BackgroundConfig {
     image?: string | undefined;
@@ -20,10 +20,13 @@ export function BackgroundConfigProvider({ children }: { children: ReactNode }) 
         setBackgroundConfigState(config);
     }, []);
 
-    const contextValue = useMemo(() => ({
-        backgroundConfig,
-        setBackgroundConfig
-    }), [backgroundConfig, setBackgroundConfig]);
+    const contextValue = useMemo(
+        () => ({
+            backgroundConfig,
+            setBackgroundConfig,
+        }),
+        [backgroundConfig, setBackgroundConfig]
+    );
 
     return (
         <BackgroundConfigContext.Provider value={contextValue}>
@@ -32,10 +35,11 @@ export function BackgroundConfigProvider({ children }: { children: ReactNode }) 
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useBackgroundConfig() {
     const context = useContext(BackgroundConfigContext);
     if (context === undefined) {
-        throw new Error("useBackgroundConfig must be used within a BackgroundConfigProvider");
+        throw new Error('useBackgroundConfig must be used within a BackgroundConfigProvider');
     }
     return context;
 }

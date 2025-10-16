@@ -1,24 +1,26 @@
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import React, { useState } from "react";
-import { Button } from "../ui/button";
-import { Youtube } from "lucide-react";
-import { AspectRatio } from "../ui/aspect-ratio";
-import { cn } from "@/lib/utils";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import React, { useState } from 'react';
+import { Button } from '../ui/button';
+import { Youtube } from 'lucide-react';
+import { AspectRatio } from '../ui/aspect-ratio';
+import { cn } from '@/lib/utils';
+import { DialogTitle } from '@radix-ui/react-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-interface YoutubeDialogProps { id: string; children?: React.ReactNode; };
-const YoutubeDialog = React.forwardRef<HTMLButtonElement, YoutubeDialogProps>( 
+interface YoutubeDialogProps {
+    id: string;
+    children?: React.ReactNode;
+}
+const YoutubeDialog = React.forwardRef<HTMLButtonElement, YoutubeDialogProps>(
     ({ id, children }, ref) => {
         return (
             <Dialog>
                 <DialogTrigger asChild ref={ref}>
-                {
-                    children ||
-                    <Button variant="ghost">
-                        <Youtube />
-                    </Button>
-                }
+                    {children || (
+                        <Button variant="ghost">
+                            <Youtube />
+                        </Button>
+                    )}
                 </DialogTrigger>
                 <YoutubeDialogContent id={id} />
             </Dialog>
@@ -26,31 +28,28 @@ const YoutubeDialog = React.forwardRef<HTMLButtonElement, YoutubeDialogProps>(
     }
 );
 
-YoutubeDialog.displayName = "YoutubeDialog";
+YoutubeDialog.displayName = 'YoutubeDialog';
 
-export function YoutubeDialogContent({id}: { id: number | string }) {
-    const [ state, setState ] = useState({ loading: true, error: false });
+export function YoutubeDialogContent({ id }: { id: number | string }) {
+    const [state, setState] = useState({ loading: true, error: false });
     return (
         <DialogContent className="p-0 overflow-hidden">
             <VisuallyHidden>
-                <DialogTitle>Youtube: { id }</DialogTitle>
+                <DialogTitle>Youtube: {id}</DialogTitle>
             </VisuallyHidden>
-            <AspectRatio
-                asChild 
-                ratio={16 / 9} 
-            >
-                <div 
+            <AspectRatio asChild ratio={16 / 9}>
+                <div
                     data-loaded={!state.loading}
                     className="group/youtubeDialog bg-white/50 animate-pulse data-[loaded=true]:animate-none"
                 >
                     <iframe
-                        src={`https://youtube.com/embed/${id}`} 
-                        loading="lazy" 
+                        src={`https://youtube.com/embed/${id}`}
+                        loading="lazy"
                         onLoad={() => setState({ loading: false, error: false })}
                         onError={() => setState({ loading: false, error: true })}
                         className={cn(
-                            "size-full",
-                            "duration-500 opacity-0 group-data-[loaded=true]/youtubeDialog:opacity-100",
+                            'size-full',
+                            'duration-500 opacity-0 group-data-[loaded=true]/youtubeDialog:opacity-100'
                         )}
                     />
                 </div>

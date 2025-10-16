@@ -1,77 +1,85 @@
-import './App.css'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router'
-import { lazy, Suspense } from 'react'
+import './App.css';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
+import { lazy, Suspense } from 'react';
 import { SiteHeader } from '@/components/header/site-header';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from 'lucide-react';
-import { BackgroundConfigProvider, useBackgroundConfig } from '@/contexts/background-config-context';
+import {
+    BackgroundConfigProvider,
+    useBackgroundConfig,
+} from '@/contexts/background-config-context';
 import { PageBackground } from '@/components/layout/page-background';
 import SiteDisclaimerDialog from './components/dialogs/site-disclaimer';
+import { OfflineIndicator } from '@/components/offline-indicator';
 
 // Lazy load route components
-const HomePage = lazy(() => import('./pages/home/home'))
-const MoviePage = lazy(() => import('./pages/movie/movie'))
-const ListPage = lazy(() => import('./pages/list/list'))
-const AboutPage = lazy(() => import('./pages/about/about'))
-const NotFoundPage = lazy(() => import('./pages/not-found/not-found'))
+const HomePage = lazy(() => import('./pages/home/home'));
+const MoviePage = lazy(() => import('./pages/movie/movie'));
+const ListPage = lazy(() => import('./pages/list/list'));
+const AboutPage = lazy(() => import('./pages/about/about'));
+const NotFoundPage = lazy(() => import('./pages/not-found/not-found'));
 
 function App() {
-
-  return (
-    <BackgroundConfigProvider>
-      <AppContent />
-      <SiteDisclaimerDialog />
-    </BackgroundConfigProvider>
-  )
+    return (
+        <BackgroundConfigProvider>
+            <AppContent />
+            <SiteDisclaimerDialog />
+            <OfflineIndicator />
+        </BackgroundConfigProvider>
+    );
 }
 
 function AppContent() {
-  const { backgroundConfig } = useBackgroundConfig();
+    const { backgroundConfig } = useBackgroundConfig();
 
-  return (
-    <PageBackground {...backgroundConfig}>
-      <BrowserRouter>
-        <div className="flex flex-col h-screen items-stretch">
-          <ApplicationHeader />
-          <div className="flex-1 overflow-auto">
-            <ErrorBoundary>
-              <Suspense fallback={<LoadingComponent/>}>
-                <Routes>
-                  <Route index path="/" element={ <HomePage /> } />
-                  <Route path="/list" element={ <ListPage /> } />
-                  <Route path="/movie/:id"  element={ <MoviePage /> } />
-                  <Route path="/about" element={ <AboutPage /> } />
-                  <Route path="*" element={ <NotFoundPage /> } />
-                </Routes>
-              </Suspense>
-            </ErrorBoundary>
-          </div>
-        </div>
-      </BrowserRouter>
-    </PageBackground>
-  )
+    return (
+        <PageBackground {...backgroundConfig}>
+            <BrowserRouter>
+                <a
+                    href="#main-content"
+                    className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:shadow-lg"
+                >
+                    Skip to main content
+                </a>
+                <div className="flex flex-col h-screen items-stretch">
+                    <ApplicationHeader />
+                    <main id="main-content" className="flex-1 overflow-auto">
+                        <ErrorBoundary>
+                            <Suspense fallback={<LoadingComponent />}>
+                                <Routes>
+                                    <Route index path="/" element={<HomePage />} />
+                                    <Route path="/list" element={<ListPage />} />
+                                    <Route path="/movie/:id" element={<MoviePage />} />
+                                    <Route path="/about" element={<AboutPage />} />
+                                    <Route path="*" element={<NotFoundPage />} />
+                                </Routes>
+                            </Suspense>
+                        </ErrorBoundary>
+                    </main>
+                </div>
+            </BrowserRouter>
+        </PageBackground>
+    );
 }
 
 function ApplicationHeader() {
-  const navigate = useNavigate();
-  function handleQuery(query: string) {
-    query = query.trim();
-    if(!query) return;
-    query = query.split(' ').join('+');
-    navigate('/list/?q=' + query + '&sort_by=date_added&order_by=desc');
-  }
-  return <SiteHeader onSearch={handleQuery}></SiteHeader>;
+    const navigate = useNavigate();
+    function handleQuery(query: string) {
+        query = query.trim();
+        if (!query) return;
+        query = query.split(' ').join('+');
+        navigate('/list/?q=' + query + '&sort_by=date_added&order_by=desc');
+    }
+    return <SiteHeader onSearch={handleQuery}></SiteHeader>;
 }
 
 function LoadingComponent() {
-  return (
-    <div className="flex flex-col gap-2 items-center justify-center h-full">
-      <Popcorn className='size-14 animate-bounce' />
-      <span className='font-semibold'>
-        Getting the Popcorn ready...
-      </span>
-    </div>
-  );
+    return (
+        <div className="flex flex-col gap-2 items-center justify-center h-full">
+            <Popcorn className="size-14 animate-bounce" />
+            <span className="font-semibold">Getting the Popcorn ready...</span>
+        </div>
+    );
 }
 
 export default App;

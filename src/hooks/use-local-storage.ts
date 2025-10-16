@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
 function useLocalStorage<T>(key: string, defaultValue: T): [T | undefined, (value: T) => void] {
     // Initialize synchronously from localStorage to avoid hydration mismatch
     const [data, setData] = useState<T>(() => {
         // SSR safety check
-        if (typeof window === "undefined") {
+        if (typeof window === 'undefined') {
             return defaultValue;
         }
 
@@ -22,23 +22,27 @@ function useLocalStorage<T>(key: string, defaultValue: T): [T | undefined, (valu
         }
 
         // Set default value in localStorage
-        const serialized = typeof defaultValue === "string" ? defaultValue : JSON.stringify(defaultValue);
+        const serialized =
+            typeof defaultValue === 'string' ? defaultValue : JSON.stringify(defaultValue);
         localStorage.setItem(key, serialized);
         return defaultValue;
     });
 
     // Setter function that updates both state and localStorage
-    const setValue = useCallback((value: T) => {
-        if (typeof window === "undefined") return;
+    const setValue = useCallback(
+        (value: T) => {
+            if (typeof window === 'undefined') return;
 
-        setData(value);
-        const serialized = typeof value === "string" ? value : JSON.stringify(value);
-        localStorage.setItem(key, serialized);
-    }, [key]);
+            setData(value);
+            const serialized = typeof value === 'string' ? value : JSON.stringify(value);
+            localStorage.setItem(key, serialized);
+        },
+        [key]
+    );
 
     // Sync across tabs - listen for storage events
     useEffect(() => {
-        if (typeof window === "undefined") return;
+        if (typeof window === 'undefined') return;
 
         const handleStorageChange = (e: StorageEvent) => {
             if (e.key === key && e.newValue !== null) {
@@ -51,8 +55,8 @@ function useLocalStorage<T>(key: string, defaultValue: T): [T | undefined, (valu
             }
         };
 
-        window.addEventListener("storage", handleStorageChange);
-        return () => window.removeEventListener("storage", handleStorageChange);
+        window.addEventListener('storage', handleStorageChange);
+        return () => window.removeEventListener('storage', handleStorageChange);
     }, [key]);
 
     return [data, setValue];

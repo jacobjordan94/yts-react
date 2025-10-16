@@ -1,91 +1,97 @@
-import * as React from "react";
-import { NavLink, useNavigate } from "react-router";
-import { cn } from "@/lib/utils";
-import { SearchSlideOut } from "@/components/search/search-slide-out";
-import { Button } from "@/components/ui/button";
-import { DicesIcon, Film, Github, InfoIcon } from "lucide-react";
-import ListDropdown from "./list-dropdown";
-import { useListMovies } from "@/hooks";
+import * as React from 'react';
+import { NavLink, useNavigate } from 'react-router';
+import { cn } from '@/lib/utils';
+import { SearchSlideOut } from '@/components/search/search-slide-out';
+import { Button } from '@/components/ui/button';
+import { DicesIcon, Film, Github, InfoIcon } from 'lucide-react';
+import ListDropdown from './list-dropdown';
+import { useListMovies } from '@/hooks';
 
-interface SiteHeaderProps extends React.ComponentPropsWithoutRef<"header"> {
-  onSearch?: (value: string) => void;
+interface SiteHeaderProps extends React.ComponentPropsWithoutRef<'header'> {
+    onSearch?: (value: string) => void;
 }
 
 const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
-  ({ onSearch, className, ...props }, ref) => {
-    const [searchValue, setSearchValue] = React.useState("");
-    const { data } = useListMovies({});
-    const navigate = useNavigate();
+    ({ onSearch, className, ...props }, ref) => {
+        const [searchValue, setSearchValue] = React.useState('');
+        const { data } = useListMovies({});
+        const navigate = useNavigate();
 
-    const handleSearchSubmit = (value: string) => {
-      onSearch?.(value);
-    };
+        const handleSearchSubmit = (value: string) => {
+            onSearch?.(value);
+        };
 
-    const randomMovie = () => {
-      const movieCount = data?.data.movie_count;
-      if(!movieCount) return;
-      const rand = Math.floor(Math.random() * (movieCount - 1 + 1)) + 1;
-      navigate('/movie/' + rand);
-    };
+        const randomMovie = () => {
+            const movieCount = data?.data.movie_count;
+            if (!movieCount) return;
+            const rand = Math.floor(Math.random() * (movieCount - 1 + 1)) + 1;
+            navigate('/movie/' + rand);
+        };
 
-    return (
-      <header
-        ref={ref}
-        className={cn(
-          "w-full border-b border-border/40 bg-background/60",
-          className
-        )}
-        {...props}
-      >
-        <div className="container flex h-14 max-w-6xl items-center justify-between px-4 m-auto">
-          <div className="flex items-center gap-8">
-            <NavLink
-              to="/"
-              className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
+        return (
+            <header
+                ref={ref}
+                className={cn('w-full border-b border-border/40 bg-background/60', className)}
+                {...props}
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-sm">
-                <Film />
-              </div>
-              <span className="font-semibold text-base tracking-tight">MovieDB</span>
-            </NavLink>
-            <nav className="flex items-center gap-1">
-              <ListDropdown />
-              <Button asChild variant="nav">
-                <NavLink to="/about">
-                  <InfoIcon />
-                  <span className="hidden md:inline">About</span>
-                </NavLink>
-              </Button>
-            </nav>
-          </div>
-          <div className="flex items-center gap-1">
-            <SearchSlideOut
-              className="hidden md:flex"
-              value={searchValue}
-              onChange={setSearchValue}
-              onSubmit={handleSearchSubmit}
-            />
-            <Button disabled={!data?.data.movie_count} variant="ghost" size="icon" className="h-8 w-8" onClick={randomMovie}>
-              <DicesIcon />
-            </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View source on GitHub"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </header>
-    );
-  }
+                <div className="container flex h-14 max-w-6xl items-center justify-between px-4 m-auto">
+                    <div className="flex items-center gap-8">
+                        <NavLink
+                            to="/"
+                            className="flex items-center gap-2.5 transition-opacity hover:opacity-80"
+                            aria-label="Home"
+                        >
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold text-sm shadow-sm">
+                                <Film aria-hidden="true" />
+                            </div>
+                            <span className="font-semibold text-base tracking-tight">MovieDB</span>
+                        </NavLink>
+                        <nav className="flex items-center gap-1" aria-label="Main navigation">
+                            <ListDropdown />
+                            <Button asChild variant="nav">
+                                <NavLink to="/about">
+                                    <InfoIcon aria-hidden="true" />
+                                    <span className="hidden md:inline">About</span>
+                                    <span className="sr-only md:hidden">About</span>
+                                </NavLink>
+                            </Button>
+                        </nav>
+                    </div>
+                    <div className="flex items-center gap-1">
+                        <SearchSlideOut
+                            className="hidden md:flex"
+                            value={searchValue}
+                            onChange={setSearchValue}
+                            onSubmit={handleSearchSubmit}
+                        />
+                        <Button
+                            disabled={!data?.data.movie_count}
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            onClick={randomMovie}
+                            aria-label="Go to random movie"
+                        >
+                            <DicesIcon aria-hidden="true" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+                            <a
+                                href="https://github.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="View source on GitHub"
+                            >
+                                <Github className="h-4 w-4" />
+                            </a>
+                        </Button>
+                    </div>
+                </div>
+            </header>
+        );
+    }
 );
 
-SiteHeader.displayName = "SiteHeader";
+SiteHeader.displayName = 'SiteHeader';
 
 export { SiteHeader };
 export type { SiteHeaderProps };

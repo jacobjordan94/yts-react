@@ -1,11 +1,11 @@
-import useLocalStorage from "@/hooks/use-local-storage";
-import { Dialog, DialogFooter, DialogHeader, DialogContent, DialogTitle } from "../ui/dialog";
-import { Button } from "../ui/button";
-import { useState } from "react";
+import useLocalStorage from '@/hooks/use-local-storage';
+import { Dialog, DialogFooter, DialogHeader, DialogContent, DialogTitle } from '../ui/dialog';
+import { Button } from '../ui/button';
+import { useState } from 'react';
 
 const SiteDisclaimerDialog = () => {
-    const [ visited, setVisited ] = useLocalStorage('visited', false);
-    const [ declined, setDeclined ] = useState(false);
+    const [visited, setVisited] = useLocalStorage('visited', false);
+    const [declined, setDeclined] = useState(false);
 
     if (declined) {
         return (
@@ -28,20 +28,27 @@ const SiteDisclaimerDialog = () => {
                 </DialogHeader>
                 <div className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
-                        This website is a <strong>read-only mirror</strong> of publicly available data from YTS.mx.
-                        It does not host, store, or distribute any copyrighted content.
+                        This website is a <strong>read-only mirror</strong> of publicly available
+                        data from YTS.mx. It does not host, store, or distribute any copyrighted
+                        content.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                        All movie information is fetched directly from the YTS public API. This project was created
-                        solely for <strong>educational and portfolio purposes</strong> to showcase technical skills in
-                        front-end development.
+                        All movie information is fetched directly from the YTS public API. This
+                        project was created solely for{' '}
+                        <strong>educational and portfolio purposes</strong> to showcase technical
+                        skills in front-end development.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                        The developer does not condone or encourage piracy. Please respect copyright laws in your jurisdiction.
+                        The developer does not condone or encourage piracy. Please respect copyright
+                        laws in your jurisdiction.
                     </p>
                 </div>
                 <DialogFooter className="flex-col gap-2">
-                    <Button className="flex-1" variant="destructive" onClick={() => setDeclined(true)}>
+                    <Button
+                        className="flex-1"
+                        variant="destructive"
+                        onClick={() => setDeclined(true)}
+                    >
                         I do not agree
                     </Button>
                     <Button onClick={() => setVisited(true)}>

@@ -1,5 +1,6 @@
-import * as React from "react";
-import * as Primitive from "../card";
+import * as React from 'react';
+import * as Primitive from '../card';
 
-export const Footer = (props: React.ComponentProps<"div"> & { asChild?: boolean }) =>
-  <Primitive.CardFooter {...props} />;
+export const Footer = (props: React.ComponentProps<'div'> & { asChild?: boolean }) => (
+    <Primitive.CardFooter {...props} />
+);

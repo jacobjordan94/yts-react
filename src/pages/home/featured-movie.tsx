@@ -1,7 +1,7 @@
-import Section from "@/components/ui/section";
-import { MovieHero } from "@/components/movie";
-import type { Movie } from "@/hooks";
-import { cn } from "@/lib/utils";
+import Section from '@/components/ui/section';
+import { MovieHero } from '@/components/movie';
+import type { Movie } from '@/hooks';
+import { cn } from '@/lib/utils';
 
 interface FeaturedMovieProps {
     movie: Movie | undefined;
@@ -15,7 +15,10 @@ export const FeaturedMovie = ({ movie, error, loading, className }: FeaturedMovi
         <Section.Base
             data-loading={loading}
             data-error={error}
-            className={cn("group/Section overflow-hidden p-0 bg-transparent shadow-none", className)}
+            className={cn(
+                'group/Section overflow-hidden p-0 bg-transparent shadow-none',
+                className
+            )}
         >
             <Section.Content asChild className="p-0">
                 <MovieHero
@@ -27,4 +30,4 @@ export const FeaturedMovie = ({ movie, error, loading, className }: FeaturedMovi
             </Section.Content>
         </Section.Base>
     );
-}
+};

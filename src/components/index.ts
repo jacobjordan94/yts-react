@@ -1,23 +1,23 @@
 // Movie components
-export * from "./movie";
+export * from './movie';
 
 // Torrent components
-export * from "./torrent";
+export * from './torrent';
 
 // Comment components
-export * from "./comment";
+export * from './comment';
 
 // Filter components
-export * from "./filter";
+export * from './filter';
 
 // Search components
-export * from "./search";
+export * from './search';
 
 // Layout components
-export * from "./layout";
+export * from './layout';
 
 // State components
-export * from "./state";
+export * from './state';
 
 // Skeleton components
-export * from "./skeleton";
+export * from './skeleton';

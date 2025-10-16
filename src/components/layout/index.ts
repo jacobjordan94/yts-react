@@ -1,1 +1,1 @@
-export * from "./movie-grid";
+export * from './movie-grid';
