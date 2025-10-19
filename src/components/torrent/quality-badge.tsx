@@ -24,7 +24,7 @@ const QualityBadge = React.forwardRef<HTMLDivElement, QualityBadgeProps>(
                     "data-[quality='1080p.h265']:bg-hd",
                     "data-[quality='720p']:bg-full-hd",
                     "data-[quality='480p']:bg-standard-def",
-                    "data-[quality='3D']:bg-three-d",
+                    "data-[quality='3d']:bg-three-d",
                     className
                 )}
                 {...props}

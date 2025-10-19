@@ -51,20 +51,25 @@ const MovieDetailedCard = React.forwardRef<HTMLDivElement, MovieDetailedCardProp
                 ref={ref}
                 onGenreClick={onGenreClick}
                 className={cn(
-                    'gap-0 flex flex-col sm:flex-row *:flex-1/2 p-0 overflow-hidden',
-                    'data-[ready=false]:[background-image:unset] data-[ready=false]:bg-transparent',
-                    'data-[ready=false]:shadow-none',
+                    'gap-0 flex flex-col p-0 data-[ready=false]:shadow-none overflow-hidden bg-transparent',
                     className
                 )}
                 {...props}
             >
-                <MoviePoster
-                    src={movie?.medium_cover_image}
-                    alt={movie?.title}
-                    loading={!ready}
-                    className="sm:rounded-r-none *:h-full w-full aspect-auto flex-1/2"
-                />
-                <div className="p-4 flex-1/2 flex flex-col items-stretch">
+                <div className="flex-1 flex">
+                    <MoviePoster
+                        src={movie?.medium_cover_image}
+                        alt={movie?.title}
+                        loading={!ready}
+                        className="sm:rounded-r-none flex-1"
+                    />
+                </div>
+                <div
+                    className={cn(
+                        'p-4 flex flex-col items-stretch absolute bottom-0 w-full from-black/75 from-85% to-transparent text-shadow-black/50 text-shadow-md',
+                        ready && 'bg-gradient-to-t'
+                    )}
+                >
                     <CardHeader className="p-0 gap-0 flex-[0]!">
                         <CardTitle>
                             <MovieTitle
@@ -91,12 +96,14 @@ const MovieDetailedCard = React.forwardRef<HTMLDivElement, MovieDetailedCardProp
                                 </CardDescription>
                             </div>
                         </CardContent>
-                        <CardFooter className="p-0 inline-flex items-end">
+                        <CardFooter className="p-0 inline-flex items-end flex-1 mt-2">
                             <GenreBadges
                                 loading={loading}
                                 genres={movie?.genres}
                                 limit={3}
                                 onGenreClick={onGenreClick}
+                                loadingClass="text-shadow-none"
+                                className="flex-wrap"
                             />
                         </CardFooter>
                     </div>
@@ -120,7 +127,8 @@ function CardDropdown({ movie }: { movie?: Movie }) {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="font-semibold text-muted-foreground fill-muted-foreground">
                 <DropdownMenuItem
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.stopPropagation();
                         window.open(
                             `https://www.imdb.com/title/${movie?.imdb_code}`,
                             '_blank',
@@ -150,7 +158,11 @@ function CardDropdown({ movie }: { movie?: Movie }) {
                                 <DropdownMenuPortal>
                                     <DropdownMenuSubContent>
                                         {movie?.torrents.map((torrent, i) => (
-                                            <DropdownMenuItem key={i} asChild>
+                                            <DropdownMenuItem
+                                                key={i}
+                                                asChild
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
                                                 <MagnetLink
                                                     hash={torrent.hash}
                                                     movieName={movie.title}
@@ -173,7 +185,11 @@ function CardDropdown({ movie }: { movie?: Movie }) {
                                 <DropdownMenuPortal>
                                     <DropdownMenuSubContent>
                                         {movie?.torrents.map((torrent, i) => (
-                                            <DropdownMenuItem key={i} asChild>
+                                            <DropdownMenuItem
+                                                key={i}
+                                                asChild
+                                                onClick={(e) => e.stopPropagation()}
+                                            >
                                                 <DownloadLink href={torrent.url}>
                                                     <QualityBadge quality={torrent.quality} />
                                                     <TorrentSize size={torrent.size} />
@@ -189,8 +205,13 @@ function CardDropdown({ movie }: { movie?: Movie }) {
                 </DropdownMenuSub>
                 {movie?.yt_trailer_code && (
                     <Dialog>
-                        <DialogTrigger className="w-full">
-                            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                        <DialogTrigger className="w-full" onClick={(e) => e.stopPropagation()}>
+                            <DropdownMenuItem
+                                onSelect={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                }}
+                            >
                                 <Youtube className="group-hover:text-white" />
                                 Youtube
                             </DropdownMenuItem>
@@ -205,32 +226,3 @@ function CardDropdown({ movie }: { movie?: Movie }) {
 
 export { MovieDetailedCard };
 export type { MovieDetailedCardProps };
-
-{
-    /* <CardAction className="h-full flex items-center">
-  { movie?.yt_trailer_code && (
-    <div
-      onPointerDown={(e) => { e.stopPropagation(); e.preventDefault(); }}
-      onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}
-    >
-      <YoutubeDialog id={ movie.yt_trailer_code }>
-        <Button variant="ghost" size="icon-lg">
-          <Youtube className="p-3 size-full" />
-        </Button>
-      </YoutubeDialog>
-    </div>
-  )}
-  <Button
-    variant="ghost"
-    size="icon-lg"
-    className="rounded-none"
-    onClick={(e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      window.open(`https://www.imdb.com/title/${movie?.imdb_code}`, '_blank', 'noopener,noreferrer');
-    }}
-  >
-    <Icons.IMDB className="p-3 size-full fill-imdb" />
-  </Button>
-</CardAction> */
-}

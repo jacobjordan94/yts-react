@@ -44,7 +44,17 @@ interface Movie {
     torrents: Torrent[];
     date_uploaded: string;
     date_uploaded_unix: number;
+    cast?: Cast;
 }
+
+interface CastMember {
+    name: string;
+    character_name: string;
+    url_small_image: string;
+    imdb_code: string;
+}
+
+type Cast = CastMember[];
 
 interface ListMoviesResponse {
     status: string;
@@ -86,4 +96,4 @@ function useListMovies(params: ListMoviesParams = {}, options: UseListMoviesOpti
 }
 
 export default useListMovies;
-export type { Movie, Torrent, ListMoviesParams, ListMoviesResponse };
+export type { Movie, Torrent, Cast, ListMoviesParams, ListMoviesResponse, CastMember };

@@ -13,7 +13,7 @@ import { Page } from '../page';
 import { OrderSelect } from '@/components/filter/order-select';
 
 // Root container for the list page
-type ListPageRootProps = React.ComponentPropsWithoutRef<'div'>;
+type ListPageRootProps = React.ComponentPropsWithoutRef<'main'>;
 
 const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
     ({ className, ...props }, ref) => {
@@ -40,7 +40,9 @@ const ListPageHeader = React.forwardRef<HTMLDivElement, ListPageHeaderProps>(
     ({ title = 'Browse Movies', description, className, children, ...props }, ref) => {
         return (
             <div ref={ref} className={cn('mb-6 space-y-2', className)} {...props}>
-                {title && <h1 className="text-3xl font-bold tracking-tight">{title}</h1>}
+                {title && (
+                    <h1 className="text-3xl font-bold tracking-tight font-[Quicksand]">{title}</h1>
+                )}
                 {description && <p className="text-muted-foreground">{description}</p>}
                 {children}
             </div>
@@ -282,27 +284,28 @@ const ListPagePagination = React.forwardRef<HTMLDivElement, ListPagePaginationPr
             <div
                 ref={ref}
                 className={cn(
-                    'list-page-pagination sticky bottom-5 z-10 flex justify-center text-shadow-background text-shadow-xs',
+                    'list-page-pagination sticky bottom-6 z-10 flex justify-center text-shadow-background text-shadow-xs',
                     className
                 )}
                 {...props}
             >
-                <span className="inline-flex justify-center bg-radial from-transparent to-white/20 p-2 px-3 rounded-l-full rounded-r-full supports-[backdrop-filter]:backdrop-blur-2xl">
+                <span className="inline-flex rounded-md border justify-center px-3 py-1 drop-shadow-black/20 drop-shadow-md backdrop-blur-md">
                     <Button
                         variant="ghost"
+                        size="sm"
                         onClick={() => onPageChange(currentPage - 1)}
                         disabled={!canGoBack}
-                        className="rounded-l-full rounded-r-full text-shadow-background text-shadow-xs bg-gradient to-transparent from-black"
+                        className="h-7 px-3 text-shadow-background text-shadow-xs bg-gradient to-transparent from-black font-semibold"
                     >
                         Previous
                     </Button>
-                    <div className="flex items-center gap-2 px-4">
-                        <span className="text-sm font-semibold">Page</span>
-                        <span className="text-sm font-medium">{currentPage}</span>
+                    <div className="flex items-center gap-2 px-4 font-semibold">
+                        <span className="text-sm">Page</span>
+                        <span className="text-sm">{currentPage}</span>
                         {totalPages && (
                             <>
-                                <span className="text-sm font-semibold">of</span>
-                                <span className="text-sm font-medium">{totalPages}</span>
+                                <span className="text-sm">of</span>
+                                <span className="text-sm">{totalPages}</span>
                             </>
                         )}
                     </div>
@@ -310,7 +313,8 @@ const ListPagePagination = React.forwardRef<HTMLDivElement, ListPagePaginationPr
                         variant="ghost"
                         onClick={() => onPageChange(currentPage + 1)}
                         disabled={!canGoForward}
-                        className="rounded-l-full rounded-r-full text-shadow-background text-shadow-xs"
+                        className="h-7 px-3 text-shadow-background text-shadow-xs font-semibold"
+                        size="sm"
                     >
                         Next
                     </Button>

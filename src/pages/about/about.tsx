@@ -14,7 +14,7 @@ const AboutPage = () => {
             />
             <Page layout="narrow" spacing="relaxed" pageName="about space-y-12">
                 <div className="space-y-4">
-                    <h1 className="text-4xl font-bold">About This Project</h1>
+                    <h1 className="text-4xl font-bold font-[Quicksand]">About This Project</h1>
                     <p className="text-xl text-muted-foreground">
                         A modern movie browsing interface built as a portfolio demonstration
                     </p>
@@ -22,7 +22,7 @@ const AboutPage = () => {
 
                 <div className="space-y-6">
                     <section className="space-y-3">
-                        <h2 className="text-2xl font-semibold">What is this?</h2>
+                        <h2 className="text-2xl font-semibold font-[Quicksand]">What is this?</h2>
                         <p className="text-muted-foreground leading-relaxed">
                             This is a <strong>portfolio project</strong> that demonstrates modern
                             web development practices using React 19, TypeScript, and Tailwind CSS.
@@ -32,7 +32,7 @@ const AboutPage = () => {
                     </section>
 
                     <section className="space-y-3">
-                        <h2 className="text-2xl font-semibold flex items-center gap-4">
+                        <h2 className="text-2xl font-semibold flex items-center gap-4 font-[Quicksand]">
                             <span>
                                 <AlertCircleIcon />
                             </span>
@@ -42,7 +42,7 @@ const AboutPage = () => {
                             <p className="text-muted-foreground leading-relaxed">
                                 This website is a <strong>read-only mirror</strong> of publicly
                                 available data from YTS.mx. It does not host, store, or distribute
-                                any copyrighted content or torrent files.
+                                any copyrighted content.
                             </p>
                             <p className="text-muted-foreground leading-relaxed">
                                 All movie information, images, and metadata are fetched directly
@@ -58,7 +58,7 @@ const AboutPage = () => {
                     </section>
 
                     <section className="space-y-3">
-                        <h2 className="text-2xl font-semibold">Technical Stack</h2>
+                        <h2 className="text-2xl font-semibold font-[Quicksand]">Technical Stack</h2>
                         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                             <li>
                                 <strong>React 19</strong> with React Compiler for automatic
@@ -83,7 +83,7 @@ const AboutPage = () => {
                     </section>
 
                     <section className="space-y-3">
-                        <h2 className="text-2xl font-semibold">Links</h2>
+                        <h2 className="text-2xl font-semibold font-[Quicksand]">Links</h2>
                         <div className="flex flex-wrap gap-3">
                             <a href="https://yts.mx" target="_blank" rel="noopener noreferrer">
                                 <Button variant="outline">
@@ -111,7 +111,7 @@ const AboutPage = () => {
                     </section>
 
                     <section className="space-y-3">
-                        <h2 className="text-2xl font-semibold">Developer</h2>
+                        <h2 className="text-2xl font-semibold font-[Quicksand]">Developer</h2>
                         <p className="text-muted-foreground leading-relaxed">
                             Built by <strong>Jacob Jordan</strong> as a demonstration of modern
                             React development and UI/UX design skills.

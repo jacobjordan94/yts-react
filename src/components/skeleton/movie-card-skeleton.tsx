@@ -15,7 +15,11 @@ const MovieCardSkeleton = React.forwardRef<HTMLDivElement, MovieCardSkeletonProp
     ({ variant = 'default', className, ...props }, ref) => {
         if (variant === 'compact')
             return (
-                <MovieCardBase ref={ref} {...props} className={cn('p-0 bg-transparent', className)}>
+                <MovieCardBase
+                    ref={ref}
+                    {...props}
+                    className={cn('p-0 bg-transparent shadow-none', className)}
+                >
                     <MoviePosterSkeleton size="full" />
                 </MovieCardBase>
             );
@@ -24,7 +28,7 @@ const MovieCardSkeleton = React.forwardRef<HTMLDivElement, MovieCardSkeletonProp
                 <MovieCardBase
                     ref={ref}
                     {...props}
-                    className={cn('bg-transparent gap-2 pt-0', className)}
+                    className={cn('bg-transparent gap-2 pt-0 shadow-none', className)}
                 >
                     <MoviePosterSkeleton size="full" className="rounded-b-none" />
                     <CardContent className="px-2 mt-1">

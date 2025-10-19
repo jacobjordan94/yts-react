@@ -101,7 +101,7 @@ const ListDropdown = () => {
             <DropdownMenuContent align="start" className="sm:grid sm:grid-cols-3 sm:p-2 sm-pb-4 ">
                 {LIST_GROUPS.map((group, groupIndex) => (
                     <div key={group.label}>
-                        <DropdownMenuLabel className="text-base font-font-semibold text-muted-foreground">
+                        <DropdownMenuLabel className="text-base font-font-semibold text-muted-foreground font-[Quicksand]">
                             {group.label}
                         </DropdownMenuLabel>
                         {group.options.map((option) => (

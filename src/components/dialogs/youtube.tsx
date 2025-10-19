@@ -10,15 +10,19 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 interface YoutubeDialogProps {
     id: string;
     children?: React.ReactNode;
+    showIcon?: boolean;
+    showLabel?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 const YoutubeDialog = React.forwardRef<HTMLButtonElement, YoutubeDialogProps>(
-    ({ id, children }, ref) => {
+    ({ id, children, showIcon = true, showLabel = false, onOpenChange }, ref) => {
         return (
-            <Dialog>
+            <Dialog onOpenChange={onOpenChange}>
                 <DialogTrigger asChild ref={ref}>
                     {children || (
                         <Button variant="ghost">
-                            <Youtube />
+                            {showIcon && <Youtube />}
+                            {showLabel && <span>Play Trailer</span>}
                         </Button>
                     )}
                 </DialogTrigger>
@@ -33,7 +37,11 @@ YoutubeDialog.displayName = 'YoutubeDialog';
 export function YoutubeDialogContent({ id }: { id: number | string }) {
     const [state, setState] = useState({ loading: true, error: false });
     return (
-        <DialogContent className="p-0 overflow-hidden">
+        <DialogContent
+            showCloseButton={false}
+            className="p-0 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+        >
             <VisuallyHidden>
                 <DialogTitle>Youtube: {id}</DialogTitle>
             </VisuallyHidden>

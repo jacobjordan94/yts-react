@@ -9,16 +9,29 @@ interface GenreBadgesProps extends React.ComponentPropsWithoutRef<'div'> {
     onGenreClick?: (genre: string) => void;
     asChild?: boolean;
     loading?: boolean;
+    loadingClass?: string;
 }
 
 const GenreBadges = React.forwardRef<HTMLDivElement, GenreBadgesProps>(
-    ({ loading, genres, limit, onGenreClick, asChild = false, className, ...props }, ref) => {
+    (
+        {
+            loading,
+            genres,
+            limit,
+            onGenreClick,
+            asChild = false,
+            className,
+            loadingClass,
+            ...props
+        },
+        ref
+    ) => {
         const Comp = asChild ? Slot : 'div';
         const ready = !loading && !!genres;
 
         if (!ready) {
             return (
-                <div className="flex gap-2 *:max-w-fit">
+                <div className={cn('flex gap-2 *:max-w-fit', loadingClass)}>
                     <GenreBadge
                         genre="longest"
                         showIcon={false}

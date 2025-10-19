@@ -11,9 +11,11 @@ import {
     ListPagePagination,
 } from './list.primitives';
 import Seo from '@/components/seo';
+import { useBackgroundConfig } from '@/contexts/background-config-context';
 
 export default function ListPage() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const { setBackgroundConfig } = useBackgroundConfig();
 
     // Initialize state from URL params
     const [layout, setLayout] = React.useState<'compact' | 'default' | 'detailed'>(
@@ -81,6 +83,17 @@ export default function ListPage() {
         setSearchParams(newParams, { replace: true });
     }, [params, layout, setSearchParams]);
 
+    React.useEffect(() => {
+        if (!setBackgroundConfig || !data) return;
+        const firstMovie = data.data.movies.at(0);
+        setBackgroundConfig({
+            image:
+                firstMovie?.background_image ||
+                firstMovie?.background_image_original ||
+                './kenobi.webp',
+        });
+    }, [setBackgroundConfig, data]);
+
     const handleGenreChange = (genre: string) => {
         setParams((prev) => ({ ...prev, genre, page: 1 }));
     };
@@ -135,7 +148,7 @@ export default function ListPage() {
     // Determine column count based on layout
     const getColumns = () => {
         if (layout === 'compact') return 8;
-        if (layout === 'detailed') return 2;
+        if (layout === 'detailed') return 3;
         return 6;
     };
 
@@ -211,6 +224,8 @@ export default function ListPage() {
                 </div>
 
                 <ListPagePagination
+                    data-hidden={totalPages < 2}
+                    className="transition-opacity duration-300 data-[hidden=true]:opacity-0 data-[hidden=true]:pointer-events-none"
                     currentPage={params.page || 1}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}

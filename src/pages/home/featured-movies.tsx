@@ -21,7 +21,7 @@ export const FeaturedMovies = ({
     ...props
 }: FeaturedMoviesProps) => (
     <Section.Base {...props} className={cn('p-0 bg-transparent shadow-none', className)}>
-        <Section.Content className="p-0 grid grid-cols-6 gap-4 md:gap-8">
+        <Section.Content className="p-0 md:px-4 grid grid-cols-6 gap-4 md:gap-5">
             {movies.map((movie, i) => (
                 <MovieCard
                     key={`${movie.id}-${i}`}
@@ -29,7 +29,7 @@ export const FeaturedMovies = ({
                     onClick={(e) => onMovieClick(movie, i, e)}
                     className={cn(
                         'hover:scale-105 hover:data-[active=true]:scale-115 data-[active=true]:scale-115 data-[active=true]:-translate-y-4 md:data-[active=true]:-translate-y-8',
-                        'grayscale-75 data-[active=true]:grayscale-0'
+                        'grayscale-75 data-[active=true]:grayscale-0 md'
                     )}
                     variant="compact"
                     movie={movie}

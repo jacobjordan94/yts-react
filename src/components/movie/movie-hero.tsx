@@ -7,14 +7,15 @@ import { GenreBadges } from './genre-badges';
 import { MovieDescription } from './movie-description';
 import { MovieSynopsis } from './movie-synopsis';
 import { MovieHeroSkeleton } from '../skeleton/movie-hero-skeleton';
-import { TrailerButton } from './trailer-button';
 import { cn } from '@/lib/utils';
 import type { Movie } from '@/hooks';
 import DownloadDropdown from '../torrent/download-dropdown';
+import YoutubeDialog from '../dialogs/youtube';
 
 type MovieHeroVariant = 'default' | 'transparent';
 interface MovieHeroProps extends React.ComponentPropsWithoutRef<'div'> {
     movie?: Movie;
+    onTrailerOpenChange?: (open: boolean) => void;
     loading?: boolean;
     showTrailerButton?: boolean;
     showDownloadButton?: boolean;
@@ -29,6 +30,7 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
     (
         {
             movie,
+            onTrailerOpenChange,
             loading = false,
             showTrailerButton = true,
             showDownloadButton = true,
@@ -86,7 +88,12 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
                         className="w-full md:w-64"
                     />
                     <div className="flex flex-1 flex-col gap-4">
-                        <MovieTitle title={movie.title} year={movie.year} size="xl" />
+                        <MovieTitle
+                            title={movie.title}
+                            year={movie.year}
+                            size="xl"
+                            className="font-semibold font-[Quicksand] md:text-4xl"
+                        />
                         <MovieSynopsis
                             synopsis={movie.synopsis}
                             lines={3}
@@ -110,12 +117,11 @@ const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
                         {children}
                         {(showTrailerButton || showDownloadButton || children) && (
                             <div className="flex *:max-md:flex-1 gap-2 md:gap-2 md:justify-end mt-auto">
-                                {showTrailerButton && (
-                                    <TrailerButton
-                                        trailerCode={movie.yt_trailer_code}
-                                        available={!!movie.yt_trailer_code}
-                                        size="lg"
-                                        variant="secondary"
+                                {showTrailerButton && movie.yt_trailer_code && (
+                                    <YoutubeDialog
+                                        id={movie.yt_trailer_code}
+                                        showLabel
+                                        onOpenChange={onTrailerOpenChange}
                                     />
                                 )}
                                 {showDownloadButton && movie.torrents?.[0] && (

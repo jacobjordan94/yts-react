@@ -2,6 +2,9 @@ import useLocalStorage from '@/hooks/use-local-storage';
 import { Dialog, DialogFooter, DialogHeader, DialogContent, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import JSConfetti from 'js-confetti';
+
+const jsConfetti = new JSConfetti();
 
 const SiteDisclaimerDialog = () => {
     const [visited, setVisited] = useLocalStorage('visited', false);
@@ -11,7 +14,7 @@ const SiteDisclaimerDialog = () => {
         return (
             <div className="fixed inset-0 bg-background flex items-center justify-center z-50">
                 <div className="text-center space-y-4 max-w-md px-6">
-                    <h1 className="text-3xl font-bold">Goodbye!</h1>
+                    <h1 className="text-3xl font-bold font-[Quicksand]">Goodbye!</h1>
                     <p className="text-muted-foreground">
                         Thank you for respecting the terms. You can safely close this tab.
                     </p>
@@ -24,7 +27,7 @@ const SiteDisclaimerDialog = () => {
         <Dialog open={!visited} modal>
             <DialogContent showCloseButton={false}>
                 <DialogHeader>
-                    <DialogTitle>Not so fast...</DialogTitle>
+                    <DialogTitle className="font-[Quicksand] font-bold">Not so fast...</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
@@ -43,15 +46,24 @@ const SiteDisclaimerDialog = () => {
                         laws in your jurisdiction.
                     </p>
                 </div>
-                <DialogFooter className="flex-col gap-2">
+                <DialogFooter className="flex-col gap-2 font-[Quicksand]">
                     <Button
-                        className="flex-1"
+                        className="flex-1 font-bold"
                         variant="destructive"
                         onClick={() => setDeclined(true)}
                     >
                         I do not agree
                     </Button>
-                    <Button onClick={() => setVisited(true)}>
+                    <Button
+                        className="font-bold"
+                        onClick={() => {
+                            setVisited(true);
+                            jsConfetti.addConfetti({
+                                emojis: ['🍿', '🎞️', '🎥', '💿'],
+                                emojiSize: 50,
+                            });
+                        }}
+                    >
                         I understand and wish to continue
                     </Button>
                 </DialogFooter>

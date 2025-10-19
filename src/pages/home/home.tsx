@@ -1,19 +1,11 @@
 import { FeaturedMovieCarousel } from './home.primitives';
 import useFeaturedMovies from '@/hooks/use-featured-movie';
-import { useEffect } from 'react';
 import Seo from '@/components/seo';
 import { Page } from '../page';
-import { useBackgroundConfig } from '@/contexts/background-config-context';
+import { cn } from '@/lib/utils';
 
 const HomePage = () => {
-    const { setBackgroundConfig } = useBackgroundConfig();
-    const { data: featuredMovies } = useFeaturedMovies();
-
-    useEffect(() => {
-        if (!featuredMovies || featuredMovies.length === 0) return;
-        setBackgroundConfig({ image: featuredMovies?.at(0)?.background_image });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [featuredMovies]);
+    const { data: featuredMovies, loading } = useFeaturedMovies();
 
     return (
         <>
@@ -23,12 +15,13 @@ const HomePage = () => {
                 pathname="/"
             />
             <Page
+                loading={loading}
                 pageName="home"
                 layout="full"
                 spacing="compact"
-                className="md:px-0 pb-0 md:space-y-12"
+                className={cn('md:px-0 pb-0 md:space-y-12')}
             >
-                <h2 className="text-3xl max-w-4xl ms-6 md:ps-6 md:m-auto font-semibold">
+                <h2 className="text-3xl max-w-4xl ms-6 md:ps-6 md:m-auto font-[Quicksand] font-bold tracking-tight">
                     Featured
                 </h2>
                 <FeaturedMovieCarousel movies={featuredMovies} />

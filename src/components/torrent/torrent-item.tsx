@@ -6,12 +6,13 @@ import { TorrentSize } from './torrent-size';
 import type { Torrent } from '@/hooks';
 import { DownloadLink } from '../ui/download-link';
 import { Button } from '../ui/button';
-import { Disc3, FileDown, GlobeIcon, Magnet } from 'lucide-react';
+import { Disc3, FileDown, Film, Globe, Magnet } from 'lucide-react';
 import { MagnetLink } from '../ui/magnet-link';
-import { Item, ItemMedia, ItemContent, ItemActions } from '../ui/item';
+import { Item, ItemMedia, ItemContent } from '../ui/item';
 import { cva } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
-const torrentItemVariants = cva('', {
+const torrentItemVariants = cva('flex justify-stretch', {
     variants: {
         selected: {
             true: 'border-primary bg-primary/5',
@@ -43,7 +44,7 @@ const TorrentItem = React.forwardRef<HTMLDivElement, TorrentItemProps>(
             <Item
                 ref={ref}
                 variant="glass"
-                className={torrentItemVariants({ selected, available, className })}
+                className={cn(torrentItemVariants({ selected, available, className }))}
                 onClick={() => onSelect?.(torrent)}
                 {...props}
             >
@@ -51,13 +52,14 @@ const TorrentItem = React.forwardRef<HTMLDivElement, TorrentItemProps>(
                     <div className="aspect-square relative">
                         <QualityBadge
                             data-quality={torrent.quality}
-                            className="scale-75 px-1 absolute -bottom-1 -right-4 data-[quality=2160p]:-right-2 text-[12px] z-10"
+                            className="scale-75 px-1 absolute -bottom-1.5 -right-4 data-[quality=2160p]:-right-2 data-[quality=3D]:-right-2 text-[12px] z-10"
                             quality={torrent.quality}
                         />
                         {torrent.type === 'bluray' && (
                             <Disc3 className="-rotate-45 text-white size-10" />
                         )}
-                        {torrent.type === 'web' && <GlobeIcon className="text-white size-10" />}
+                        {torrent.type === 'web' && <Globe className="text-white size-10" />}
+                        {torrent.type === '' && <Film className="text-white size-10" />}
                     </div>
                 </ItemMedia>
                 <ItemContent>
@@ -79,18 +81,20 @@ const TorrentItem = React.forwardRef<HTMLDivElement, TorrentItemProps>(
                         sizeBytes={torrent.size_bytes}
                     />
                 </ItemContent>
-                <ItemActions className="text-white *:hover:bg-white/20 *:hover:text-white">
+                <ItemContent className="text-white *:hover:bg-white/20 *:hover:text-white flex justify-between flex-1 flex-row w-full sm:w-[unset]">
                     <DownloadLink href={torrent.url} asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="outline">
                             <FileDown />
+                            <span className="sm:hidden">Torrent File</span>
                         </Button>
                     </DownloadLink>
                     <MagnetLink hash={torrent.hash} movieName={movieName} asChild>
-                        <Button variant="ghost" size="icon">
+                        <Button variant="outline">
                             <Magnet />
+                            <span className="sm:hidden">Magnet Link</span>
                         </Button>
                     </MagnetLink>
-                </ItemActions>
+                </ItemContent>
             </Item>
         );
     }

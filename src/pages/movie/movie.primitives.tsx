@@ -8,21 +8,26 @@ import {
 } from '@/components/movie';
 import { MovieSynopsis } from '@/components/movie/movie-synopsis';
 import { RatingDisplay } from '@/components/movie/rating-display';
-import { TrailerButton } from '@/components/movie/trailer-button';
 import Section from '@/components/ui/section';
 import { useMovieSuggestions, type Movie } from '@/hooks';
 import DownloadDropdown from '@/components/torrent/download-dropdown';
 import { Separator } from '@/components/ui/separator';
+import YoutubeDialog from '@/components/dialogs/youtube';
+import { CastList } from '../cast';
 
 export const Hero = ({ movie }: { movie: Movie | undefined }) => (
-    <div className="flex gap-6 ">
-        <MoviePoster className="flex-1/3 pt-2" size="full" src={movie?.large_cover_image} />
+    <div className="flex gap-6 flex-col md:flex-row">
+        <MoviePoster
+            className="flex-1/3 drop-shadow-black/50 drop-shadow-md"
+            size="full"
+            src={movie?.large_cover_image}
+        />
         <div className="movie-info flex-2/3 flex flex-col space-y-4">
             <div className="title-information space-y-2">
                 <MovieTitle
                     title={movie?.title_english || ''}
                     year={movie?.year}
-                    className="text-4xl"
+                    className="font-[Quicksand] font-bold text-4xl text-shadow-md text-shadow-black/50"
                 />
                 <div className="flex items-center gap-4">
                     <RatingDisplay rating={movie?.rating || 0} variant="both" showLabel />
@@ -36,10 +41,15 @@ export const Hero = ({ movie }: { movie: Movie | undefined }) => (
                     )}
                 </div>
             </div>
-            <MovieSynopsis synopsis={movie?.synopsis} />
+            <MovieSynopsis
+                className="text-shadow-md text-shadow-black/50"
+                synopsis={movie?.synopsis}
+            />
             <div className="flex items-center gap-3">
                 <DownloadDropdown movieTitle={movie?.title_english} torrents={movie?.torrents} />
-                <TrailerButton trailerCode={movie?.yt_trailer_code} variant="outline" />
+                {movie?.yt_trailer_code && (
+                    <YoutubeDialog id={movie?.yt_trailer_code} showLabel={true} />
+                )}
             </div>
             <div className="flex gap-2">
                 {movie && (
@@ -52,9 +62,16 @@ export const Hero = ({ movie }: { movie: Movie | undefined }) => (
                 <GenreBadges genres={movie?.genres || []} />
             </div>
             <MovieDescription
-                className="text-white/80"
+                className="text-white/80 text-shadow-md text-shadow-black/50"
                 description={movie?.description_full || movie?.summary || ''}
             />
+            {movie?.cast && (
+                <CastList
+                    className="mt-auto md:me-auto md:min-w-xs"
+                    direction="vertical"
+                    cast={movie?.cast}
+                />
+            )}
         </div>
     </div>
 );
@@ -64,7 +81,7 @@ export const RecommendedMovies = ({ id }: { id: number }) => {
     return (
         <Section.Base className="bg-transparent text-white shadow-none">
             <Section.Header className="p-0">
-                <Section.Title>Recommended</Section.Title>
+                <Section.Title className="font-[Quicksand] font-bold">Recommended</Section.Title>
             </Section.Header>
             <Section.Content className="p-0">
                 <MovieGrid

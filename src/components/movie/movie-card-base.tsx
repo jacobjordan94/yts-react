@@ -19,8 +19,8 @@ const MovieCardBase = React.forwardRef<HTMLDivElement, MovieCardBaseProps>(
                 data-background={background}
                 data-clickable={!!onClick}
                 className={cn(
-                    'group/movieCard flex flex-col transition-transform border-0 data-[background=true]:bg-radial from-white/20 to-transparent',
-                    'data-[clickable=true]:cursor-pointer',
+                    'group/movieCard flex flex-col transition-transform border-0 relative',
+                    'data-[clickable=true]:cursor-pointer shadow-black/50 shadow-md',
                     className
                 )}
                 onClick={onClick}

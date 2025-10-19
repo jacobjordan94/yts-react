@@ -10,7 +10,7 @@ import { useBackgroundConfig } from '@/contexts/background-config-context';
 const MoviePage = () => {
     const { id } = useParams();
     const { setBackgroundConfig } = useBackgroundConfig();
-    const { data: movie } = useMovieDetails({ movie_id: Number(id) });
+    const { data: movie, loading } = useMovieDetails({ movie_id: Number(id), with_cast: true });
     useEffect(() => {
         if (!movie) return;
         setBackgroundConfig({ image: movie.data.movie.background_image });
@@ -34,7 +34,13 @@ const MoviePage = () => {
                 image={movieData?.large_cover_image}
                 type="article"
             />
-            <Page spacing="relaxed" layout="wide" pageName="movie" className="space-y-6">
+            <Page
+                spacing="default"
+                layout="wide"
+                loading={loading}
+                pageName="movie"
+                className="space-y-6 pb-0"
+            >
                 <Hero movie={movie?.data.movie}></Hero>
                 <TorrentTabs
                     torrents={movie?.data.movie.torrents}

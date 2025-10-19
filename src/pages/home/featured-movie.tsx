@@ -8,9 +8,16 @@ interface FeaturedMovieProps {
     error?: Error | null;
     loading?: boolean;
     className?: string;
+    onTrailerOpenChange?: (open: boolean) => void;
 }
 
-export const FeaturedMovie = ({ movie, error, loading, className }: FeaturedMovieProps) => {
+export const FeaturedMovie = ({
+    movie,
+    error,
+    loading,
+    className,
+    onTrailerOpenChange,
+}: FeaturedMovieProps) => {
     return (
         <Section.Base
             data-loading={loading}
@@ -26,6 +33,7 @@ export const FeaturedMovie = ({ movie, error, loading, className }: FeaturedMovi
                     loading={loading}
                     className="transition-all duration-300 hover:shadow-xl"
                     variant="transparent"
+                    onTrailerOpenChange={onTrailerOpenChange}
                 />
             </Section.Content>
         </Section.Base>
