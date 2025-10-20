@@ -6,6 +6,7 @@ import { SortIcon } from './sort-icon';
 export { GenreIcon } from './genre-icon';
 export { QualityIcon } from './quality-icon';
 export { SortIcon } from './sort-icon';
+export * from './lucide';
 
 const Icons = { IMDB, Genre: GenreIcon, Quality: QualityIcon, Sort: SortIcon };
 

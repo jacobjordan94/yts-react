@@ -1,21 +1,21 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '@/components/ui/button';
 import { buttonVariants } from '@/components/ui/button-variants';
 import { cn } from '@/lib/utils';
 import type { Torrent } from '@/hooks';
 import type { VariantProps } from 'class-variance-authority';
-import { Download } from 'lucide-react';
+import { Download } from '@/components/icons/lucide';
 
 interface DownloadButtonProps
-    extends React.ComponentPropsWithoutRef<'button'>,
+    extends ComponentPropsWithoutRef<'button'>,
         VariantProps<typeof buttonVariants> {
     torrent: Pick<Torrent, 'url' | 'hash'>;
     disabled?: boolean;
     asChild?: boolean;
 }
 
-const DownloadButton = React.forwardRef<HTMLButtonElement, DownloadButtonProps>(
+const DownloadButton = forwardRef<HTMLButtonElement, DownloadButtonProps>(
     (
         { torrent, disabled = false, asChild = false, variant = 'default', className, ...props },
         ref

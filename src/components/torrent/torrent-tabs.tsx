@@ -46,4 +46,5 @@ const TorrentTabs = ({
     );
 };
 
+export { TorrentTabs };
 export default TorrentTabs;

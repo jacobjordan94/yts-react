@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home Page -->
   <url>
     <loc>https://yts-react.jacob-jordan.me/</loc>
-    <lastmod>2025-10-16</lastmod>
+    <lastmod>2025-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- Movie List Page -->
   <url>
     <loc>https://yts-react.jacob-jordan.me/list</loc>
-    <lastmod>2025-10-16</lastmod>
+    <lastmod>2025-10-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- About Page -->
   <url>
     <loc>https://yts-react.jacob-jordan.me/about</loc>
-    <lastmod>2025-10-16</lastmod>
+    <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

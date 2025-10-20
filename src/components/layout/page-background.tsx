@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { forwardRef, useEffect, useState, type ComponentPropsWithoutRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn, loadImage } from '@/lib/utils';
 
-interface PageBackgroundProps extends React.ComponentPropsWithoutRef<'div'> {
+interface PageBackgroundProps extends ComponentPropsWithoutRef<'div'> {
     image?: string;
     blur?: number;
     darkness?: number;
@@ -10,7 +10,7 @@ interface PageBackgroundProps extends React.ComponentPropsWithoutRef<'div'> {
     duration?: number;
 }
 
-const PageBackground = React.forwardRef<HTMLDivElement, PageBackgroundProps>(
+const PageBackground = forwardRef<HTMLDivElement, PageBackgroundProps>(
     (
         {
             image,
@@ -25,10 +25,10 @@ const PageBackground = React.forwardRef<HTMLDivElement, PageBackgroundProps>(
         ref
     ) => {
         const Comp = asChild ? Slot : 'div';
-        const [pageBackground, setPageBackground] = React.useState<string | undefined>();
-        const [loading, setLoading] = React.useState<boolean>(false);
+        const [pageBackground, setPageBackground] = useState<string | undefined>();
+        const [loading, setLoading] = useState<boolean>(false);
 
-        React.useEffect(() => {
+        useEffect(() => {
             if (!image) return;
             loadImage(image).then((imageElement) => {
                 setLoading(true);

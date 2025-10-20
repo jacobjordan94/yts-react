@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, type ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Frown } from 'lucide-react';
+import { Frown } from '@/components/icons/lucide';
 
-interface EmptyStateProps extends React.ComponentPropsWithoutRef<'div'> {
+interface EmptyStateProps extends ComponentPropsWithoutRef<'div'> {
     title?: string;
     description?: string;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
     action?: {
         label: string;
         onClick: () => void;
@@ -16,7 +16,7 @@ interface EmptyStateProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(
+const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
     (
         {
             title = 'No results found',

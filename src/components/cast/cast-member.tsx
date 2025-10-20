@@ -4,7 +4,7 @@ import { ActorImage } from './actor-image';
 import { cn } from '@/lib/utils';
 import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia } from '@/components/ui/item';
 import Icons from '@/components/icons';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink } from '@/components/icons/lucide';
 
 type CastMemberProps = ComponentPropsWithRef<'div'> & {
     cast: CastMemberType;

@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 
-interface TorrentSizeProps extends React.ComponentPropsWithoutRef<'span'> {
+interface TorrentSizeProps extends ComponentPropsWithoutRef<'span'> {
     sizeBytes?: number;
     size?: string;
     asChild?: boolean;
 }
 
-const TorrentSize = React.forwardRef<HTMLSpanElement, TorrentSizeProps>(
+const TorrentSize = forwardRef<HTMLSpanElement, TorrentSizeProps>(
     ({ sizeBytes, size, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'span';
         const displaySize =

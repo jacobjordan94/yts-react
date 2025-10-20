@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle } from '@/components/icons/lucide';
 
-interface ErrorStateProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ErrorStateProps extends ComponentPropsWithoutRef<'div'> {
     error?: Error | string;
     onRetry?: () => void;
     title?: string;
@@ -12,7 +12,7 @@ interface ErrorStateProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const ErrorState = React.forwardRef<HTMLDivElement, ErrorStateProps>(
+const ErrorState = forwardRef<HTMLDivElement, ErrorStateProps>(
     (
         {
             error,

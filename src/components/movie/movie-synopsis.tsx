@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { ClampedText } from '@/components/ui/clamped-text';
 import { cn } from '@/lib/utils';
 
-interface MovieSynopsisProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieSynopsisProps extends ComponentPropsWithoutRef<'div'> {
     synopsis?: string;
     description?: string;
     movieId?: number;
@@ -13,7 +13,7 @@ interface MovieSynopsisProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const MovieSynopsis = React.forwardRef<HTMLDivElement, MovieSynopsisProps>(
+const MovieSynopsis = forwardRef<HTMLDivElement, MovieSynopsisProps>(
     (
         {
             synopsis,

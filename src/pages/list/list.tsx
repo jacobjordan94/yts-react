@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router';
 import useListMovies, { type ListMoviesParams } from '@/hooks/use-list-movies';
 import {
@@ -18,11 +18,11 @@ export default function ListPage() {
     const { setBackgroundConfig } = useBackgroundConfig();
 
     // Initialize state from URL params
-    const [layout, setLayout] = React.useState<'compact' | 'default' | 'detailed'>(
+    const [layout, setLayout] = useState<'compact' | 'default' | 'detailed'>(
         (searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default'
     );
 
-    const [params, setParams] = React.useState<ListMoviesParams>({
+    const [params, setParams] = useState<ListMoviesParams>({
         limit: 24,
         page: parseInt(searchParams.get('page') || '1', 10),
         quality: searchParams.get('quality') || 'all',
@@ -39,7 +39,7 @@ export default function ListPage() {
     const { data, loading, error } = useListMovies(params);
 
     // Sync state FROM URL when searchParams change (e.g., from dropdown navigation)
-    React.useEffect(() => {
+    useEffect(() => {
         setParams({
             limit: 24,
             page: parseInt(searchParams.get('page') || '1', 10),
@@ -57,10 +57,10 @@ export default function ListPage() {
     }, [searchParams]);
 
     // Sync URL FROM state when state changes (e.g., from filter interactions)
-    const prevParamsRef = React.useRef(params);
-    const prevLayoutRef = React.useRef(layout);
+    const prevParamsRef = useRef(params);
+    const prevLayoutRef = useRef(layout);
 
-    React.useEffect(() => {
+    useEffect(() => {
         // Only update URL if state actually changed (not from URL sync above)
         if (prevParamsRef.current === params && prevLayoutRef.current === layout) {
             return;
@@ -83,7 +83,7 @@ export default function ListPage() {
         setSearchParams(newParams, { replace: true });
     }, [params, layout, setSearchParams]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!setBackgroundConfig || !data) return;
         const firstMovie = data.data.movies.at(0);
         setBackgroundConfig({

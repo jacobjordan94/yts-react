@@ -1,19 +1,19 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-interface CommentTextProps extends React.ComponentPropsWithoutRef<'p'> {
+interface CommentTextProps extends ComponentPropsWithoutRef<'p'> {
     text: string;
     lines?: number;
     expandable?: boolean;
     asChild?: boolean;
 }
 
-const CommentText = React.forwardRef<HTMLParagraphElement, CommentTextProps>(
+const CommentText = forwardRef<HTMLParagraphElement, CommentTextProps>(
     ({ text, lines = 3, expandable = true, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'p';
-        const [expanded, setExpanded] = React.useState(false);
+        const [expanded, setExpanded] = useState(false);
 
         const shouldShowToggle = expandable && text.length > 150;
 

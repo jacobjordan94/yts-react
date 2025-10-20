@@ -1,5 +1,5 @@
 import { Button } from '../ui/button';
-import { Download, FileDown, Magnet } from 'lucide-react';
+import { Download, FileDown, Magnet } from '@/components/icons/lucide';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,6 +16,7 @@ import { TorrentSize } from './torrent-size';
 import { QualityBadge } from './quality-badge';
 import { DownloadLink } from '../ui/download-link';
 import { MagnetLink } from '../ui/magnet-link';
+import type { ReactNode } from 'react';
 
 const DownloadDropdown = ({
     movieTitle,
@@ -24,7 +25,7 @@ const DownloadDropdown = ({
 }: {
     movieTitle: string | undefined;
     torrents: Torrent[] | undefined;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }) =>
     torrents && (
         <DropdownMenu>
@@ -79,4 +80,5 @@ const DownloadDropdown = ({
         </DropdownMenu>
     );
 
+export { DownloadDropdown };
 export default DownloadDropdown;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, type ReactNode, forwardRef, Fragment } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { MovieCard } from '../movie/movie-card';
 import { MovieCardSkeleton } from '../skeleton/movie-card-skeleton';
@@ -6,14 +6,14 @@ import { cn } from '@/lib/utils';
 import type { Movie } from '@/hooks';
 import { Link } from 'react-router';
 
-interface MovieGridProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieGridProps extends ComponentPropsWithoutRef<'div'> {
     movies?: Movie[];
     loading?: boolean;
     empty?: boolean;
     columns?: 2 | 3 | 4 | 5 | 6 | 8;
     rows?: number;
     variant?: 'compact' | 'default' | 'detailed';
-    renderCard?: (movie: Movie) => React.ReactNode;
+    renderCard?: (movie: Movie) => ReactNode;
     onMovieClick?: (movie: Movie) => void;
     onGenreClick?: (genre: string) => void;
     emptyMessage?: string;
@@ -30,7 +30,7 @@ const columnClasses = {
     8: 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8',
 };
 
-const MovieGrid = React.forwardRef<HTMLDivElement, MovieGridProps>(
+const MovieGrid = forwardRef<HTMLDivElement, MovieGridProps>(
     (
         {
             movies = [],
@@ -97,9 +97,7 @@ const MovieGrid = React.forwardRef<HTMLDivElement, MovieGridProps>(
             >
                 {movies.map((movie, i) =>
                     renderCard ? (
-                        <React.Fragment key={`${movie.id}-${i}`}>
-                            {renderCard(movie)}
-                        </React.Fragment>
+                        <Fragment key={`${movie.id}-${i}`}>{renderCard(movie)}</Fragment>
                     ) : (
                         <Link
                             data-animate={animate}

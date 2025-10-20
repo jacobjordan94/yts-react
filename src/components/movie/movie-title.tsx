@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '../ui/skeleton';
 
-interface MovieTitleProps extends React.ComponentPropsWithoutRef<'h3'> {
+interface MovieTitleProps extends ComponentPropsWithoutRef<'h3'> {
     title?: string;
     year?: number;
     size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -18,7 +18,7 @@ const sizeClasses = {
     xl: 'text-2xl',
 };
 
-const MovieTitle = React.forwardRef<HTMLHeadingElement, MovieTitleProps>(
+const MovieTitle = forwardRef<HTMLHeadingElement, MovieTitleProps>(
     ({ title, year, size = 'md', truncate = false, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'h3';
 

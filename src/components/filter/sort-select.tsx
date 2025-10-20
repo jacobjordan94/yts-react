@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import {
     Select,
     SelectContent,
@@ -9,7 +9,7 @@ import {
 import Icons from '../icons';
 import { cn } from '@/lib/utils';
 
-interface SortSelectProps extends React.ComponentPropsWithoutRef<'div'> {
+interface SortSelectProps extends ComponentPropsWithoutRef<'div'> {
     sortBy?: string;
     onSortChange: (value: string) => void;
     className?: string;
@@ -26,7 +26,7 @@ const SORT_OPTIONS = [
     { value: 'like_count', label: 'Likes' },
 ];
 
-const SortSelect = React.forwardRef<HTMLDivElement, SortSelectProps>(
+const SortSelect = forwardRef<HTMLDivElement, SortSelectProps>(
     ({ sortBy = 'date_added', onSortChange, className, ...props }, ref) => {
         return (
             <Select value={sortBy} onValueChange={onSortChange}>

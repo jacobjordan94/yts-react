@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
-interface MoviePosterSkeletonProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MoviePosterSkeletonProps extends ComponentPropsWithoutRef<'div'> {
     size?: 'sm' | 'md' | 'lg' | 'full';
 }
 
@@ -14,7 +14,7 @@ const sizeClasses = {
     full: 'w-full',
 };
 
-const MoviePosterSkeleton = React.forwardRef<HTMLDivElement, MoviePosterSkeletonProps>(
+const MoviePosterSkeleton = forwardRef<HTMLDivElement, MoviePosterSkeletonProps>(
     ({ size = 'md', className, ...props }, ref) => {
         return (
             <div

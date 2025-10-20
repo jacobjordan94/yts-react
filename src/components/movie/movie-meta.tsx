@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { YearBadge } from './year-badge';
 import { RuntimeDisplay } from './runtime-display';
@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import type { Movie } from '@/hooks';
 
-interface MovieMetaProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieMetaProps extends ComponentPropsWithoutRef<'div'> {
     movie?: Pick<Movie, 'year' | 'runtime' | 'rating' | 'language' | 'mpa_rating'>;
     layout?: 'horizontal' | 'vertical';
     compact?: boolean;
@@ -16,7 +16,7 @@ interface MovieMetaProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const MovieMeta = React.forwardRef<HTMLDivElement, MovieMetaProps>(
+const MovieMeta = forwardRef<HTMLDivElement, MovieMetaProps>(
     (
         {
             movie,

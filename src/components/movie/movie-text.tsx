@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, type ReactNode } from 'react';
 import { MovieSynopsis } from './movie-synopsis';
 import { MovieDescription } from './movie-description';
 import type { Movie } from '@/hooks/use-list-movies';
@@ -6,7 +6,7 @@ import { Skeleton } from '../ui/skeleton';
 
 type TextType = 'summary' | 'synopsis' | 'description';
 
-interface MovieTextProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieTextProps extends ComponentPropsWithoutRef<'div'> {
     movie?: Movie;
     preference?: TextType[];
     link?: boolean;
@@ -15,7 +15,7 @@ interface MovieTextProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const MovieText = React.forwardRef<HTMLDivElement, MovieTextProps>(
+const MovieText = forwardRef<HTMLDivElement, MovieTextProps>(
     (
         {
             movie,
@@ -39,10 +39,7 @@ const MovieText = React.forwardRef<HTMLDivElement, MovieTextProps>(
         }
 
         // Map of text types to their values and component renderers
-        const textMap: Record<
-            TextType,
-            { value: string | undefined; render: () => React.ReactNode }
-        > = {
+        const textMap: Record<TextType, { value: string | undefined; render: () => ReactNode }> = {
             summary: {
                 value: movie.summary,
                 render: () =>

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { GenreBadge } from './genre-badge';
 import { cn } from '@/lib/utils';
 
-interface GenreBadgesProps extends React.ComponentPropsWithoutRef<'div'> {
+interface GenreBadgesProps extends ComponentPropsWithoutRef<'div'> {
     genres?: string[];
     limit?: number;
     onGenreClick?: (genre: string) => void;
@@ -12,7 +12,7 @@ interface GenreBadgesProps extends React.ComponentPropsWithoutRef<'div'> {
     loadingClass?: string;
 }
 
-const GenreBadges = React.forwardRef<HTMLDivElement, GenreBadgesProps>(
+const GenreBadges = forwardRef<HTMLDivElement, GenreBadgesProps>(
     (
         {
             loading,

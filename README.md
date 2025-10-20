@@ -206,6 +206,7 @@ yts-react/
 
 ### Build & Bundle Optimization
 
+- **Import Optimization & Barrel Exports** - Named imports instead of wildcard imports for better tree-shaking; barrel exports (index.ts) in component directories for cleaner imports; centralized Lucide icon imports through `src/components/icons/lucide.ts` (48 icons) to prevent bloat and improve tree-shaking
 - **Manual Chunk Splitting** - Separate chunks for React, Radix UI, and icons
 - **React 19 Compiler** - Automatic memoization and performance optimizations
 - **Lazy Loading** - Route-based code splitting and component lazy loading

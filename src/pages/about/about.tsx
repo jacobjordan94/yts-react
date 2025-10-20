@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { AlertCircleIcon, ExternalLink, Github, Home } from 'lucide-react';
+import { AlertCircleIcon, ExternalLink, Github, Home } from '@/components/icons/lucide';
 import { Link } from 'react-router';
 import Seo from '@/components/seo';
 import { Page } from '../page';

@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { MoviePosterSkeleton } from './movie-poster-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
-interface MovieHeroSkeletonProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieHeroSkeletonProps extends ComponentPropsWithoutRef<'div'> {
     header: boolean;
 }
 
-const MovieHeroSkeleton = React.forwardRef<HTMLDivElement, MovieHeroSkeletonProps>(
+const MovieHeroSkeleton = forwardRef<HTMLDivElement, MovieHeroSkeletonProps>(
     ({ className, header, ...props }, ref) => {
         return (
             <div ref={ref} className={cn('flex flex-col gap-6', className)} {...props}>

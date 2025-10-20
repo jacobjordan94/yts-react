@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { CommentAvatar } from './comment-avatar';
 import { CommentMeta } from './comment-meta';
@@ -7,14 +7,14 @@ import { CommentCardSkeleton } from '../skeleton/comment-card-skeleton';
 import { cn } from '@/lib/utils';
 import type { Comment } from '@/hooks';
 
-interface CommentCardProps extends React.ComponentPropsWithoutRef<'div'> {
+interface CommentCardProps extends ComponentPropsWithoutRef<'div'> {
     comment?: Comment;
     loading?: boolean;
     highlighted?: boolean;
     asChild?: boolean;
 }
 
-const CommentCard = React.forwardRef<HTMLDivElement, CommentCardProps>(
+const CommentCard = forwardRef<HTMLDivElement, CommentCardProps>(
     (
         { comment, loading = false, highlighted = false, asChild = false, className, ...props },
         ref

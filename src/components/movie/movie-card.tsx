@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { MovieCompactCard } from './movie-compact-card';
 import { MovieDefaultCard } from './movie-default-card';
 import { MovieDetailedCard } from './movie-detailed-card';
 import { MovieCardSkeleton } from '../skeleton/movie-card-skeleton';
 import type { Movie } from '@/hooks';
 
-interface MovieCardProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieCardProps extends ComponentPropsWithoutRef<'div'> {
     movie?: Movie;
     variant?: 'compact' | 'default' | 'detailed' | 'full';
     loading?: boolean;
@@ -13,7 +13,7 @@ interface MovieCardProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const MovieCard = React.forwardRef<HTMLDivElement, MovieCardProps>(
+const MovieCard = forwardRef<HTMLDivElement, MovieCardProps>(
     ({ movie, variant = 'default', loading = false, onGenreClick, className, ...props }, ref) => {
         if (loading || !movie) {
             return <MovieCardSkeleton variant={variant} className={className} />;

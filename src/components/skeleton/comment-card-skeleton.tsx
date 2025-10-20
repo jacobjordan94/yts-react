@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
-type CommentCardSkeletonProps = React.ComponentPropsWithoutRef<'div'>;
+type CommentCardSkeletonProps = ComponentPropsWithoutRef<'div'>;
 
-const CommentCardSkeleton = React.forwardRef<HTMLDivElement, CommentCardSkeletonProps>(
+const CommentCardSkeleton = forwardRef<HTMLDivElement, CommentCardSkeletonProps>(
     ({ className, ...props }, ref) => {
         return (
             <div ref={ref} className={cn('flex gap-4', className)} {...props}>

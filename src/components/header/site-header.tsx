@@ -1,20 +1,20 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { cn } from '@/lib/utils';
-import { SearchSlideOut } from '@/components/search/search-slide-out';
+import { SearchSlideOut } from '@/components/search';
 import { Button } from '@/components/ui/button';
-import { DicesIcon, Film, Github, InfoIcon } from 'lucide-react';
-import ListDropdown from './list-dropdown';
+import { DicesIcon, Film, Github, InfoIcon } from '@/components/icons/lucide';
+import { ListDropdown } from './index';
 import { useListMovies } from '@/hooks';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 
-interface SiteHeaderProps extends React.ComponentPropsWithoutRef<'header'> {
+interface SiteHeaderProps extends ComponentPropsWithoutRef<'header'> {
     onSearch?: (value: string) => void;
 }
 
-const SiteHeader = React.forwardRef<HTMLElement, SiteHeaderProps>(
+const SiteHeader = forwardRef<HTMLElement, SiteHeaderProps>(
     ({ onSearch, className, ...props }, ref) => {
-        const [searchValue, setSearchValue] = React.useState('');
+        const [searchValue, setSearchValue] = useState('');
         const { data } = useListMovies({});
         const navigate = useNavigate();
 

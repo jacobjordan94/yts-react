@@ -1,15 +1,15 @@
 import './App.css';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
 import { lazy, Suspense } from 'react';
-import { SiteHeader } from '@/components/header/site-header';
+import { SiteHeader } from '@/components/header';
 import { ErrorBoundary } from '@/components/error-boundary';
-import { Popcorn } from 'lucide-react';
+import { Popcorn } from '@/components/icons/lucide';
 import {
     BackgroundConfigProvider,
     useBackgroundConfig,
 } from '@/contexts/background-config-context';
-import { PageBackground } from '@/components/layout/page-background';
-import SiteDisclaimerDialog from './components/dialogs/site-disclaimer';
+import { PageBackground } from '@/components/layout';
+import { SiteDisclaimerDialog } from '@/components/dialogs';
 import { OfflineIndicator } from '@/components/offline-indicator';
 
 // Lazy load route components

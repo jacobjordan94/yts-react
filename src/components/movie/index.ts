@@ -5,6 +5,7 @@ export * from './movie-description';
 export * from './movie-hero';
 export * from './movie-meta';
 export * from './movie-poster';
+export * from './movie-synopsis';
 export * from './movie-title';
 export * from './rating-display';
 export * from './runtime-display';

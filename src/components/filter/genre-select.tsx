@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import {
     Select,
     SelectContent,
@@ -6,8 +6,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { GenreIcon } from '@/components/icons/genre-icon';
-import { Film } from 'lucide-react';
+import { GenreIcon } from '@/components/icons';
+import { Film } from '@/components/icons/lucide';
 import { cn } from '@/lib/utils';
 
 interface GenreSelectProps {
@@ -42,7 +42,7 @@ const DEFAULT_GENRES = [
     'Western',
 ];
 
-const GenreSelect = React.forwardRef<HTMLDivElement, GenreSelectProps>(
+const GenreSelect = forwardRef<HTMLDivElement, GenreSelectProps>(
     ({ value, onChange, genres = DEFAULT_GENRES, className }, ref) => {
         return (
             <Select value={value} onValueChange={onChange}>

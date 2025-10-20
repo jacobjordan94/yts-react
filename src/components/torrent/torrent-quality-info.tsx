@@ -1,15 +1,15 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 import type { Torrent } from '@/hooks';
 
-interface TorrentQualityInfoProps extends React.ComponentPropsWithoutRef<'div'> {
+interface TorrentQualityInfoProps extends ComponentPropsWithoutRef<'div'> {
     torrent: Pick<Torrent, 'video_codec' | 'bit_depth' | 'audio_channels' | 'type'>;
     detailed?: boolean;
     asChild?: boolean;
 }
 
-const TorrentQualityInfo = React.forwardRef<HTMLDivElement, TorrentQualityInfoProps>(
+const TorrentQualityInfo = forwardRef<HTMLDivElement, TorrentQualityInfoProps>(
     ({ torrent, detailed = false, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
 

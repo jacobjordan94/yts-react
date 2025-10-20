@@ -1,16 +1,16 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
-import { ArrowUpCircle, ArrowDownCircle } from 'lucide-react';
+import { ArrowUpCircle, ArrowDownCircle } from '@/components/icons/lucide';
 
-interface TorrentStatsProps extends React.ComponentPropsWithoutRef<'div'> {
+interface TorrentStatsProps extends ComponentPropsWithoutRef<'div'> {
     seeds: number;
     peers: number;
     layout?: 'horizontal' | 'vertical';
     asChild?: boolean;
 }
 
-const TorrentStats = React.forwardRef<HTMLDivElement, TorrentStatsProps>(
+const TorrentStats = forwardRef<HTMLDivElement, TorrentStatsProps>(
     ({ seeds, peers, layout = 'horizontal', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
 

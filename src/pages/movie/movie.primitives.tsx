@@ -5,15 +5,15 @@ import {
     MovieMeta,
     MoviePoster,
     MovieTitle,
+    MovieSynopsis,
+    RatingDisplay,
 } from '@/components/movie';
-import { MovieSynopsis } from '@/components/movie/movie-synopsis';
-import { RatingDisplay } from '@/components/movie/rating-display';
 import Section from '@/components/ui/section';
 import { useMovieSuggestions, type Movie } from '@/hooks';
-import DownloadDropdown from '@/components/torrent/download-dropdown';
+import { DownloadDropdown } from '@/components/torrent';
 import { Separator } from '@/components/ui/separator';
-import YoutubeDialog from '@/components/dialogs/youtube';
-import { CastList } from '../cast';
+import { YoutubeDialog } from '@/components/dialogs';
+import { CastList } from '@/components/cast';
 
 export const Hero = ({ movie }: { movie: Movie | undefined }) => (
     <div className="flex gap-6 flex-col md:flex-row">

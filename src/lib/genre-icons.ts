@@ -20,7 +20,7 @@ import {
     type LucideIcon,
     Pencil,
     Lasso,
-} from 'lucide-react';
+} from '@/components/icons/lucide';
 
 export const genreIcons: Record<string, LucideIcon> = {
     // Action & Adventure

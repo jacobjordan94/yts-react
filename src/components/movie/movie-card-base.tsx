@@ -1,15 +1,15 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Card } from '../ui/card';
 import { cn } from '@/lib/utils';
 
-interface MovieCardBaseProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieCardBaseProps extends ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
     background?: boolean;
     onGenreClick?: (genre: string) => void;
 }
 
-const MovieCardBase = React.forwardRef<HTMLDivElement, MovieCardBaseProps>(
+const MovieCardBase = forwardRef<HTMLDivElement, MovieCardBaseProps>(
     ({ asChild = false, background = false, className, onClick, children, ...props }, ref) => {
         const Comp = asChild ? Slot : Card;
 

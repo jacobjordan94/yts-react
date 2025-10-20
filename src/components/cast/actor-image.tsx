@@ -1,7 +1,7 @@
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import type { CastMember } from '@/hooks/use-list-movies';
 import { forwardRef, useState, type ComponentPropsWithRef } from 'react';
-import { User2 } from 'lucide-react';
+import { User2 } from '@/components/icons/lucide';
 import { cn } from '@/lib/utils';
 
 type AvatarImageLoadingStatus = 'idle' | 'loading' | 'loaded' | 'error';

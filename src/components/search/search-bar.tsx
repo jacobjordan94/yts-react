@@ -1,10 +1,17 @@
-import * as React from 'react';
+import {
+    forwardRef,
+    useState,
+    useRef,
+    useEffect,
+    type ComponentPropsWithoutRef,
+    type ChangeEvent,
+} from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Search, X } from 'lucide-react';
+import { Search, X } from '@/components/icons/lucide';
 
-interface SearchBarProps extends Omit<React.ComponentPropsWithoutRef<typeof Input>, 'onChange'> {
+interface SearchBarProps extends Omit<ComponentPropsWithoutRef<typeof Input>, 'onChange'> {
     value: string;
     onChange: (value: string) => void;
     loading?: boolean;
@@ -12,7 +19,7 @@ interface SearchBarProps extends Omit<React.ComponentPropsWithoutRef<typeof Inpu
     debounceMs?: number;
 }
 
-const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
+const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
     (
         {
             value,
@@ -25,14 +32,14 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
         },
         ref
     ) => {
-        const [localValue, setLocalValue] = React.useState(value);
-        const timerRef = React.useRef<number>(undefined);
+        const [localValue, setLocalValue] = useState(value);
+        const timerRef = useRef<number>(undefined);
 
-        React.useEffect(() => {
+        useEffect(() => {
             setLocalValue(value);
         }, [value]);
 
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
             const newValue = e.target.value;
             setLocalValue(newValue);
 
@@ -50,7 +57,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             onChange('');
         };
 
-        React.useEffect(() => {
+        useEffect(() => {
             return () => {
                 if (timerRef.current) {
                     clearTimeout(timerRef.current);

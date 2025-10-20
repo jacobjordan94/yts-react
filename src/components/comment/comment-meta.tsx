@@ -1,15 +1,15 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 
-interface CommentMetaProps extends React.ComponentPropsWithoutRef<'div'> {
+interface CommentMetaProps extends ComponentPropsWithoutRef<'div'> {
     username: string;
     date: string;
     layout?: 'horizontal' | 'vertical';
     asChild?: boolean;
 }
 
-const CommentMeta = React.forwardRef<HTMLDivElement, CommentMetaProps>(
+const CommentMeta = forwardRef<HTMLDivElement, CommentMetaProps>(
     ({ username, date, layout = 'horizontal', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
 

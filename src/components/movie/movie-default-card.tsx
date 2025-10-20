@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import { MovieCardBase, type MovieCardBaseProps } from './movie-card-base';
 import { MoviePoster } from './movie-poster';
 import { MovieTitle } from './movie-title';
@@ -11,7 +11,7 @@ interface MovieDefaultCardProps extends Omit<MovieCardBaseProps, 'children'> {
     movie: Movie;
 }
 
-const MovieDefaultCard = React.forwardRef<HTMLDivElement, MovieDefaultCardProps>(
+const MovieDefaultCard = forwardRef<HTMLDivElement, MovieDefaultCardProps>(
     ({ movie, className, ...props }, ref) => {
         return (
             <MovieCardBase ref={ref} className={cn('gap-2 pt-0', className)} {...props}>

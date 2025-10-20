@@ -8,7 +8,7 @@ import {
     DropdownMenuLabel,
 } from '../ui/dropdown-menu';
 import { Button } from '../ui/button';
-import { Library } from 'lucide-react';
+import { Library } from '@/components/icons/lucide';
 
 type ListOption = {
     label: string;

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
-interface CommentAvatarProps extends React.ComponentPropsWithoutRef<typeof Avatar> {
+interface CommentAvatarProps extends ComponentPropsWithoutRef<typeof Avatar> {
     src?: string;
     username: string;
     size?: 'sm' | 'md' | 'lg';
@@ -18,7 +18,7 @@ const sizeClasses = {
     lg: 'h-12 w-12',
 };
 
-const CommentAvatar = React.forwardRef<HTMLDivElement, CommentAvatarProps>(
+const CommentAvatar = forwardRef<HTMLDivElement, CommentAvatarProps>(
     (
         { src, username, size = 'md', loading = false, asChild = false, className, ...props },
         ref

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { QualityBadge } from './quality-badge';
 import { TorrentQualityInfo } from './torrent-quality-info';
 import { TorrentStats } from './torrent-stats';
@@ -6,7 +6,7 @@ import { TorrentSize } from './torrent-size';
 import type { Torrent } from '@/hooks';
 import { DownloadLink } from '../ui/download-link';
 import { Button } from '../ui/button';
-import { Disc3, FileDown, Film, Globe, Magnet } from 'lucide-react';
+import { Disc3, FileDown, Film, Globe, Magnet } from '@/components/icons/lucide';
 import { MagnetLink } from '../ui/magnet-link';
 import { Item, ItemMedia, ItemContent } from '../ui/item';
 import { cva } from 'class-variance-authority';
@@ -29,14 +29,14 @@ const torrentItemVariants = cva('flex justify-stretch', {
     },
 });
 
-interface TorrentItemProps extends Omit<React.ComponentPropsWithoutRef<typeof Item>, 'onSelect'> {
+interface TorrentItemProps extends Omit<ComponentPropsWithoutRef<typeof Item>, 'onSelect'> {
     torrent: Torrent;
     selected?: boolean;
     movieName?: string;
     onSelect?: (torrent: Torrent) => void;
 }
 
-const TorrentItem = React.forwardRef<HTMLDivElement, TorrentItemProps>(
+const TorrentItem = forwardRef<HTMLDivElement, TorrentItemProps>(
     ({ torrent, selected = false, onSelect, movieName, className, ...props }, ref) => {
         const available = torrent.seeds > 0;
 

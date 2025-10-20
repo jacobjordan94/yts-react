@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-interface QualityBadgeProps extends React.ComponentPropsWithoutRef<typeof Badge> {
+interface QualityBadgeProps extends ComponentPropsWithoutRef<typeof Badge> {
     quality: string;
     asChild?: boolean;
 }
 
-const QualityBadge = React.forwardRef<HTMLDivElement, QualityBadgeProps>(
+const QualityBadge = forwardRef<HTMLDivElement, QualityBadgeProps>(
     ({ quality, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : Badge;
         const normalizedQuality = quality.toLowerCase();

@@ -1,4 +1,13 @@
-import { MonitorPlay, Monitor, Tv, Glasses, type LucideIcon, Star, Tv2, Video } from 'lucide-react';
+import {
+    MonitorPlay,
+    Monitor,
+    Tv,
+    Glasses,
+    type LucideIcon,
+    Star,
+    Tv2,
+    Video,
+} from '@/components/icons/lucide';
 
 export const QUALITY_ICONS: Record<string, LucideIcon> = {
     all: MonitorPlay,

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, type ReactNode, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { MoviePoster } from './movie-poster';
 import { MovieTitle } from './movie-title';
@@ -13,7 +13,7 @@ import DownloadDropdown from '../torrent/download-dropdown';
 import YoutubeDialog from '../dialogs/youtube';
 
 type MovieHeroVariant = 'default' | 'transparent';
-interface MovieHeroProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieHeroProps extends ComponentPropsWithoutRef<'div'> {
     movie?: Movie;
     onTrailerOpenChange?: (open: boolean) => void;
     loading?: boolean;
@@ -22,11 +22,11 @@ interface MovieHeroProps extends React.ComponentPropsWithoutRef<'div'> {
     onGenreClick?: (genre: string) => void;
     variant?: MovieHeroVariant;
     asChild?: boolean;
-    children?: React.ReactNode;
-    header?: React.ReactNode;
+    children?: ReactNode;
+    header?: ReactNode;
 }
 
-const MovieHero = React.forwardRef<HTMLDivElement, MovieHeroProps>(
+const MovieHero = forwardRef<HTMLDivElement, MovieHeroProps>(
     (
         {
             movie,

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { TorrentItem } from './torrent-item';
 import { TorrentItemSkeleton } from '../skeleton/torrent-item-skeleton';
 import { cn } from '@/lib/utils';
 import type { Torrent } from '@/hooks';
 
-interface TorrentListProps extends React.ComponentPropsWithoutRef<'div'> {
+interface TorrentListProps extends ComponentPropsWithoutRef<'div'> {
     torrents?: Torrent[];
     layout?: 'list' | 'grid';
     loading?: boolean;
@@ -15,7 +15,7 @@ interface TorrentListProps extends React.ComponentPropsWithoutRef<'div'> {
     movieName?: string;
 }
 
-const TorrentList = React.forwardRef<HTMLDivElement, TorrentListProps>(
+const TorrentList = forwardRef<HTMLDivElement, TorrentListProps>(
     (
         {
             torrents = [],

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Film, Home } from 'lucide-react';
+import { Film, Home } from '@/components/icons/lucide';
 import { Link } from 'react-router';
 import Seo from '@/components/seo';
 import { Page } from '../page';

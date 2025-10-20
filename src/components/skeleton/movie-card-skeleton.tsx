@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { MoviePosterSkeleton } from './movie-poster-skeleton';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
@@ -7,11 +7,11 @@ import { CardContent, CardDescription, CardTitle } from '../ui/card';
 import { MovieMeta } from '../movie';
 import { MovieDetailedCard } from '../movie/movie-detailed-card';
 
-interface MovieCardSkeletonProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieCardSkeletonProps extends ComponentPropsWithoutRef<'div'> {
     variant?: 'compact' | 'default' | 'detailed' | 'full';
 }
 
-const MovieCardSkeleton = React.forwardRef<HTMLDivElement, MovieCardSkeletonProps>(
+const MovieCardSkeleton = forwardRef<HTMLDivElement, MovieCardSkeletonProps>(
     ({ variant = 'default', className, ...props }, ref) => {
         if (variant === 'compact')
             return (

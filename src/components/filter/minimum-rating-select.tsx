@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import {
     Select,
     SelectContent,
@@ -6,7 +6,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Star } from 'lucide-react';
+import { Star } from '@/components/icons/lucide';
 import { cn } from '@/lib/utils';
 
 interface MinimumRatingSelectProps {
@@ -24,7 +24,7 @@ const RATING_OPTIONS = [
     { value: 9, label: '9+ Masterpiece' },
 ];
 
-const MinimumRatingSelect = React.forwardRef<HTMLButtonElement, MinimumRatingSelectProps>(
+const MinimumRatingSelect = forwardRef<HTMLButtonElement, MinimumRatingSelectProps>(
     ({ value = 0, onChange, className }, ref) => {
         return (
             <Select value={String(value)} onValueChange={(val) => onChange(Number(val))}>

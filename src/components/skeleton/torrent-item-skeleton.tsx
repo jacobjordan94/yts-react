@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
-type TorrentItemSkeletonProps = React.ComponentPropsWithoutRef<'div'>;
+type TorrentItemSkeletonProps = ComponentPropsWithoutRef<'div'>;
 
-const TorrentItemSkeleton = React.forwardRef<HTMLDivElement, TorrentItemSkeletonProps>(
+const TorrentItemSkeleton = forwardRef<HTMLDivElement, TorrentItemSkeletonProps>(
     ({ className, ...props }, ref) => {
         return (
             <div

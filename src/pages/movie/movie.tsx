@@ -2,7 +2,7 @@ import { useMovieDetails } from '@/hooks';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Hero, RecommendedMovies } from './movie.primitives';
-import TorrentTabs from '@/components/torrent/torrent-tabs';
+import { TorrentTabs } from '@/components/torrent';
 import Seo from '@/components/seo';
 import { Page } from '../page';
 import { useBackgroundConfig } from '@/contexts/background-config-context';

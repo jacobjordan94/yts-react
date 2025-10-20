@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-interface YearBadgeProps extends React.ComponentPropsWithoutRef<typeof Badge> {
+interface YearBadgeProps extends ComponentPropsWithoutRef<typeof Badge> {
     year: number;
     asChild?: boolean;
 }
 
-const YearBadge = React.forwardRef<HTMLDivElement, YearBadgeProps>(
+const YearBadge = forwardRef<HTMLDivElement, YearBadgeProps>(
     ({ year, asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : Badge;
 

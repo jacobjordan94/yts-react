@@ -2,7 +2,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
 const pageVariants = cva('page px-4', {
     variants: {
@@ -26,14 +26,12 @@ const pageVariants = cva('page px-4', {
     },
 });
 
-interface PageProps
-    extends React.ComponentPropsWithoutRef<'main'>,
-        VariantProps<typeof pageVariants> {
+interface PageProps extends ComponentPropsWithoutRef<'main'>, VariantProps<typeof pageVariants> {
     pageName: string;
     asChild?: boolean;
     loading?: boolean;
 }
-const Page = React.forwardRef<HTMLDivElement, PageProps>(
+const Page = forwardRef<HTMLDivElement, PageProps>(
     (
         {
             pageName,

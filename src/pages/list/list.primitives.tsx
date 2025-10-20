@@ -1,21 +1,24 @@
-import * as React from 'react';
+import { forwardRef, useState } from 'react';
+import type { ComponentPropsWithoutRef, FormEvent, ReactNode, MouseEvent } from 'react';
 import { cn } from '@/lib/utils';
-import { GenreSelect } from '@/components/filter/genre-select';
-import { QualitySelect } from '@/components/filter/quality-select';
-import { SortSelect } from '@/components/filter/sort-select';
-import { MovieGrid, type MovieGridProps } from '@/components/layout/movie-grid';
+import {
+    GenreSelect,
+    QualitySelect,
+    SortSelect,
+    ResetFiltersButton,
+    MinimumRatingSelect,
+    OrderSelect,
+} from '@/components/filter';
+import { MovieGrid, type MovieGridProps } from '@/components/layout';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, Grid3x3, LayoutGrid, LayoutList } from 'lucide-react';
-import { ResetFiltersButton } from '@/components/filter/reset-filters';
-import { MinimumRatingSelect } from '@/components/filter/minimum-rating-select';
+import { Search, Grid3x3, LayoutGrid, LayoutList } from '@/components/icons/lucide';
 import { Page } from '../page';
-import { OrderSelect } from '@/components/filter/order-select';
 
 // Root container for the list page
-type ListPageRootProps = React.ComponentPropsWithoutRef<'main'>;
+type ListPageRootProps = ComponentPropsWithoutRef<'main'>;
 
-const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
+const ListPageRoot = forwardRef<HTMLDivElement, ListPageRootProps>(
     ({ className, ...props }, ref) => {
         return (
             <Page
@@ -31,12 +34,12 @@ const ListPageRoot = React.forwardRef<HTMLDivElement, ListPageRootProps>(
 ListPageRoot.displayName = 'ListPageRoot';
 
 // Header section with title
-interface ListPageHeaderProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ListPageHeaderProps extends ComponentPropsWithoutRef<'div'> {
     title?: string;
     description?: string;
 }
 
-const ListPageHeader = React.forwardRef<HTMLDivElement, ListPageHeaderProps>(
+const ListPageHeader = forwardRef<HTMLDivElement, ListPageHeaderProps>(
     ({ title = 'Browse Movies', description, className, children, ...props }, ref) => {
         return (
             <div ref={ref} className={cn('mb-6 space-y-2', className)} {...props}>
@@ -53,17 +56,17 @@ const ListPageHeader = React.forwardRef<HTMLDivElement, ListPageHeaderProps>(
 ListPageHeader.displayName = 'ListPageHeader';
 
 // Search bar component
-interface ListPageSearchProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ListPageSearchProps extends ComponentPropsWithoutRef<'div'> {
     value?: string;
     onSearch: (value: string) => void;
     placeholder?: string;
 }
 
-const ListPageSearch = React.forwardRef<HTMLDivElement, ListPageSearchProps>(
+const ListPageSearch = forwardRef<HTMLDivElement, ListPageSearchProps>(
     ({ value, onSearch, placeholder = 'Search movies...', className, ...props }, ref) => {
-        const [searchValue, setSearchValue] = React.useState(value || '');
+        const [searchValue, setSearchValue] = useState(value || '');
 
-        const handleSubmit = (e: React.FormEvent) => {
+        const handleSubmit = (e: FormEvent) => {
             e.preventDefault();
             onSearch(searchValue);
         };
@@ -97,7 +100,7 @@ const ListPageSearch = React.forwardRef<HTMLDivElement, ListPageSearchProps>(
 ListPageSearch.displayName = 'ListPageSearch';
 
 // Filters section
-interface ListPageFiltersProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ListPageFiltersProps extends ComponentPropsWithoutRef<'div'> {
     genre?: string;
     quality?: string;
     sortBy?: string;
@@ -108,12 +111,12 @@ interface ListPageFiltersProps extends React.ComponentPropsWithoutRef<'div'> {
     onQualityChange: (value: string) => void;
     onSortChange: (value: string) => void;
     onOrderChange: (value: 'asc' | 'desc') => void;
-    onFiltersReset: (e: React.MouseEvent) => void;
+    onFiltersReset: (e: MouseEvent) => void;
     onMinimumRatingChange: (value: number) => void;
     onLayoutChange: (value: 'compact' | 'default' | 'detailed') => void;
 }
 
-const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
+const ListPageFilters = forwardRef<HTMLDivElement, ListPageFiltersProps>(
     (
         {
             genre,
@@ -185,12 +188,12 @@ const ListPageFilters = React.forwardRef<HTMLDivElement, ListPageFiltersProps>(
 ListPageFilters.displayName = 'ListPageFilters';
 
 // Layout switcher component
-interface ListPageLayoutSwitcherProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ListPageLayoutSwitcherProps extends ComponentPropsWithoutRef<'div'> {
     layout: 'compact' | 'default' | 'detailed';
     onLayoutChange: (layout: 'compact' | 'default' | 'detailed') => void;
 }
 
-const ListPageLayoutSwitcher = React.forwardRef<HTMLDivElement, ListPageLayoutSwitcherProps>(
+const ListPageLayoutSwitcher = forwardRef<HTMLDivElement, ListPageLayoutSwitcherProps>(
     ({ layout, onLayoutChange, className, ...props }, ref) => {
         return (
             <div
@@ -240,11 +243,11 @@ const ListPageLayoutSwitcher = React.forwardRef<HTMLDivElement, ListPageLayoutSw
 ListPageLayoutSwitcher.displayName = 'ListPageLayoutSwitcher';
 
 // Toolbar combining filters and layout switcher
-interface ListPageToolbarProps extends React.ComponentPropsWithoutRef<'div'> {
-    children?: React.ReactNode;
+interface ListPageToolbarProps extends ComponentPropsWithoutRef<'div'> {
+    children?: ReactNode;
 }
 
-const ListPageToolbar = React.forwardRef<HTMLDivElement, ListPageToolbarProps>(
+const ListPageToolbar = forwardRef<HTMLDivElement, ListPageToolbarProps>(
     ({ className, children, ...props }, ref) => {
         return (
             <div ref={ref} className={cn('mb-6 flex', className)} {...props}>
@@ -259,7 +262,7 @@ ListPageToolbar.displayName = 'ListPageToolbar';
 // Content section with movies grid
 type ListPageContentProps = MovieGridProps;
 
-const ListPageContent = React.forwardRef<HTMLDivElement, ListPageContentProps>(
+const ListPageContent = forwardRef<HTMLDivElement, ListPageContentProps>(
     ({ className, ...props }, ref) => {
         return <MovieGrid ref={ref} className={cn('mb-6', className)} {...props} />;
     }
@@ -268,14 +271,14 @@ const ListPageContent = React.forwardRef<HTMLDivElement, ListPageContentProps>(
 ListPageContent.displayName = 'ListPageContent';
 
 // Pagination component
-interface ListPagePaginationProps extends React.ComponentPropsWithoutRef<'div'> {
+interface ListPagePaginationProps extends ComponentPropsWithoutRef<'div'> {
     currentPage: number;
     totalPages?: number;
     onPageChange: (page: number) => void;
     hasMore?: boolean;
 }
 
-const ListPagePagination = React.forwardRef<HTMLDivElement, ListPagePaginationProps>(
+const ListPagePagination = forwardRef<HTMLDivElement, ListPagePaginationProps>(
     ({ currentPage, totalPages, onPageChange, hasMore, className, ...props }, ref) => {
         const canGoBack = currentPage > 1;
         const canGoForward = hasMore || (totalPages && currentPage < totalPages);

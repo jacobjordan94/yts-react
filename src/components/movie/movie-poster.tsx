@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useState } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ImageOff } from 'lucide-react';
+import { ImageOff } from '@/components/icons/lucide';
 
-interface MoviePosterProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MoviePosterProps extends ComponentPropsWithoutRef<'div'> {
     src?: string;
     alt?: string;
     size?: 'sm' | 'md' | 'lg' | 'full';
@@ -21,7 +21,7 @@ const sizeClasses = {
     full: 'w-full',
 };
 
-const MoviePoster = React.forwardRef<HTMLDivElement, MoviePosterProps>(
+const MoviePoster = forwardRef<HTMLDivElement, MoviePosterProps>(
     (
         {
             src,
@@ -36,8 +36,8 @@ const MoviePoster = React.forwardRef<HTMLDivElement, MoviePosterProps>(
         ref
     ) => {
         const Comp = asChild ? Slot : 'div';
-        const [loadingImage, setLoadingImage] = React.useState(false);
-        const [loadingError, setLoadingError] = React.useState(false);
+        const [loadingImage, setLoadingImage] = useState(false);
+        const [loadingError, setLoadingError] = useState(false);
 
         if (loading || loadingImage) {
             return (

@@ -1,13 +1,13 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 
-interface LoadingStateProps extends React.ComponentPropsWithoutRef<'div'> {
+interface LoadingStateProps extends ComponentPropsWithoutRef<'div'> {
     message?: string;
     asChild?: boolean;
 }
 
-const LoadingState = React.forwardRef<HTMLDivElement, LoadingStateProps>(
+const LoadingState = forwardRef<HTMLDivElement, LoadingStateProps>(
     ({ message = 'Loading...', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
 

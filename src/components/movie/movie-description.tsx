@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { ClampedText } from '@/components/ui/clamped-text';
 
-interface MovieDescriptionProps extends React.ComponentPropsWithoutRef<'div'> {
+interface MovieDescriptionProps extends ComponentPropsWithoutRef<'div'> {
     description: string;
     movieId?: number;
     link?: boolean;
@@ -10,7 +10,7 @@ interface MovieDescriptionProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const MovieDescription = React.forwardRef<HTMLDivElement, MovieDescriptionProps>(
+const MovieDescription = forwardRef<HTMLDivElement, MovieDescriptionProps>(
     (
         {
             description,

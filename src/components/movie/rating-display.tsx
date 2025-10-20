@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { forwardRef, type ComponentPropsWithoutRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
-import { Star } from 'lucide-react';
+import { Star } from '@/components/icons/lucide';
 
-interface RatingDisplayProps extends React.ComponentPropsWithoutRef<'div'> {
+interface RatingDisplayProps extends ComponentPropsWithoutRef<'div'> {
     rating: number;
     variant?: 'stars' | 'numeric' | 'both';
     showLabel?: boolean;
@@ -11,7 +11,7 @@ interface RatingDisplayProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const RatingDisplay = React.forwardRef<HTMLDivElement, RatingDisplayProps>(
+const RatingDisplay = forwardRef<HTMLDivElement, RatingDisplayProps>(
     (
         {
             rating,

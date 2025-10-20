@@ -8,7 +8,7 @@ import {
     type LucideIcon,
     Leaf,
     Type,
-} from 'lucide-react';
+} from '@/components/icons/lucide';
 
 export const SORT_ICONS: Record<string, LucideIcon> = {
     date_added: CalendarPlus,

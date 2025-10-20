@@ -1,14 +1,14 @@
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from '@/components/icons/lucide';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
-import React from 'react';
+import { forwardRef } from 'react';
 
 type OrderSelectProps = {
     orderBy?: 'asc' | 'desc';
     onOrderChange: (value: 'asc' | 'desc') => void;
     className?: string;
 };
-const OrderSelect = React.forwardRef<HTMLButtonElement, OrderSelectProps>(
+const OrderSelect = forwardRef<HTMLButtonElement, OrderSelectProps>(
     ({ orderBy, onOrderChange, className, ...props }, ref) => {
         return (
             <Button

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import { MovieCardBase, type MovieCardBaseProps } from './movie-card-base';
 import { MoviePoster } from './movie-poster';
 import { MovieTitle } from './movie-title';
@@ -13,7 +13,14 @@ import {
 } from '../ui/card';
 import { cn } from '@/lib/utils';
 import { MovieText } from './movie-text';
-import { Download, EllipsisVertical, ExternalLink, FileDown, Magnet, Youtube } from 'lucide-react';
+import {
+    Download,
+    EllipsisVertical,
+    ExternalLink,
+    FileDown,
+    Magnet,
+    Youtube,
+} from '@/components/icons/lucide';
 import Icons from '../icons';
 import { YoutubeDialogContent } from '../dialogs/youtube';
 import type { Movie } from '@/hooks';
@@ -42,7 +49,7 @@ interface MovieDetailedCardProps extends Omit<MovieCardBaseProps, 'children'> {
     onGenreClick?: (genre: string) => void;
 }
 
-const MovieDetailedCard = React.forwardRef<HTMLDivElement, MovieDetailedCardProps>(
+const MovieDetailedCard = forwardRef<HTMLDivElement, MovieDetailedCardProps>(
     ({ movie, loading = false, skeleton = false, onGenreClick, className, ...props }, ref) => {
         const ready = !skeleton && !loading && !!movie;
         return (

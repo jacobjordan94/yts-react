@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { useState, forwardRef, useEffect, useRef, type FormEvent } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, X } from 'lucide-react';
+import { Search, X } from '@/components/icons/lucide';
 
 interface SearchSlideOutProps {
     value: string;
@@ -12,18 +12,18 @@ interface SearchSlideOutProps {
     className?: string;
 }
 
-const SearchSlideOut = React.forwardRef<HTMLDivElement, SearchSlideOutProps>(
+const SearchSlideOut = forwardRef<HTMLDivElement, SearchSlideOutProps>(
     ({ value, onChange, onSubmit, placeholder = 'Search movies...', className }, ref) => {
-        const [isOpen, setIsOpen] = React.useState(false);
-        const inputRef = React.useRef<HTMLInputElement>(null);
+        const [isOpen, setIsOpen] = useState(false);
+        const inputRef = useRef<HTMLInputElement>(null);
 
-        React.useEffect(() => {
+        useEffect(() => {
             if (isOpen && inputRef.current) {
                 inputRef.current.focus();
             }
         }, [isOpen]);
 
-        const handleSubmit = (e: React.FormEvent) => {
+        const handleSubmit = (e: FormEvent) => {
             e.preventDefault();
             onSubmit?.(value);
         };

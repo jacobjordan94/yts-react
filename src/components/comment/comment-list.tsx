@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { CommentCard } from './comment-card';
 import { CommentCardSkeleton } from '../skeleton/comment-card-skeleton';
@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import type { Comment } from '@/hooks';
 
-interface CommentListProps extends React.ComponentPropsWithoutRef<'div'> {
+interface CommentListProps extends ComponentPropsWithoutRef<'div'> {
     comments?: Comment[];
     loading?: boolean;
     empty?: boolean;
@@ -15,7 +15,7 @@ interface CommentListProps extends React.ComponentPropsWithoutRef<'div'> {
     asChild?: boolean;
 }
 
-const CommentList = React.forwardRef<HTMLDivElement, CommentListProps>(
+const CommentList = forwardRef<HTMLDivElement, CommentListProps>(
     (
         {
             comments = [],

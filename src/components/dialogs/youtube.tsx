@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import React, { useState } from 'react';
+import { useState, type ReactNode, forwardRef } from 'react';
 import { Button } from '../ui/button';
-import { Youtube } from 'lucide-react';
+import { Youtube } from '@/components/icons/lucide';
 import { AspectRatio } from '../ui/aspect-ratio';
 import { cn } from '@/lib/utils';
 import { DialogTitle } from '@radix-ui/react-dialog';
@@ -9,12 +9,12 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface YoutubeDialogProps {
     id: string;
-    children?: React.ReactNode;
+    children?: ReactNode;
     showIcon?: boolean;
     showLabel?: boolean;
     onOpenChange?: (open: boolean) => void;
 }
-const YoutubeDialog = React.forwardRef<HTMLButtonElement, YoutubeDialogProps>(
+const YoutubeDialog = forwardRef<HTMLButtonElement, YoutubeDialogProps>(
     ({ id, children, showIcon = true, showLabel = false, onOpenChange }, ref) => {
         return (
             <Dialog onOpenChange={onOpenChange}>

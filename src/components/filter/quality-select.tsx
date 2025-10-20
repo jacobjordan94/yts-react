@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import {
     Select,
     SelectContent,
@@ -17,7 +17,7 @@ interface QualitySelectProps {
 
 const QUALITIES = ['all', '480p', '720p', '1080p', '1080p.x265', '2160p', '3D'];
 
-const QualitySelect = React.forwardRef<HTMLButtonElement, QualitySelectProps>(
+const QualitySelect = forwardRef<HTMLButtonElement, QualitySelectProps>(
     ({ value, onChange, className }, ref) => {
         return (
             <Select value={value} onValueChange={onChange}>

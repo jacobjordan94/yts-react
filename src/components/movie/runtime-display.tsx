@@ -1,16 +1,16 @@
-import * as React from 'react';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '../ui/skeleton';
 
-interface RuntimeDisplayProps extends React.ComponentPropsWithoutRef<'span'> {
+interface RuntimeDisplayProps extends ComponentPropsWithoutRef<'span'> {
     runtime: number; // in minutes
     format?: 'short' | 'long';
     asChild?: boolean;
     loading?: boolean;
 }
 
-const RuntimeDisplay = React.forwardRef<HTMLSpanElement, RuntimeDisplayProps>(
+const RuntimeDisplay = forwardRef<HTMLSpanElement, RuntimeDisplayProps>(
     ({ loading, runtime, format = 'short', asChild = false, className, ...props }, ref) => {
         if (loading) {
             return <Skeleton className="h-4 w-12">&nbsp;</Skeleton>;

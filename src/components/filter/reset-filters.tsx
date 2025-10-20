@@ -1,19 +1,19 @@
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from '../ui/button';
-import React from 'react';
-import { Trash2 } from 'lucide-react';
+import { forwardRef, type ComponentProps, type MouseEvent } from 'react';
+import { Trash2 } from '@/components/icons/lucide';
 import { cn } from '@/lib/utils';
 import { type VariantProps } from 'class-variance-authority';
 import { buttonVariants } from '../ui/button-variants';
 
 interface ResetFiltersButtonProps
-    extends React.ComponentProps<'button'>,
+    extends ComponentProps<'button'>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
-    onFilterReset: (e: React.MouseEvent) => void;
+    onFilterReset: (e: MouseEvent) => void;
 }
 
-const ResetFiltersButton = React.forwardRef<HTMLButtonElement, ResetFiltersButtonProps>(
+const ResetFiltersButton = forwardRef<HTMLButtonElement, ResetFiltersButtonProps>(
     (
         {
             asChild = false,

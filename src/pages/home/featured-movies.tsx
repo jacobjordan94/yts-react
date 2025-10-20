@@ -2,14 +2,11 @@ import Section from '@/components/ui/section';
 import { MovieCard } from '@/components/movie';
 import type { Movie } from '@/hooks';
 import { cn } from '@/lib/utils';
+import type { MouseEvent as ReactMouseEvent } from 'react';
 
 type FeaturedMoviesProps = {
     movies?: Movie[];
-    onMovieClick: (
-        movie: Movie,
-        i: number,
-        e: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => void;
+    onMovieClick: (movie: Movie, i: number, e: ReactMouseEvent<HTMLDivElement, MouseEvent>) => void;
     currentIndex: number;
     className: string;
 };
