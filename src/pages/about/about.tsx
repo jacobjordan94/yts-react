@@ -126,6 +126,28 @@ const AboutPage = () => {
                             <ExternalLink className="size-4" />
                         </a>
                     </section>
+
+                    <section className="space-y-3 pt-6 border-t border-border">
+                        <h2 className="text-2xl font-semibold font-[Quicksand]">
+                            Build Information
+                        </h2>
+                        <div className="text-sm text-muted-foreground space-y-1">
+                            <p>
+                                <strong>Version:</strong> {__APP_VERSION__}
+                            </p>
+                            <p>
+                                <strong>Build Date:</strong>{' '}
+                                {new Date(__BUILD_TIME__).toLocaleString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                    timeZoneName: 'short',
+                                })}
+                            </p>
+                        </div>
+                    </section>
                 </div>
             </Page>
         </>

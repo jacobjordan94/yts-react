@@ -1,6 +1,6 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router';
-import { lazy, Suspense } from 'react';
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router';
+import { lazy, Suspense, useLayoutEffect, useRef, type RefObject } from 'react';
 import { SiteHeader } from '@/components/header';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Popcorn } from '@/components/icons/lucide';
@@ -31,6 +31,7 @@ function App() {
 
 function AppContent() {
     const { backgroundConfig } = useBackgroundConfig();
+    const ref = useRef<HTMLDivElement>(null);
 
     return (
         <PageBackground {...backgroundConfig}>
@@ -43,7 +44,12 @@ function AppContent() {
                 </a>
                 <div className="flex flex-col h-screen items-stretch">
                     <ApplicationHeader />
-                    <main id="main-content" className="flex-1 overflow-auto">
+                    <main
+                        id="main-content"
+                        className="flex-1 overflow-auto scroll-smooth"
+                        ref={ref}
+                    >
+                        <ScrollHelper scrollRef={ref} />
                         <ErrorBoundary>
                             <Suspense fallback={<LoadingComponent />}>
                                 <Routes>
@@ -62,6 +68,26 @@ function AppContent() {
     );
 }
 
+function ScrollHelper({ scrollRef }: { scrollRef: RefObject<HTMLDivElement | null> }) {
+    const location = useLocation();
+    const prevLocationRef = useRef({ pathname: location.pathname, search: location.search });
+
+    useLayoutEffect(() => {
+        if (!scrollRef.current) return;
+
+        const prev = prevLocationRef.current;
+        const getPattern = (path: string) => path.split('/')[1] || path;
+        const isSameRoute =
+            getPattern(prev.pathname) === getPattern(location.pathname) &&
+            (prev.pathname !== location.pathname || prev.search !== location.search);
+
+        scrollRef.current.scrollTo({ top: 0, behavior: isSameRoute ? 'smooth' : 'instant' });
+        prevLocationRef.current = { pathname: location.pathname, search: location.search };
+    }, [location.pathname, location.search, scrollRef]);
+
+    return null;
+}
+
 function ApplicationHeader() {
     const navigate = useNavigate();
     function handleQuery(query: string) {
@@ -77,7 +103,7 @@ function LoadingComponent() {
     return (
         <div className="flex flex-col gap-2 items-center justify-center h-full">
             <Popcorn className="size-14 animate-bounce" />
-            <span className="font-semibold">Getting the Popcorn ready...</span>
+            <span className="font-semibold font-[Quicksand]">Getting the Popcorn ready...</span>
         </div>
     );
 }

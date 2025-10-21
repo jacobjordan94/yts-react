@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 import useListMovies, { type ListMoviesParams } from '@/hooks/use-list-movies';
 import {
@@ -17,53 +17,30 @@ export default function ListPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { setBackgroundConfig } = useBackgroundConfig();
 
-    // Initialize state from URL params using lazy initialization
-    const [layout, setLayout] = useState<'compact' | 'default' | 'detailed'>(
-        () => (searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default'
+    // Derive params and layout from URL
+    const params = useMemo<ListMoviesParams>(
+        () => ({
+            limit: 24,
+            page: parseInt(searchParams.get('page') || '1', 10),
+            quality: searchParams.get('quality') || 'all',
+            genre: searchParams.get('genre') || 'all',
+            sort_by: (searchParams.get('sort_by') as ListMoviesParams['sort_by']) || 'date_added',
+            order_by: (searchParams.get('order_by') as 'asc' | 'desc') || 'desc',
+            query_term: searchParams.get('q') || undefined,
+            minimum_rating: searchParams.get('minimum_rating')
+                ? parseInt(searchParams.get('minimum_rating')!, 10)
+                : undefined,
+            with_rt_ratings: true,
+        }),
+        [searchParams]
     );
 
-    const [params, setParams] = useState<ListMoviesParams>(() => ({
-        limit: 24,
-        page: parseInt(searchParams.get('page') || '1', 10),
-        quality: searchParams.get('quality') || 'all',
-        genre: searchParams.get('genre') || 'all',
-        sort_by: (searchParams.get('sort_by') as ListMoviesParams['sort_by']) || 'date_added',
-        order_by: (searchParams.get('order_by') as 'asc' | 'desc') || 'desc',
-        query_term: searchParams.get('q') || undefined,
-        minimum_rating: searchParams.get('minimum_rating')
-            ? parseInt(searchParams.get('minimum_rating')!, 10)
-            : undefined,
-        with_rt_ratings: true,
-    }));
+    const layout = useMemo<'compact' | 'default' | 'detailed'>(
+        () => (searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default',
+        [searchParams]
+    );
 
     const { data, loading, error } = useListMovies(params);
-
-    // Sync URL FROM state when state changes (e.g., from filter interactions)
-    const prevParamsRef = useRef(params);
-    const prevLayoutRef = useRef(layout);
-
-    useEffect(() => {
-        // Only update URL if state actually changed (not from URL sync above)
-        if (prevParamsRef.current === params && prevLayoutRef.current === layout) {
-            return;
-        }
-
-        prevParamsRef.current = params;
-        prevLayoutRef.current = layout;
-
-        const newParams = new URLSearchParams();
-
-        if (params.page && params.page > 1) newParams.set('page', params.page.toString());
-        if (params.quality && params.quality !== 'all') newParams.set('quality', params.quality);
-        if (params.genre && params.genre !== 'all') newParams.set('genre', params.genre);
-        if (params.sort_by) newParams.set('sort_by', params.sort_by);
-        if (params.order_by) newParams.set('order_by', params.order_by);
-        if (params.query_term) newParams.set('q', params.query_term);
-        if (params.minimum_rating) newParams.set('minimum_rating', String(params.minimum_rating));
-        if (layout !== 'default') newParams.set('layout', layout);
-
-        setSearchParams(newParams, { replace: true });
-    }, [params, layout, setSearchParams]);
 
     useEffect(() => {
         if (!setBackgroundConfig || !data) return;
@@ -76,51 +53,59 @@ export default function ListPage() {
         });
     }, [setBackgroundConfig, data]);
 
+    const updateParams = (updates: Partial<Record<string, string | number | undefined>>) => {
+        const newParams = new URLSearchParams(searchParams);
+
+        Object.entries(updates).forEach(([key, value]) => {
+            if (
+                value === undefined ||
+                value === '' ||
+                value === 'all' ||
+                (key === 'page' && value === 1)
+            ) {
+                newParams.delete(key);
+            } else {
+                newParams.set(key, String(value));
+            }
+        });
+
+        setSearchParams(newParams, { replace: true });
+    };
+
     const handleGenreChange = (genre: string) => {
-        setParams((prev) => ({ ...prev, genre, page: 1 }));
+        updateParams({ genre, page: 1 });
     };
 
     const handleQualityChange = (quality: string) => {
-        setParams((prev) => ({ ...prev, quality, page: 1 }));
+        updateParams({ quality, page: 1 });
     };
 
     const handleSortChange = (sort_by: string) => {
-        setParams((prev) => ({
-            ...prev,
-            sort_by: sort_by as ListMoviesParams['sort_by'],
-            page: 1,
-        }));
+        updateParams({ sort_by, page: 1 });
     };
 
     const handleOrderChange = (order_by: 'asc' | 'desc') => {
-        setParams((prev) => ({ ...prev, order_by, page: 1 }));
+        updateParams({ order_by, page: 1 });
     };
 
     const handleSearch = (query: string) => {
-        setParams((prev) => ({ ...prev, query_term: query || undefined, page: 1 }));
+        updateParams({ q: query || undefined, page: 1 });
     };
 
     const handlePageChange = (page: number) => {
-        setParams((prev) => ({ ...prev, page }));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        updateParams({ page });
     };
 
     const handleMinimumRatingsChange = (rating: number) => {
-        setParams((prev) => ({ ...prev, minimum_rating: rating || 0, page: 1 }));
+        updateParams({ minimum_rating: rating || undefined, page: 1 });
     };
 
     const handleResetFilters = () => {
-        setParams({
-            limit: 24,
-            page: 1,
-            quality: 'all',
-            genre: 'all',
-            sort_by: 'date_added',
-            order_by: 'desc',
-            query_term: undefined,
-            with_rt_ratings: true,
-            minimum_rating: 0,
-        });
+        setSearchParams(new URLSearchParams(), { replace: true });
+    };
+
+    const handleLayoutChange = (newLayout: 'compact' | 'default' | 'detailed') => {
+        updateParams({ layout: newLayout === 'default' ? undefined : newLayout });
     };
 
     const movies = data?.data?.movies || [];
@@ -172,7 +157,7 @@ export default function ListPage() {
                             orderBy={params.order_by}
                             minimumRating={params.minimum_rating || 0}
                             layout={layout}
-                            onLayoutChange={setLayout}
+                            onLayoutChange={handleLayoutChange}
                             onGenreChange={handleGenreChange}
                             onQualityChange={handleQualityChange}
                             onSortChange={handleSortChange}

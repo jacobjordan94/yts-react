@@ -20,11 +20,17 @@ const QualityBadge = forwardRef<HTMLDivElement, QualityBadgeProps>(
                 className={cn(
                     'font-mono font-semibold text-white',
                     "data-[quality='2160p']:bg-uhd",
+                    "data-[quality='2160P']:bg-uhd",
                     "data-[quality='1080p']:bg-hd",
+                    "data-[quality='1080P']:bg-hd",
                     "data-[quality='1080p.h265']:bg-hd",
+                    "data-[quality='1080p.H265']:bg-hd",
                     "data-[quality='720p']:bg-full-hd",
+                    "data-[quality='720P']:bg-full-hd",
                     "data-[quality='480p']:bg-standard-def",
+                    "data-[quality='480P']:bg-standard-def",
                     "data-[quality='3d']:bg-three-d",
+                    "data-[quality='3D']:bg-three-d",
                     className
                 )}
                 {...props}

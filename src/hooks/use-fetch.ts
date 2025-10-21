@@ -43,14 +43,31 @@ function useFetch<T = unknown>(
         retryDelay = DEFAULT_RETRY_DELAY,
         ...fetchOptions
     } = options;
-    const [state, setState] = useState<FetchState<T>>({
-        data: null,
-        error: null,
-        loading: !skip && url !== null,
-    });
 
     const abortControllerRef = useRef<AbortController | null>(null);
     const fetchOptionsKey = JSON.stringify(fetchOptions);
+
+    // Check cache on initialization
+    const getInitialState = (): FetchState<T> => {
+        if (skip || !url) {
+            return { data: null, error: null, loading: false };
+        }
+
+        const cacheKey = `${url}-${fetchOptionsKey}`;
+        const cachedEntry = cache.get(cacheKey);
+
+        if (cachedEntry && Date.now() - cachedEntry.timestamp < CACHE_DURATION) {
+            return {
+                data: cachedEntry.data as T,
+                error: null,
+                loading: false,
+            };
+        }
+
+        return { data: null, error: null, loading: true };
+    };
+
+    const [state, setState] = useState<FetchState<T>>(getInitialState);
 
     const fetchData = useCallback(
         async (signal: AbortSignal) => {
