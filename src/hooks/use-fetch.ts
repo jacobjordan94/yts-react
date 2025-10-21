@@ -20,6 +20,19 @@ const DEFAULT_RETRY_DELAY = 1000; // 1 second
 // Helper function to delay execution
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Clean up expired cache entries
+const cleanupCache = () => {
+    const now = Date.now();
+    for (const [key, entry] of cache.entries()) {
+        if (now - entry.timestamp >= CACHE_DURATION) {
+            cache.delete(key);
+        }
+    }
+};
+
+// Run cleanup every 5 minutes
+setInterval(cleanupCache, CACHE_DURATION);
+
 function useFetch<T = unknown>(
     url: string | null,
     options: FetchOptions = {}

@@ -59,6 +59,7 @@ export function YoutubeDialogContent({ id }: { id: number | string }) {
                             'size-full',
                             'duration-500 opacity-0 group-data-[loaded=true]/youtubeDialog:opacity-100'
                         )}
+                        sandbox="allow-scripts allow-same-origin"
                     />
                 </div>
             </AspectRatio>

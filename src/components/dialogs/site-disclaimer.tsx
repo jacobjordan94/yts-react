@@ -58,10 +58,12 @@ const SiteDisclaimerDialog = () => {
                         className="font-bold"
                         onClick={() => {
                             setVisited(true);
-                            jsConfetti.addConfetti({
-                                emojis: ['🍿', '🎞️', '🎥', '💿'],
-                                emojiSize: 50,
-                            });
+                            jsConfetti
+                                .addConfetti({
+                                    emojis: ['🍿', '🎞️', '🎥', '💿'],
+                                    emojiSize: 50,
+                                })
+                                .catch();
                         }}
                     >
                         I understand and wish to continue

@@ -31,7 +31,7 @@ export default function ListPage() {
         order_by: (searchParams.get('order_by') as 'asc' | 'desc') || 'desc',
         query_term: searchParams.get('q') || undefined,
         minimum_rating: searchParams.get('minimum_rating')
-            ? parseInt(searchParams.get('minimum_rating')!, 0)
+            ? parseInt(searchParams.get('minimum_rating')!, 10)
             : undefined,
         with_rt_ratings: true,
     });

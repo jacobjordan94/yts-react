@@ -23,6 +23,7 @@ const ActorImage = forwardRef<HTMLSpanElement, ActorImageProps>(
                     className="avatar-image size-full"
                     onLoadingStatusChange={(state) => setStatus(state)}
                     src={castMember.url_small_image}
+                    alt={`Image of ${castMember.name}`}
                 />
                 <AvatarFallback className="avatar-fallback">
                     <User2 />
