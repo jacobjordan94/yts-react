@@ -1,5 +1,14 @@
 # YTS Movie Browser
 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fyts-react.jacob-jordan.me)
+![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
+![GitHub last commit](https://img.shields.io/github/last-commit/jacobjordan94/yts-react)
+![License](https://img.shields.io/github/license/jacobjordan94/yts-react)
+![Code size](https://img.shields.io/github/languages/code-size/jacobjordan94/yts-react)
+
 A modern, responsive movie browsing application built with React 19 and TypeScript. Browse, search, and discover movies with a beautiful, performant interface featuring Progressive Web App capabilities, offline support, and advanced caching strategies.
 
 ## Live Demo
