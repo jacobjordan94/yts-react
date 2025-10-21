@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useMemo, createElement } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { getSortIcon } from '@/lib/sort-icons';
 import { cn } from '@/lib/utils';
@@ -18,9 +18,17 @@ const sizeClasses = {
 const SortIcon = forwardRef<HTMLDivElement, SortIconProps>(
     ({ sortBy, size = 'md', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
-        const Icon = getSortIcon(sortBy);
+        const IconComponent = getSortIcon(sortBy);
 
-        if (!Icon) return null;
+        const iconElement = useMemo(
+            () =>
+                IconComponent
+                    ? createElement(IconComponent, { className: cn(sizeClasses[size]) })
+                    : null,
+            [IconComponent, size]
+        );
+
+        if (!IconComponent) return null;
 
         return (
             <Comp
@@ -30,7 +38,7 @@ const SortIcon = forwardRef<HTMLDivElement, SortIconProps>(
                 className={cn('inline-flex items-center justify-center', className)}
                 {...props}
             >
-                <Icon className={cn(sizeClasses[size])} />
+                {iconElement}
             </Comp>
         );
     }

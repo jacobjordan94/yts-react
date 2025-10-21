@@ -17,12 +17,12 @@ export default function ListPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const { setBackgroundConfig } = useBackgroundConfig();
 
-    // Initialize state from URL params
+    // Initialize state from URL params using lazy initialization
     const [layout, setLayout] = useState<'compact' | 'default' | 'detailed'>(
-        (searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default'
+        () => (searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default'
     );
 
-    const [params, setParams] = useState<ListMoviesParams>({
+    const [params, setParams] = useState<ListMoviesParams>(() => ({
         limit: 24,
         page: parseInt(searchParams.get('page') || '1', 10),
         quality: searchParams.get('quality') || 'all',
@@ -34,27 +34,9 @@ export default function ListPage() {
             ? parseInt(searchParams.get('minimum_rating')!, 10)
             : undefined,
         with_rt_ratings: true,
-    });
+    }));
 
     const { data, loading, error } = useListMovies(params);
-
-    // Sync state FROM URL when searchParams change (e.g., from dropdown navigation)
-    useEffect(() => {
-        setParams({
-            limit: 24,
-            page: parseInt(searchParams.get('page') || '1', 10),
-            quality: searchParams.get('quality') || 'all',
-            genre: searchParams.get('genre') || 'all',
-            sort_by: (searchParams.get('sort_by') as ListMoviesParams['sort_by']) || 'date_added',
-            order_by: (searchParams.get('order_by') as 'asc' | 'desc') || 'desc',
-            query_term: searchParams.get('q') || undefined,
-            minimum_rating: searchParams.get('minimum_rating')
-                ? parseInt(searchParams.get('minimum_rating')!, 10)
-                : undefined,
-            with_rt_ratings: true,
-        });
-        setLayout((searchParams.get('layout') as 'compact' | 'default' | 'detailed') || 'default');
-    }, [searchParams]);
 
     // Sync URL FROM state when state changes (e.g., from filter interactions)
     const prevParamsRef = useRef(params);

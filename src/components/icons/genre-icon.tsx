@@ -1,4 +1,4 @@
-import { type ComponentPropsWithoutRef, forwardRef } from 'react';
+import { type ComponentPropsWithoutRef, forwardRef, useMemo, createElement } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { getGenreIcon } from '@/lib/genre-icons';
 import { cn } from '@/lib/utils';
@@ -18,7 +18,10 @@ const sizeClasses = {
 const GenreIcon = forwardRef<HTMLDivElement, GenreIconProps>(
     ({ genre, size = 'md', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
-        const Icon = getGenreIcon(genre);
+        const iconElement = useMemo(
+            () => createElement(getGenreIcon(genre), { className: cn(sizeClasses[size]) }),
+            [genre, size]
+        );
 
         return (
             <Comp
@@ -28,7 +31,7 @@ const GenreIcon = forwardRef<HTMLDivElement, GenreIconProps>(
                 className={cn('inline-flex items-center justify-center', className)}
                 {...props}
             >
-                <Icon className={cn(sizeClasses[size])} />
+                {iconElement}
             </Comp>
         );
     }

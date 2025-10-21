@@ -1,4 +1,4 @@
-import { forwardRef, type ComponentPropsWithoutRef } from 'react';
+import { forwardRef, useMemo, createElement, type ComponentPropsWithoutRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { getQualityIcon } from '@/lib/quality-icons';
 import { cn } from '@/lib/utils';
@@ -18,9 +18,17 @@ const sizeClasses = {
 const QualityIcon = forwardRef<HTMLDivElement, QualityIconProps>(
     ({ quality, size = 'md', asChild = false, className, ...props }, ref) => {
         const Comp = asChild ? Slot : 'div';
-        const Icon = getQualityIcon(quality);
+        const IconComponent = getQualityIcon(quality);
 
-        if (!Icon) return null;
+        const iconElement = useMemo(
+            () =>
+                IconComponent
+                    ? createElement(IconComponent, { className: cn(sizeClasses[size]) })
+                    : null,
+            [IconComponent, size]
+        );
+
+        if (!IconComponent) return null;
 
         return (
             <Comp
@@ -30,7 +38,7 @@ const QualityIcon = forwardRef<HTMLDivElement, QualityIconProps>(
                 className={cn('inline-flex items-center justify-center', className)}
                 {...props}
             >
-                <Icon className={cn(sizeClasses[size])} />
+                {iconElement}
             </Comp>
         );
     }
