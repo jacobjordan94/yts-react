@@ -1,19 +1,29 @@
-# YTS Movie Browser
+<div align="center">
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fyts-react.jacob-jordan.me)
-![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript)
-![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
-![TailwindCSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
-![GitHub last commit](https://img.shields.io/github/last-commit/jacobjordan94/yts-react)
-![License](https://img.shields.io/github/license/jacobjordan94/yts-react)
-![Code size](https://img.shields.io/github/languages/code-size/jacobjordan94/yts-react)
+# YTS Movie Browser
 
 A modern, responsive movie browsing application built with React 19 and TypeScript. Browse, search, and discover movies with a beautiful, performant interface featuring Progressive Web App capabilities, offline support, and advanced caching strategies.
 
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fyts-react.jacob-jordan.me)](https://yts-react.jacob-jordan.me)
+[![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)](https://vite.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)](https://tailwindcss.com)
+[![PWA](https://img.shields.io/badge/PWA-enabled-5A0FC8?logo=pwa)](https://web.dev/progressive-web-apps)
+
+[![GitHub last commit](https://img.shields.io/github/last-commit/jacobjordan94/yts-react)](https://github.com/jacobjordan94/yts-react/commits/main)
+[![License](https://img.shields.io/github/license/jacobjordan94/yts-react)](LICENSE)
+[![Code size](https://img.shields.io/github/languages/code-size/jacobjordan94/yts-react)](https://github.com/jacobjordan94/yts-react)
+
+[Live Demo](https://yts-react.jacob-jordan.me) • [Getting Started](#getting-started) • [Features](#features)
+
+</div>
+
+---
+
 ## Live Demo
 
-**🌐 [https://yts-react.jacob-jordan.me](https://yts-react.jacob-jordan.me)**
+**[https://yts-react.jacob-jordan.me](https://yts-react.jacob-jordan.me)**
 
 Experience the full PWA functionality, offline support, and optimized performance in production.
 
