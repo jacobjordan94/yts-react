@@ -1,6 +1,6 @@
 import useFetch from './use-fetch';
 
-const YTS_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://yts.mx/api/v2';
+const YTS_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://yts.lt/api/v2';
 
 interface UseApiOptions {
     skip?: boolean;
