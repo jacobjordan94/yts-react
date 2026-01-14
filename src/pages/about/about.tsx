@@ -85,10 +85,10 @@ const AboutPage = () => {
                     <section className="space-y-3">
                         <h2 className="text-2xl font-semibold font-[Quicksand]">Links</h2>
                         <div className="flex flex-wrap gap-3">
-                            <a href="https://yts.mx" target="_blank" rel="noopener noreferrer">
+                            <a href="https://yts.bz" target="_blank" rel="noopener noreferrer">
                                 <Button variant="outline">
                                     <ExternalLink />
-                                    Visit YTS.mx
+                                    Visit YTS.bz
                                 </Button>
                             </a>
                             <a

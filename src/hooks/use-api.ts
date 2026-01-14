@@ -1,6 +1,5 @@
 import useFetch from './use-fetch';
-
-const YTS_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://yts.lt/api/v2';
+import { getApiBaseUrl } from '@/lib/api-config';
 
 interface UseApiOptions {
     skip?: boolean;
@@ -21,7 +20,8 @@ function useApi<T = unknown>(
     options: UseApiOptions = {}
 ) {
     const queryString = buildQueryString(params);
-    const url = endpoint ? `${YTS_API_BASE_URL}/${endpoint}${queryString}` : null;
+    const baseUrl = getApiBaseUrl();
+    const url = endpoint && baseUrl ? `${baseUrl}/${endpoint}${queryString}` : null;
 
     return useFetch<T>(url, { skip: options.skip });
 }

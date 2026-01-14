@@ -40,7 +40,7 @@ export default function ListPage() {
         [searchParams]
     );
 
-    const { data, loading, error } = useListMovies(params);
+    const { data, loading } = useListMovies(params);
 
     useEffect(() => {
         if (!setBackgroundConfig || !data) return;
@@ -166,14 +166,6 @@ export default function ListPage() {
                             onMinimumRatingChange={handleMinimumRatingsChange}
                         />
                     </ListPageToolbar>
-
-                    {error && (
-                        <div className="mb-6 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-center">
-                            <p className="text-sm text-destructive">
-                                Failed to load movies. Please try again later.
-                            </p>
-                        </div>
-                    )}
 
                     <ListPageContent
                         movies={movies}
