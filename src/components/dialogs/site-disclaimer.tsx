@@ -32,7 +32,7 @@ const SiteDisclaimerDialog = () => {
                 <div className="space-y-4">
                     <p className="text-muted-foreground leading-relaxed">
                         This website is a <strong>read-only mirror</strong> of publicly available
-                        data from YTS.mx. It does not host, store, or distribute any copyrighted
+                        data from YTS. It does not host, store, or distribute any copyrighted
                         content.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">

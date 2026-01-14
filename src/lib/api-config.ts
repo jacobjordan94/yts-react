@@ -1,4 +1,4 @@
-const API_DOMAINS = ['yts.mx', 'yts.lt', 'yts.gg', 'yts.am', 'yts.ag'] as const;
+const API_DOMAINS = ['yts.bz', 'yts.gg', 'yts.mx', 'yts.lt', 'yts.am', 'yts.ag'] as const;
 
 const API_VERSION = 'api/v2';
 
